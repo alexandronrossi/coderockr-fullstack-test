@@ -35,5 +35,6 @@ O Code Agent **não pode**:
 - Allowlist / DTO / validated input; nunca mass-assign campos de controle.
 - Transações/locking quando invariantes de concorrência existirem.
 - Erros de cliente sem stack, SQL, paths ou secrets.
+- Todo endpoint novo ou alterado em `routes/api.php`: anotar para o Scribe (`@group`, auth) e rodar `php artisan scribe:generate` (ou `composer docs`). Commitar `public/docs` no mesmo PR. Sem docs atualizadas o PR não fecha.
 
 Após qualquer alteração: devolver ao Test Agent. Estado: `IMPLEMENTATION_DONE` → validação. Não ir para review ou PR.

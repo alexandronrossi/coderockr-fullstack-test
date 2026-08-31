@@ -85,6 +85,8 @@ Before each gate, **read** the skill and follow it:
 
 Write the architecture-security-plan to `specs/<feature>/architecture-security-plan.md` using `.specify/templates/architecture-security-plan.md`.
 
+New or changed `routes/api.php` endpoints: regenerate Scribe (`php artisan scribe:generate`) and commit `public/docs` before `PR_CREATED`.
+
 ## Definition of Done
 
 Implementation is complete only when:

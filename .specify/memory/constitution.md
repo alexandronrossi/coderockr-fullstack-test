@@ -53,6 +53,8 @@ CRITICAL e HIGH bloqueiam o PR. Qualquer `FAIL` no `security_review` produz `REV
 
 Fonte normativa completa: `.specify/memory/sdd-multi-agent.md`.
 
+A API Laravel é documentada com [Scribe](https://scribe.knuckles.wtf/laravel/getting-started) (`type: static`, rotas `api/*`). Todo PR que adiciona ou altera endpoint regenera e commita `public/docs`.
+
 ## Development Workflow
 
 Agentes especializados (não um único passo de "escrever código"):
@@ -70,4 +72,4 @@ Definition of Done exige todos os itens `[PASS]` da seção 32 do SDD, inclusive
 
 Esta constituição prevalece sobre conveniência, prazo e "os testes passaram". Emendas exigem atualização deste arquivo, de `.specify/memory/sdd-multi-agent.md` e das skills em `.cursor/skills/sdd-*`. PRs e reviews verificam conformidade com os gates. Complexidade e design patterns exigem justificativa no architecture-security-plan.
 
-**Version**: 1.0.2 | **Ratified**: 2026-08-31 | **Last Amended**: 2026-08-31
+**Version**: 1.0.3 | **Ratified**: 2026-08-31 | **Last Amended**: 2026-08-31
