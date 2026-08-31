@@ -29,6 +29,7 @@ This project uses Spec-Driven Development with specialized agents. **Read and fo
 - Implementation is not done until Definition of Done is all `[PASS]` and state is `PR_CREATED`.
 - GitHub commits and PRs must use assertive titles and descriptions (SDD 30.1). Vague messages (`update`, `fix`, `ajustes`, `WIP`) are not allowed.
 - Create `development` from `main` if missing. Every PR targets `development`, never `main`.
+- New or changed API endpoints MUST regenerate Scribe docs (`php artisan scribe:generate`) and commit `public/docs` in the same PR.
 
 ## Pre-Execution Checks
 

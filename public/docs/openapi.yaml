@@ -1,0 +1,46 @@
+openapi: 3.1.0
+info:
+  title: 'Investment API'
+  description: 'JSON API for creating, listing, viewing, and withdrawing investments.'
+  version: 1.0.0
+servers:
+  -
+    url: 'http://localhost:8000'
+tags:
+  -
+    name: System
+    description: ''
+components:
+  securitySchemes:
+    default:
+      type: http
+      scheme: bearer
+      description: 'Send a Sanctum Bearer token in the `Authorization` header. **Admin** may access every investment; **Owner** may access only their own. Endpoints that do not require a token are marked as unauthenticated.'
+security:
+  -
+    default: []
+paths:
+  /api/health:
+    get:
+      summary: 'Check API health'
+      operationId: checkAPIHealth
+      description: 'Returns a simple payload so clients and Scribe can verify the API is reachable.'
+      parameters: []
+      responses:
+        200:
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    examples:
+                      - ok
+                examples:
+                  -
+                    status: ok
+      tags:
+        - System
+      security: []
