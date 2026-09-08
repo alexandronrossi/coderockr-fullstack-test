@@ -1309,6 +1309,44 @@ O estado `PR_CREATED` só vale quando título e descrição do commit e do PR fo
 
 ---
 
+# 30.2 Graphify — consulta prioritária e rebuild no PR (obrigatório)
+
+Se o Graphify estiver presente neste repositório (`graphify-out/graph.json` existe e o CLI `graphify` está disponível), **consultar o grafo tem prioridade** sobre abrir o código-fonte.
+
+Ordem:
+
+```text
+Graphify (query / path / explain / GRAPH_REPORT)
+        ↓
+há informação útil?
+        ↓ sim → orientar o trabalho pelo grafo, então ler só as linhas necessárias
+        ↓ não (CLI ausente, graph.json inexistente, query vazia ou irrelevante)
+        ↓
+código (Read / Grep / Glob)
+```
+
+* Não varrer o repositório com Grep/Glob/Read **antes** de tentar o Graphify, quando o grafo existir.
+* Se o Graphify **não** estiver instalado, o grafo **não** existir, ou a consulta **não** devolver informação sobre o assunto, ir ao código.
+* Isto aplica-se a todos os agentes (Architecture, Test, Code, Review) e a subagentes.
+
+## Rebuild no fim de cada PR
+
+Antes do commit final / `PR_CREATED`, o Git Agent **refaz o grafo** e inclui `graphify-out/` no PR (exceto `cost.json`):
+
+```bash
+graphify update .
+```
+
+Se `graphify-out/graph.json` ainda não existir:
+
+```bash
+graphify extract . --code-only
+```
+
+AST-only, sem LLM. Sem rebuild, o PR não fecha.
+
+---
+
 # 31. Dependency Security
 
 Quando uma dependência nova for adicionada, avaliar:
@@ -1344,6 +1382,7 @@ A implementação somente pode ser considerada concluída quando:
 [PASS] Security Review
 [PASS] Git Diff Review
 [PASS] Secrets Check
+[PASS] Graphify rebuild
 [PASS] Commit e PR assertivos
 [PASS] PR
 ```

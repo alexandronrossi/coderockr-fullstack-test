@@ -1,0 +1,26 @@
+---
+description: graphify knowledge graph context
+alwaysApply: true
+---
+
+This project has a graphify knowledge graph at graphify-out/. Aligns with SDD 30.2.
+
+**Priority:** Graphify first. Code second.
+
+If `graphify-out/graph.json` exists and the `graphify` CLI is available, you MUST query the graph **before** Read, Grep, Glob, or Bash exploration:
+
+- `graphify query "<question>"`
+- `graphify path "<A>" "<B>"`
+- `graphify explain "<concept>"`
+
+Only go to the source when:
+
+1. Graphify is not installed
+2. `graphify-out/graph.json` does not exist
+3. The query/path/explain returns nothing useful for the question
+
+Then Read/Grep/Glob the specific files the graph (or the fallback search) identified.
+
+This applies to you and every subagent. After Graphify orients you, Read only the lines you will change.
+
+**End of every PR:** run `graphify update .` (or `graphify extract . --code-only` if the graph is missing), commit `graphify-out/` except `cost.json`. Do not close the PR without the rebuild.

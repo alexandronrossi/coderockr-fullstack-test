@@ -55,6 +55,8 @@ Fonte normativa completa: `.specify/memory/sdd-multi-agent.md`.
 
 A API Laravel é documentada com [Scribe](https://scribe.knuckles.wtf/laravel/getting-started) (`type: static`, rotas `api/*`). Todo PR que adiciona ou altera endpoint regenera e commita `public/docs`.
 
+**Graphify:** se `graphify-out/graph.json` existir, consultar o grafo **antes** do código. Se o Graphify não existir ou a consulta não tiver informação útil, ir ao código. No fim de cada PR, `graphify update .` e commit de `graphify-out/` (seção 30.2).
+
 ## Development Workflow
 
 Agentes especializados (não um único passo de "escrever código"):
@@ -72,4 +74,4 @@ Definition of Done exige todos os itens `[PASS]` da seção 32 do SDD, inclusive
 
 Esta constituição prevalece sobre conveniência, prazo e "os testes passaram". Emendas exigem atualização deste arquivo, de `.specify/memory/sdd-multi-agent.md` e das skills em `.cursor/skills/sdd-*`. PRs e reviews verificam conformidade com os gates. Complexidade e design patterns exigem justificativa no architecture-security-plan.
 
-**Version**: 1.0.3 | **Ratified**: 2026-08-31 | **Last Amended**: 2026-08-31
+**Version**: 1.0.4 | **Ratified**: 2026-08-31 | **Last Amended**: 2026-08-31
