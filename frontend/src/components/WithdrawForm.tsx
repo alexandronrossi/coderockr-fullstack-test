@@ -21,17 +21,17 @@ export function WithdrawForm({ investmentId, createdOn, onSuccess }: WithdrawFor
     setError(null);
 
     if (!withdrawnOn) {
-      setError('Informe a data de resgate.');
+      setError('Enter the withdrawal date.');
       return;
     }
 
     if (withdrawnOn > today) {
-      setError('A data de resgate não pode ser futura.');
+      setError('Withdrawal date cannot be in the future.');
       return;
     }
 
     if (withdrawnOn < createdOn) {
-      setError('A data de resgate deve ser igual ou posterior à criação.');
+      setError('Withdrawal date must be on or after the creation date.');
       return;
     }
 
@@ -41,11 +41,11 @@ export function WithdrawForm({ investmentId, createdOn, onSuccess }: WithdrawFor
       onSuccess(result);
     } catch (err) {
       if (err instanceof ApiError && err.status === 422) {
-        setError('Não foi possível resgatar. Verifique a data.');
+        setError('Could not withdraw. Check the date.');
       } else if (err instanceof ApiError) {
         setError(err.message);
       } else {
-        setError('Falha ao resgatar o investimento.');
+        setError('Failed to withdraw the investment.');
       }
     } finally {
       setBusy(false);
@@ -54,9 +54,9 @@ export function WithdrawForm({ investmentId, createdOn, onSuccess }: WithdrawFor
 
   return (
     <form className={styles.form} onSubmit={handleSubmit} noValidate>
-      <h2>Resgatar</h2>
-      <p className={styles.hint}>O imposto e o líquido vêm só da API — a tela não calcula.</p>
-      <label htmlFor="withdrawn_on">Data do resgate</label>
+      <h2>Withdraw</h2>
+      <p className={styles.hint}>Tax and net come from the API only — this screen does not calculate them.</p>
+      <label htmlFor="withdrawn_on">Withdrawal date</label>
       <input
         id="withdrawn_on"
         name="withdrawn_on"
@@ -69,7 +69,7 @@ export function WithdrawForm({ investmentId, createdOn, onSuccess }: WithdrawFor
       />
       {error ? <p role="alert">{error}</p> : null}
       <button type="submit" disabled={busy}>
-        Confirmar resgate
+        Confirm withdrawal
       </button>
     </form>
   );

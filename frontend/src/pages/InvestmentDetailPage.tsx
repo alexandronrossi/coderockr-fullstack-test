@@ -40,7 +40,7 @@ export function InvestmentDetailPage() {
           setNotFound(true);
           setInvestment(null);
         } else {
-          setError('Não foi possível carregar o investimento.');
+          setError('Could not load the investment.');
         }
       })
       .finally(() => {
@@ -55,15 +55,15 @@ export function InvestmentDetailPage() {
   }, [investmentId]);
 
   if (loading) {
-    return <p>Carregando…</p>;
+    return <p>Loading…</p>;
   }
 
   if (notFound) {
     return (
       <section className={styles.page}>
-        <h1>Investimento não encontrado</h1>
-        <p>O recurso não existe ou você não tem acesso.</p>
-        <Link to="/investments">Voltar à lista</Link>
+        <h1>Investment not found</h1>
+        <p>The resource does not exist or you do not have access.</p>
+        <Link to="/investments">Back to list</Link>
       </section>
     );
   }
@@ -71,8 +71,8 @@ export function InvestmentDetailPage() {
   if (error || !investment) {
     return (
       <section className={styles.page}>
-        <p role="alert">{error ?? 'Falha inesperada.'}</p>
-        <Link to="/investments">Voltar à lista</Link>
+        <p role="alert">{error ?? 'Unexpected failure.'}</p>
+        <Link to="/investments">Back to list</Link>
       </section>
     );
   }
@@ -81,7 +81,7 @@ export function InvestmentDetailPage() {
     <section className={styles.page}>
       <header className={styles.header}>
         <div>
-          <p className={styles.eyebrow}>Investimento #{investment.id}</p>
+          <p className={styles.eyebrow}>Investment #{investment.id}</p>
           <h1>{investment.owner.name}</h1>
           <p>{investment.owner.email}</p>
         </div>
@@ -90,33 +90,33 @@ export function InvestmentDetailPage() {
 
       <dl className={styles.grid}>
         <div>
-          <dt>Valor</dt>
+          <dt>Amount</dt>
           <dd>{investment.amount}</dd>
         </div>
         <div>
-          <dt>Criado em</dt>
+          <dt>Created on</dt>
           <dd>{investment.created_on}</dd>
         </div>
         <div>
-          <dt>Saldo esperado</dt>
+          <dt>Expected balance</dt>
           <dd>{investment.expected_balance}</dd>
         </div>
         <div>
-          <dt>Ganho</dt>
+          <dt>Gain</dt>
           <dd>{investment.gain}</dd>
         </div>
         {investment.status === 'withdrawn' ? (
           <>
             <div>
-              <dt>Resgatado em</dt>
+              <dt>Withdrawn on</dt>
               <dd>{investment.withdrawn_on}</dd>
             </div>
             <div>
-              <dt>Imposto</dt>
+              <dt>Tax</dt>
               <dd>{investment.tax}</dd>
             </div>
             <div>
-              <dt>Líquido</dt>
+              <dt>Net</dt>
               <dd>{investment.net}</dd>
             </div>
           </>
@@ -132,7 +132,7 @@ export function InvestmentDetailPage() {
       ) : null}
 
       <p className={styles.back}>
-        <Link to="/investments">Voltar à lista</Link>
+        <Link to="/investments">Back to list</Link>
       </p>
     </section>
   );

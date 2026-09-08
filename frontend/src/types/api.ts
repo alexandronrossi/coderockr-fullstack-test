@@ -47,10 +47,19 @@ export interface LoginCredentials {
   password: string;
 }
 
+export interface RegisterCredentials {
+  name: string;
+  email: string;
+  password: string;
+  password_confirmation: string;
+}
+
 export interface LoginResponse {
   token: string;
   user: User;
 }
+
+export type AuthResponse = LoginResponse;
 
 export interface CreateInvestmentInput {
   amount: string;

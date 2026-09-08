@@ -10,7 +10,7 @@
     ],
     "info": {
         "name": "Investment API",
-        "_postman_id": "a8d87913-4aa1-4b36-8e5b-4cdf5cecc79f",
+        "_postman_id": "d0a41501-14b3-43c6-9e89-f3cf9fcb5df4",
         "description": "JSON API for creating, listing, viewing, and withdrawing investments.",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
@@ -59,6 +59,56 @@
                             "header": [],
                             "code": 401,
                             "body": "{\"message\": \"Invalid credentials.\"}",
+                            "name": "invalid"
+                        },
+                        {
+                            "header": [],
+                            "code": 422,
+                            "body": "{\"message\":\"The email field must not be greater than 255 characters.\",\"errors\":{\"email\":[\"The email field must not be greater than 255 characters.\"]}}",
+                            "name": "oversized"
+                        }
+                    ]
+                },
+                {
+                    "name": "Register",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/register",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/register"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"New Owner\",\"email\":\"new@example.com\",\"password\":\"password1\",\"password_confirmation\":\"password1\"}"
+                        },
+                        "description": "Creates an Owner account and returns a Sanctum Bearer token.\nRole and user_id from the client are ignored; every registration is Owner.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "{\"token\": \"1|plainTextToken\", \"user\": {\"id\": 3, \"name\": \"New Owner\", \"email\": \"new@example.com\", \"role\": \"owner\"}}",
+                            "name": "created"
+                        },
+                        {
+                            "header": [],
+                            "code": 422,
+                            "body": "{\"message\":\"The email has already been taken.\",\"errors\":{\"email\":[\"The email has already been taken.\"]}}",
                             "name": "invalid"
                         }
                     ]

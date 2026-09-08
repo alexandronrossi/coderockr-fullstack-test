@@ -2,8 +2,8 @@ import { MemoryRouter } from 'react-router-dom';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { LoginPage } from '@/pages/LoginPage';
 import { getToken, getUser } from '@/auth/session';
+import { LoginPage } from '@/pages/LoginPage';
 
 describe('LoginPage', () => {
   beforeEach(() => {
@@ -31,14 +31,14 @@ describe('LoginPage', () => {
 
     expect(screen.queryByLabelText(/role/i)).not.toBeInTheDocument();
     expect(document.querySelector('input[name="role"]')).toBeNull();
+    expect(screen.getByLabelText(/^email$/i)).toHaveAttribute('maxLength', '255');
+    expect(screen.getByLabelText(/^password$/i)).toHaveAttribute('maxLength', '72');
 
-    await user.type(screen.getByLabelText(/e-mail/i), 'a@b.com');
-    await user.type(screen.getByLabelText(/senha/i), 'wrong');
-    await user.click(screen.getByRole('button', { name: /continuar/i }));
+    await user.type(screen.getByLabelText(/^email$/i), 'a@b.com');
+    await user.type(screen.getByLabelText(/^password$/i), 'wrong');
+    await user.click(screen.getByRole('button', { name: /continue/i }));
 
-    expect(
-      await screen.findByRole('alert'),
-    ).toHaveTextContent(/não foi possível entrar/i);
+    expect(await screen.findByRole('alert')).toHaveTextContent(/could not sign in/i);
   });
 
   it('stores session on successful login', async () => {
@@ -60,9 +60,9 @@ describe('LoginPage', () => {
       </MemoryRouter>,
     );
 
-    await user.type(screen.getByLabelText(/e-mail/i), 'owner@example.com');
-    await user.type(screen.getByLabelText(/senha/i), 'secret');
-    await user.click(screen.getByRole('button', { name: /continuar/i }));
+    await user.type(screen.getByLabelText(/^email$/i), 'owner@example.com');
+    await user.type(screen.getByLabelText(/^password$/i), 'secret');
+    await user.click(screen.getByRole('button', { name: /continue/i }));
 
     await waitFor(() => {
       expect(getToken()).toBe('tok-ok');

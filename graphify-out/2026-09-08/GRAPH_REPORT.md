@@ -1,16 +1,16 @@
 # Graph Report - coderockr-fullstack-test  (2026-09-08)
 
 ## Corpus Check
-- 265 files · ~281,145 words
+- 270 files · ~279,435 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 2003 nodes · 2419 edges · 165 communities (139 shown, 10 thin omitted)
+- 1971 nodes · 2406 edges · 175 communities (146 shown, 13 thin omitted)
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 27 edges (avg confidence: 0.85)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `b914e7e9`
+- Built from commit: `b968751d`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -54,8 +54,8 @@
 - logging.php
 - speckit-taskstoissues/SKILL.md
 - [CHECKLIST TYPE] Checklist: [FEATURE NAME]
-- Laravel Boost Guidelines
-- Laravel Boost Guidelines
+- Laravel Application
+- Laravel Application
 - scribe.php
 - Code Agent
 - Money
@@ -68,7 +68,7 @@
 - 30.2 Graphify — consulta prioritária e rebuild no PR (obrigatório)
 - 8. DATABASE SECURITY — RLS / Authorization
 - Data Model: Autenticação Admin / Owner
-- InvestmentFactory
+- UserFactory
 - Research: Autenticação Admin / Owner
 - sanctum.php
 - Tasks: Ganho composto no dia civil e imposto no resgate
@@ -79,20 +79,20 @@
 - User
 - Quickstart: Interface web de investimentos
 - Investment
-- api.ts
-- InvestmentResource
+- session.ts
+- Controller
 - Architecture-Security Plan: Interface web de investimentos
 - Research: API de investimentos
 - devDependencies
 - Tasks: Interface web de investimentos
 - AppServiceProvider.php
 - compilerOptions
-- LoginTest
+- UserRole
 - Illuminate\Foundation\Http\FormRequest
 - Research: Interface web de investimentos
 - DatabaseSeeder
-- User.php
-- UserRole
+- Investment.php
+- InvestmentValuation
 - Detection Checklist
 - Process
 - Security Best Practices
@@ -129,7 +129,7 @@
 - Error Handling Best Practices
 - Task Scheduling Best Practices
 - Endpoint Tests
-- Controller
+- LogoutController.php
 - .claude/skills/laravel-best-practices/SKILL.md
 - Collection Best Practices
 - HTTP Client Best Practices
@@ -164,9 +164,19 @@
 - Testing Best Practices
 - vite-env.d.ts
 - laravel-boost
+- Carbon\CarbonImmutable
+- InvalidInvestmentDate
+- PHPUnit\Framework\TestCase
+- CarbonImmutable
+- InvestmentFactory
+- Verdict: CODE_REVIEW_PASSED
+- InvestmentAuthorizationTest
+- ListInvestmentsTest
+- e2e-smoke.mjs
+- Security review — 004-investment-ui
 
 ## God Nodes (most connected - your core abstractions)
-1. `User` - 78 edges
+1. `User` - 79 edges
 2. `Money` - 38 edges
 3. `TestCase` - 35 edges
 4. `Investment` - 29 edges
@@ -178,25 +188,25 @@
 10. `Tasks: Ganho composto no dia civil e imposto no resgate` - 14 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `CreateInvestment` --references--> `InvestmentValuation`  [EXTRACTED]
-  app/Services/Investment/CreateInvestment.php → app/Domain/Investment/InvestmentValuation.php
-- `ShowInvestment` --references--> `InvestmentValuation`  [EXTRACTED]
-  app/Services/Investment/ShowInvestment.php → app/Domain/Investment/InvestmentValuation.php
+- `InvestmentValuation` --references--> `CompoundGainCalculator`  [EXTRACTED]
+  app/Domain/Investment/InvestmentValuation.php → app/Domain/Investment/CompoundGainCalculator.php
+- `InvestmentValuation` --references--> `WithdrawalTaxCalculator`  [EXTRACTED]
+  app/Domain/Investment/InvestmentValuation.php → app/Domain/Investment/WithdrawalTaxCalculator.php
+- `ListInvestments` --references--> `InvestmentValuation`  [EXTRACTED]
+  app/Services/Investment/ListInvestments.php → app/Domain/Investment/InvestmentValuation.php
+- `WithdrawInvestment` --references--> `InvestmentValuation`  [EXTRACTED]
+  app/Services/Investment/WithdrawInvestment.php → app/Domain/Investment/InvestmentValuation.php
 - `CurrentUserController` --inherits--> `Controller`  [EXTRACTED]
   app/Http/Controllers/Api/CurrentUserController.php → app/Http/Controllers/Controller.php
-- `HealthController` --inherits--> `Controller`  [EXTRACTED]
-  app/Http/Controllers/Api/HealthController.php → app/Http/Controllers/Controller.php
-- `IndexInvestmentController` --inherits--> `Controller`  [EXTRACTED]
-  app/Http/Controllers/Api/IndexInvestmentController.php → app/Http/Controllers/Controller.php
 
 ## Import Cycles
 - None detected.
 
-## Communities (165 total, 10 thin omitted)
+## Communities (175 total, 13 thin omitted)
 
 ### Community 0 - "composer.json"
 Cohesion: 0.05
-Nodes (43): pestphp/pest-plugin, php-http/discovery, autoload, autoload-dev, psr-4, psr-4, config, allow-plugins (+35 more)
+Nodes (42): pestphp/pest-plugin, php-http/discovery, autoload, autoload-dev, psr-4, psr-4, config, allow-plugins (+34 more)
 
 ### Community 1 - "sdd-multi-agent.md"
 Cohesion: 0.07
@@ -211,8 +221,8 @@ Cohesion: 0.07
 Nodes (26): Dependencies & Execution Order, Format: `[ID] [P?] [Story] Description`, Implementation for User Story 1, Implementation for User Story 2, Implementation for User Story 3, Implementation Strategy, Incremental Delivery, MVP First (User Story 1 Only) (+18 more)
 
 ### Community 4 - "TestCase"
-Cohesion: 0.06
-Nodes (15): Factory, Illuminate\Foundation\Testing\RefreshDatabase, Illuminate\Foundation\Testing\TestCase, Illuminate\Support\Facades\RateLimiter, CurrentUserTest, DatabaseSeederAuthTest, LoginRateLimitTest, LogoutTest (+7 more)
+Cohesion: 0.08
+Nodes (13): Factory, Illuminate\Foundation\Testing\RefreshDatabase, Illuminate\Foundation\Testing\TestCase, Illuminate\Support\Facades\RateLimiter, DatabaseSeederAuthTest, LoginRateLimitTest, LogoutTest, PrivilegeEscalationTest (+5 more)
 
 ### Community 5 - "speckit-analyze/SKILL.md"
 Cohesion: 0.08
@@ -346,13 +356,13 @@ Nodes (4): Outline, Post-Execution Checks, Pre-Execution Checks, User Input
 Cohesion: 0.40
 Nodes (4): [Category 1], [Category 2], [CHECKLIST TYPE] Checklist: [FEATURE NAME], Notes
 
-### Community 39 - "Laravel Boost Guidelines"
-Cohesion: 0.07
-Nodes (28): APIs & Eloquent Resources, Application Structure & Architecture, Artisan, Conventions, Deployment, Do Things the Laravel Way, Documentation Files, Foundational Context (+20 more)
+### Community 39 - "Laravel Application"
+Cohesion: 0.50
+Nodes (3): Agent Setup, Laravel Application, Prerequisites
 
-### Community 40 - "Laravel Boost Guidelines"
-Cohesion: 0.07
-Nodes (28): APIs & Eloquent Resources, Application Structure & Architecture, Artisan, Conventions, Deployment, Do Things the Laravel Way, Documentation Files, Foundational Context (+20 more)
+### Community 40 - "Laravel Application"
+Cohesion: 0.50
+Nodes (3): Agent Setup, Laravel Application, Prerequisites
 
 ### Community 41 - "scribe.php"
 Cohesion: 0.50
@@ -363,8 +373,8 @@ Cohesion: 0.50
 Nodes (3): Code Agent, Proibido, Required
 
 ### Community 43 - "Money"
-Cohesion: 0.06
-Nodes (22): CivilMonthAnniversary, CompoundGainCalculator, InvalidInvestmentDate, InvestmentAlreadyWithdrawn, InvestmentValuation, Money, self, WithdrawalTaxCalculator (+14 more)
+Cohesion: 0.16
+Nodes (4): Money, self, InvalidArgumentException, MoneyTest
 
 ### Community 44 - "25. Code Review Gate"
 Cohesion: 0.50
@@ -378,9 +388,9 @@ Nodes (4): 30.1 Commit e Pull Request — Boas práticas (obrigatório), Branchi
 Cohesion: 0.09
 Nodes (21): Data Model: Autenticação Admin / Owner, Factory states, Out of scope, Seed records, Session (token Sanctum), State transitions, User (Pessoa), UserRole (enum) (+13 more)
 
-### Community 67 - "InvestmentFactory"
-Cohesion: 0.14
-Nodes (7): InvestmentFactory, static, Illuminate\Auth\AuthenticationException, Illuminate\Database\Eloquent\Factories\Factory, Illuminate\Support\Facades\Hash, Illuminate\Support\Str, Pdo\Mysql
+### Community 67 - "UserFactory"
+Cohesion: 0.16
+Nodes (6): static, UserFactory, Illuminate\Auth\AuthenticationException, Illuminate\Support\Facades\Hash, Illuminate\Support\Str, Pdo\Mysql
 
 ### Community 68 - "Research: Autenticação Admin / Owner"
 Cohesion: 0.17
@@ -411,24 +421,24 @@ Cohesion: 0.06
 Nodes (31): Dependencies & Execution Order, Format: `[ID] [P?] [Story] Description`, Implementation, Implementation for User Story 1, Implementation for User Story 2, Implementation for User Story 3, Implementation for User Story 4, Implementation Strategy (+23 more)
 
 ### Community 75 - "User"
-Cohesion: 0.10
-Nodes (6): User, Illuminate\Foundation\Auth\User, InvestmentAuthorizationTest, ListInvestmentsTest, StoreInvestmentTest, WithdrawInvestmentTest
+Cohesion: 0.11
+Nodes (6): User, Illuminate\Foundation\Auth\User, ShowInvestmentTest, StoreInvestmentTest, WithdrawInvestmentTest, UserTest
 
 ### Community 76 - "Quickstart: Interface web de investimentos"
 Cohesion: 0.05
 Nodes (37): Data Model: Investimentos, Evaluation (não persistida), Factory, Investment, Out of scope, State transitions, User (existente), Validation rules (+29 more)
 
 ### Community 77 - "Investment"
-Cohesion: 0.09
-Nodes (13): Investment, InvestmentPolicy, CreateInvestment, self, ValuedInvestment, Illuminate\Database\Eloquent\Attributes\Fillable, Illuminate\Database\Eloquent\Builder, Illuminate\Database\Eloquent\Factories\HasFactory (+5 more)
+Cohesion: 0.13
+Nodes (6): Investment, InvestmentPolicy, ListInvestments, self, ValuedInvestment, Illuminate\Contracts\Pagination\LengthAwarePaginator
 
-### Community 78 - "api.ts"
+### Community 78 - "session.ts"
 Cohesion: 0.06
-Nodes (49): login(), logout(), apiBaseUrl(), ApiError, apiRequest(), RequestOptions, user, create() (+41 more)
+Nodes (51): login(), logout(), apiBaseUrl(), ApiError, apiRequest(), RequestOptions, user, create() (+43 more)
 
-### Community 79 - "InvestmentResource"
-Cohesion: 0.38
-Nodes (3): ShowInvestmentController, InvestmentResource, ShowInvestment
+### Community 79 - "Controller"
+Cohesion: 0.29
+Nodes (5): ShowInvestmentController, WithdrawInvestmentController, Controller, InvestmentResource, Illuminate\Foundation\Auth\Access\AuthorizesRequests
 
 ### Community 80 - "Architecture-Security Plan: Interface web de investimentos"
 Cohesion: 0.05
@@ -454,9 +464,13 @@ Nodes (3): AppServiceProvider, Illuminate\Cache\RateLimiting\Limit, Illuminate\S
 Cohesion: 0.07
 Nodes (26): compilerOptions, allowImportingTsExtensions, baseUrl, isolatedModules, jsx, lib, module, moduleDetection (+18 more)
 
+### Community 86 - "UserRole"
+Cohesion: 0.12
+Nodes (4): UserRole, CurrentUserTest, LoginTest, UserRoleTest
+
 ### Community 87 - "Illuminate\Foundation\Http\FormRequest"
-Cohesion: 0.19
-Nodes (4): WithdrawInvestmentController, StoreInvestmentRequest, WithdrawInvestmentRequest, Illuminate\Foundation\Http\FormRequest
+Cohesion: 0.28
+Nodes (3): StoreInvestmentRequest, WithdrawInvestmentRequest, Illuminate\Foundation\Http\FormRequest
 
 ### Community 88 - "Research: Interface web de investimentos"
 Cohesion: 0.15
@@ -466,13 +480,13 @@ Nodes (12): 10. Scribe / API, 1. Onde vive a SPA, 2. Sessão no browser, 3. Pape
 Cohesion: 0.60
 Nodes (3): DatabaseSeeder, Illuminate\Database\Console\Seeds\WithoutModelEvents, Illuminate\Database\Seeder
 
-### Community 90 - "User.php"
-Cohesion: 0.21
-Nodes (6): static, UserFactory, Illuminate\Database\Eloquent\Attributes\Hidden, Illuminate\Database\Eloquent\Relations\HasMany, Illuminate\Notifications\Notifiable, Laravel\Sanctum\HasApiTokens
+### Community 90 - "Investment.php"
+Cohesion: 0.15
+Nodes (9): Illuminate\Database\Eloquent\Attributes\Fillable, Illuminate\Database\Eloquent\Attributes\Hidden, Illuminate\Database\Eloquent\Builder, Illuminate\Database\Eloquent\Factories\HasFactory, Illuminate\Database\Eloquent\Model, Illuminate\Database\Eloquent\Relations\BelongsTo, Illuminate\Database\Eloquent\Relations\HasMany, Illuminate\Notifications\Notifiable (+1 more)
 
-### Community 91 - "UserRole"
-Cohesion: 0.20
-Nodes (3): UserRole, UserRoleTest, UserTest
+### Community 91 - "InvestmentValuation"
+Cohesion: 0.18
+Nodes (6): InvestmentValuation, CreateInvestment, ShowInvestment, Illuminate\Database\Eloquent\ModelNotFoundException, Illuminate\Validation\ValidationException, InvestmentValuationTest
 
 ### Community 92 - "Detection Checklist"
 Cohesion: 0.17
@@ -483,7 +497,7 @@ Cohesion: 0.17
 Nodes (11): Edge cases, Glob mapping, Ground Rules (read before you start), Infer Conventions, Process, Step 0: Orient, Step 1: Predefined sweep, Step 2: Open-ended pass (+3 more)
 
 ### Community 94 - "Security Best Practices"
-Cohesion: 0.17
+Cohesion: 0.18
 Nodes (11): Apply Cross-Site Request Forgery Protection, Audit Dependencies, Authorize Protected Actions, Bind Query Parameters, Control Mass Assignment, Encrypt Sensitive Attributes When Appropriate, Escape Output in Its Context, Keep Secrets Out of Application Code (+3 more)
 
 ### Community 95 - "Detection Checklist"
@@ -495,7 +509,7 @@ Cohesion: 0.17
 Nodes (11): Edge cases, Glob mapping, Ground Rules (read before you start), Infer Conventions, Process, Step 0: Orient, Step 1: Predefined sweep, Step 2: Open-ended pass (+3 more)
 
 ### Community 97 - "Architecture Best Practices"
-Cohesion: 0.17
+Cohesion: 0.18
 Nodes (11): Architecture Best Practices, Depend on Contracts at Boundaries, Extract Focused Business Operations, Follow Framework Conventions, Inject Required Dependencies, Specify a Deterministic Sort Order, Use Atomic Locks for Race Conditions, Use `Concurrency::run()` for Parallel Execution (+3 more)
 
 ### Community 98 - "Data Model: Interface (visão cliente)"
@@ -551,11 +565,11 @@ Cohesion: 0.20
 Nodes (9): Back Off Transient Failures, Batch Jobs for Group Coordination, Configure Time-Based Retry Limits Deliberately, Handle Terminal Failure When Needed, Keep Reservation Time Longer Than Execution Time, Queue and Job Best Practices, Rate Limit External Calls, Use Horizon for Redis Queue Operations (+1 more)
 
 ### Community 111 - "api.php"
-Cohesion: 0.28
+Cohesion: 0.27
 Nodes (4): HealthController, StoreInvestmentController, Illuminate\Http\JsonResponse, Illuminate\Support\Facades\Route
 
 ### Community 112 - "IndexInvestmentRequest"
-Cohesion: 0.28
+Cohesion: 0.24
 Nodes (3): IndexInvestmentController, IndexInvestmentRequest, Illuminate\Http\Resources\Json\AnonymousResourceCollection
 
 ### Community 113 - "LoginController.php"
@@ -618,12 +632,8 @@ Nodes (7): Bound Work Inside the Task, Group Shared Configuration, Prevent Unwan
 Cohesion: 0.25
 Nodes (7): Endpoint Coverage, Endpoint Tests, How to Write the Test, Tenant Isolation, Test Authorization at the Policy Level, Testing Validation, Which Layer Owns Which Case
 
-### Community 128 - "Controller"
-Cohesion: 0.43
-Nodes (4): LogoutController, Controller, Illuminate\Foundation\Auth\Access\AuthorizesRequests, Illuminate\Http\Response
-
 ### Community 129 - ".claude/skills/laravel-best-practices/SKILL.md"
-Cohesion: 0.29
+Cohesion: 0.25
 Nodes (5): Consistency First, Decision Rules, How to Apply, Laravel Best Practices, Rule Index
 
 ### Community 130 - "Collection Best Practices"
@@ -687,7 +697,7 @@ Cohesion: 0.29
 Nodes (6): Keep Controllers Focused on HTTP Concerns, Organize Controllers Around Resources, Routing and Controller Best Practices, Scope Nested Bindings, Use Implicit Route Model Binding, Use Resource Routes for Resourceful Actions
 
 ### Community 145 - ".cursor/skills/laravel-best-practices/SKILL.md"
-Cohesion: 0.29
+Cohesion: 0.25
 Nodes (5): Consistency First, Decision Rules, How to Apply, Laravel Best Practices, Rule Index
 
 ### Community 146 - "Convention and Style Best Practices"
@@ -750,24 +760,52 @@ Nodes (4): Data Providers, Each Test Makes Its Own Data, Factories and Test Data
 Cohesion: 0.40
 Nodes (5): Consistency First, How to Apply, Rule Index, Testing Best Practices, What to Test
 
+### Community 165 - "Carbon\CarbonImmutable"
+Cohesion: 0.23
+Nodes (3): WithdrawalTaxCalculator, Carbon\CarbonImmutable, WithdrawalTaxCalculatorTest
+
+### Community 166 - "InvalidInvestmentDate"
+Cohesion: 0.20
+Nodes (5): InvalidInvestmentDate, InvestmentAlreadyWithdrawn, WithdrawInvestment, DomainException, Illuminate\Support\Facades\DB
+
+### Community 167 - "PHPUnit\Framework\TestCase"
+Cohesion: 0.24
+Nodes (4): CompoundGainCalculator, PHPUnit\Framework\TestCase, CompoundGainCalculatorTest, ExampleTest
+
+### Community 168 - "CarbonImmutable"
+Cohesion: 0.44
+Nodes (3): CivilMonthAnniversary, CarbonImmutable, CivilMonthAnniversaryTest
+
+### Community 169 - "InvestmentFactory"
+Cohesion: 0.36
+Nodes (3): InvestmentFactory, static, Illuminate\Database\Eloquent\Factories\Factory
+
+### Community 170 - "Verdict: CODE_REVIEW_PASSED"
+Cohesion: 0.29
+Nodes (6): Architecture, Code review — 004-investment-ui, Notes (non-blocking), Quality, Security, Verdict: CODE_REVIEW_PASSED
+
+### Community 173 - "e2e-smoke.mjs"
+Cohesion: 1.00
+Nodes (3): apiLogin(), assert(), main()
+
 ## Knowledge Gaps
-- **1139 isolated node(s):** `php`, `$schema`, `name`, `type`, `description` (+1134 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 1273 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **10 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **1102 isolated node(s):** `php`, `$schema`, `name`, `type`, `description` (+1097 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 1240 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **13 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `User` connect `User` to `InvestmentFactory`, `TestCase`, `Money`, `Investment`, `LoginController.php`, `LoginTest`, `DatabaseSeeder`, `User.php`, `UserRole`?**
+- **Why does `User` connect `User` to `UserFactory`, `TestCase`, `InvalidInvestmentDate`, `InvestmentFactory`, `InvestmentAuthorizationTest`, `ListInvestmentsTest`, `Investment`, `LoginController.php`, `UserRole`, `DatabaseSeeder`, `Investment.php`, `InvestmentValuation`?**
   _High betweenness centrality (0.014) - this node is a cross-community bridge._
-- **Why does `Money` connect `Money` to `Investment`?**
+- **Why does `Money` connect `Money` to `Carbon\CarbonImmutable`, `InvalidInvestmentDate`, `PHPUnit\Framework\TestCase`, `Investment`, `Investment.php`, `InvestmentValuation`?**
   _High betweenness centrality (0.007) - this node is a cross-community bridge._
-- **Why does `Investment` connect `Investment` to `IndexInvestmentRequest`, `InvestmentFactory`, `Money`?**
-  _High betweenness centrality (0.005) - this node is a cross-community bridge._
+- **Why does `TestCase` connect `TestCase` to `User`, `InvestmentAuthorizationTest`, `ListInvestmentsTest`, `UserRole`?**
+  _High betweenness centrality (0.006) - this node is a cross-community bridge._
 - **What connects `php`, `$schema`, `name` to the rest of the system?**
-  _1139 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _1102 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `composer.json` be split into smaller, more focused modules?**
-  _Cohesion score 0.045454545454545456 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.046511627906976744 - nodes in this community are weakly interconnected._
 - **Should `sdd-multi-agent.md` be split into smaller, more focused modules?**
   _Cohesion score 0.06896551724137931 - nodes in this community are weakly interconnected._
 - **Should `scripts` be split into smaller, more focused modules?**
