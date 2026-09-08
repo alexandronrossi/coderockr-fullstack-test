@@ -114,9 +114,9 @@
     "semantic_hash": "888c810b5a4720916f07aa05dd2c2dd3"
   },
   "composer.json": {
-    "mtime": 1788886116.0265982,
-    "seen": 1788886636.6541996,
-    "ast_hash": "4f1916eaba180a33887118ec020e547f",
+    "mtime": 1788886660.5112543,
+    "seen": 1788888360.1432889,
+    "ast_hash": "6f492b38253377a85d68857220b66cea",
     "semantic_hash": ""
   },
   "config/app.php": {
@@ -138,10 +138,10 @@
     "semantic_hash": "399c7a3b4bca7e3cb9b622828682ab56"
   },
   "config/cors.php": {
-    "mtime": 1788206966.4765604,
-    "seen": 1788207008.9190052,
-    "ast_hash": "b820408085208907fdd4333aaeeaf7a5",
-    "semantic_hash": "b820408085208907fdd4333aaeeaf7a5"
+    "mtime": 1788888024.1092653,
+    "seen": 1788888360.143295,
+    "ast_hash": "3d59246c01a0902a6f4c413a09e2a00c",
+    "semantic_hash": ""
   },
   "config/database.php": {
     "mtime": 1787660818.0,
@@ -450,15 +450,15 @@
     "semantic_hash": ""
   },
   "AGENTS.md": {
-    "mtime": 1788886467.3880374,
-    "seen": 1788886636.654436,
-    "ast_hash": "b65c4165aae9fe7a0b8478bd8e382671",
+    "mtime": 1788886660.5112543,
+    "seen": 1788888360.14355,
+    "ast_hash": "4b049823bd463671a9cbbe6d0fd9a302",
     "semantic_hash": ""
   },
   "CLAUDE.md": {
-    "mtime": 1788886467.3880374,
-    "seen": 1788886636.6544373,
-    "ast_hash": "b65c4165aae9fe7a0b8478bd8e382671",
+    "mtime": 1788886660.5112543,
+    "seen": 1788888360.1435509,
+    "ast_hash": "4b049823bd463671a9cbbe6d0fd9a302",
     "semantic_hash": ""
   },
   "README.md": {
@@ -786,9 +786,9 @@
     "semantic_hash": ""
   },
   "app/Http/Controllers/Api/StoreInvestmentController.php": {
-    "mtime": 1788885430.270934,
-    "seen": 1788886636.654165,
-    "ast_hash": "aa739aa2ccfe4379ebd82337a14a61f0",
+    "mtime": 1788888244.784197,
+    "seen": 1788888360.1432538,
+    "ast_hash": "7949879f62104ad30a4db6d313d2c173",
     "semantic_hash": ""
   },
   "app/Http/Controllers/Api/WithdrawInvestmentController.php": {
@@ -828,9 +828,9 @@
     "semantic_hash": ""
   },
   "app/Policies/InvestmentPolicy.php": {
-    "mtime": 1788885430.270934,
-    "seen": 1788886636.654181,
-    "ast_hash": "0d40c093175a5b511d17c9f7abea3279",
+    "mtime": 1788888239.3958113,
+    "seen": 1788888360.1432703,
+    "ast_hash": "fb46dc527738149f7fd9875da1d978e3",
     "semantic_hash": ""
   },
   "app/Services/Investment/CreateInvestment.php": {
@@ -906,9 +906,9 @@
     "semantic_hash": ""
   },
   "tests/Feature/Api/Investments/StoreInvestmentTest.php": {
-    "mtime": 1788885430.3178098,
-    "seen": 1788886636.6543016,
-    "ast_hash": "25fedbc634aba3f8a473b9af18fd796b",
+    "mtime": 1788888254.7344162,
+    "seen": 1788888360.143398,
+    "ast_hash": "980eefac6b95b0bdf73a5c29a3fcbb00",
     "semantic_hash": ""
   },
   "tests/Feature/Api/Investments/WithdrawInvestmentTest.php": {
@@ -960,9 +960,9 @@
     "semantic_hash": ""
   },
   "specs/003-investment-api/spec.md": {
-    "mtime": 1788885430.302184,
-    "seen": 1788886636.6544778,
-    "ast_hash": "77a7e90fddebf8c2ed5589ffc46dfb2e",
+    "mtime": 1788888349.882469,
+    "seen": 1788888360.1435916,
+    "ast_hash": "0f0a4f1fa0e84e9d8dcbebae12e5a0be",
     "semantic_hash": ""
   },
   "specs/003-investment-api/tasks.md": {
@@ -1020,15 +1020,15 @@
     "semantic_hash": ""
   },
   "frontend/src/api/investments.test.ts": {
-    "mtime": 1788886364.836501,
-    "seen": 1788886636.654241,
-    "ast_hash": "3358caa9e8a60a3b3e18f732e1a8fd1e",
+    "mtime": 1788887455.4151285,
+    "seen": 1788888360.1433322,
+    "ast_hash": "286ae682db90fc11914db455bfd75439",
     "semantic_hash": ""
   },
   "frontend/src/api/investments.ts": {
-    "mtime": 1788886071.3695436,
-    "seen": 1788886636.6542444,
-    "ast_hash": "59d674a87a5041dd8267bbbed9f2950c",
+    "mtime": 1788887455.3657393,
+    "seen": 1788888360.1433337,
+    "ast_hash": "a552052074d8bbe28c81dfd9746fb456",
     "semantic_hash": ""
   },
   "frontend/src/auth/RequireAuth.test.tsx": {
@@ -1056,15 +1056,15 @@
     "semantic_hash": ""
   },
   "frontend/src/components/AppShell.test.tsx": {
-    "mtime": 1788886419.7314177,
-    "seen": 1788886636.6542504,
-    "ast_hash": "370afe24ae8c0ad6b7c330cf527cf9a9",
+    "mtime": 1788888309.9403937,
+    "seen": 1788888360.1433437,
+    "ast_hash": "7df778805213c1a6384072d1c5f0c672",
     "semantic_hash": ""
   },
   "frontend/src/components/AppShell.tsx": {
-    "mtime": 1788886250.4587333,
-    "seen": 1788886636.6542518,
-    "ast_hash": "8f3ec04fc20ca32ecbbc2c4cfbcdc6b0",
+    "mtime": 1788888283.6118712,
+    "seen": 1788888360.1433446,
+    "ast_hash": "2b9110261dc637c26c972fade0d69855",
     "semantic_hash": ""
   },
   "frontend/src/components/InvestmentRow.tsx": {
@@ -1080,9 +1080,9 @@
     "semantic_hash": ""
   },
   "frontend/src/components/WithdrawForm.test.tsx": {
-    "mtime": 1788886418.7600048,
-    "seen": 1788886636.6542552,
-    "ast_hash": "2e02360aa3dde000c5cc9c39f2342db0",
+    "mtime": 1788887475.009794,
+    "seen": 1788888360.143349,
+    "ast_hash": "4d30d005107bb8601fdb84c4f6623f5b",
     "semantic_hash": ""
   },
   "frontend/src/components/WithdrawForm.tsx": {
@@ -1098,21 +1098,21 @@
     "semantic_hash": ""
   },
   "frontend/src/pages/CreateInvestmentPage.test.tsx": {
-    "mtime": 1788886407.8219981,
-    "seen": 1788886636.6542585,
-    "ast_hash": "d2129e3da704bfa4677b4a5dacfe649e",
+    "mtime": 1788888322.1720784,
+    "seen": 1788888360.143353,
+    "ast_hash": "15cace33e926924bb1e6b91c1dfb88bd",
     "semantic_hash": ""
   },
   "frontend/src/pages/CreateInvestmentPage.tsx": {
-    "mtime": 1788886315.0691805,
-    "seen": 1788886636.6542597,
-    "ast_hash": "094cbb5c2727fc975e1ba637534ad2de",
+    "mtime": 1788888306.7006664,
+    "seen": 1788888360.1433544,
+    "ast_hash": "3703c0d7fb4d8ee2caa3e87fbfff4e49",
     "semantic_hash": ""
   },
   "frontend/src/pages/InvestmentDetailPage.test.tsx": {
-    "mtime": 1788886414.1029046,
-    "seen": 1788886636.6542606,
-    "ast_hash": "f13f913c076d48b33a08a67f57616a14",
+    "mtime": 1788887472.9306388,
+    "seen": 1788888360.1433554,
+    "ast_hash": "8f2fa8814158b0c955fcb774db2063d3",
     "semantic_hash": ""
   },
   "frontend/src/pages/InvestmentDetailPage.tsx": {
@@ -1122,15 +1122,15 @@
     "semantic_hash": ""
   },
   "frontend/src/pages/InvestmentsListPage.test.tsx": {
-    "mtime": 1788886383.8254697,
-    "seen": 1788886636.6542635,
-    "ast_hash": "742abab3c27c746bc74ddb611b0f4bd6",
+    "mtime": 1788888331.2315013,
+    "seen": 1788888360.1433582,
+    "ast_hash": "5f46756438288b32b5b19e8e44155f8f",
     "semantic_hash": ""
   },
   "frontend/src/pages/InvestmentsListPage.tsx": {
-    "mtime": 1788886303.2834702,
-    "seen": 1788886636.654265,
-    "ast_hash": "3a11831abd1559ebf02fac1b1253bbff",
+    "mtime": 1788888289.3663392,
+    "seen": 1788888360.1433592,
+    "ast_hash": "b35035696431116f0661c7d1175038e8",
     "semantic_hash": ""
   },
   "frontend/src/pages/LoginPage.test.tsx": {
@@ -1170,9 +1170,9 @@
     "semantic_hash": ""
   },
   "frontend/vite.config.ts": {
-    "mtime": 1788885947.5806167,
-    "seen": 1788886636.6542726,
-    "ast_hash": "8cab3d25faedfef5b2d22e669cf84b8a",
+    "mtime": 1788886658.7630153,
+    "seen": 1788888360.1433692,
+    "ast_hash": "1ed4ca451182f9719f357b29f770b190",
     "semantic_hash": ""
   },
   ".claude/skills/infer-conventions/SKILL.md": {
@@ -1626,9 +1626,9 @@
     "semantic_hash": ""
   },
   "specs/004-investment-ui/tasks.md": {
-    "mtime": 1788885877.9338021,
-    "seen": 1788886636.6544893,
-    "ast_hash": "c040c0d0a4fe719b12cbf60035f80647",
+    "mtime": 1788886661.9362202,
+    "seen": 1788888360.143608,
+    "ast_hash": "8a893a67f304cd9ea65162c08335a4ad",
     "semantic_hash": ""
   },
   "frontend/public/images/coderockr.banner.svg": {
@@ -1647,6 +1647,36 @@
     "mtime": 1788886592.778581,
     "seen": 1788886636.654496,
     "ast_hash": "a346609b07bea39dbf4f726913a0dfd1",
+    "semantic_hash": ""
+  },
+  "frontend/scripts/e2e-smoke.mjs": {
+    "mtime": 1788887475.0549023,
+    "seen": 1788888360.1433237,
+    "ast_hash": "160b48a62e5e5825d9d47d46e8761fb8",
+    "semantic_hash": ""
+  },
+  "frontend/src/auth/permissions.test.ts": {
+    "mtime": 1788888309.3935986,
+    "seen": 1788888360.143338,
+    "ast_hash": "8770b7b6ab0e843e8e88fb379e7da6b4",
+    "semantic_hash": ""
+  },
+  "frontend/src/auth/permissions.ts": {
+    "mtime": 1788888244.7455814,
+    "seen": 1788888360.1433396,
+    "ast_hash": "296a49a8af30c602faec0dd307ac1aec",
+    "semantic_hash": ""
+  },
+  "specs/004-investment-ui/code-review.md": {
+    "mtime": 1788886724.0262592,
+    "seen": 1788888360.1435974,
+    "ast_hash": "ab4ef3e071f0d85a8728bfdacb911d0e",
+    "semantic_hash": ""
+  },
+  "specs/004-investment-ui/security-review.md": {
+    "mtime": 1788886724.252786,
+    "seen": 1788888360.1436055,
+    "ast_hash": "ae2981772d856397c135b41fce1e1425",
     "semantic_hash": ""
   }
 }

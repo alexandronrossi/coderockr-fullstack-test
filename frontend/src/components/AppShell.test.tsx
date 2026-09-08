@@ -31,7 +31,7 @@ describe('AppShell logout', () => {
     );
 
     expect(screen.getByText('Owner')).toBeInTheDocument();
-    await user.click(screen.getByRole('button', { name: /sair/i }));
+    await user.click(screen.getByRole('button', { name: /sign out/i }));
 
     await waitFor(() => {
       expect(fetchMock).toHaveBeenCalled();
@@ -56,7 +56,7 @@ describe('AppShell logout', () => {
       </MemoryRouter>,
     );
 
-    expect(screen.getByRole('link', { name: /lista/i })).toBeInTheDocument();
-    expect(screen.queryByRole('link', { name: /^novo$/i })).not.toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /list/i })).toBeInTheDocument();
+    expect(screen.queryByRole('link', { name: /^new$/i })).not.toBeInTheDocument();
   });
 });

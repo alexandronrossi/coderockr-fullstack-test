@@ -29,7 +29,7 @@ export function InvestmentsListPage() {
       })
       .catch(() => {
         if (!cancelled) {
-          setError('Não foi possível carregar os investimentos.');
+          setError('Could not load investments.');
         }
       })
       .finally(() => {
@@ -51,27 +51,27 @@ export function InvestmentsListPage() {
     <section className={styles.page}>
       <header className={styles.header}>
         <div>
-          <h1>Investimentos</h1>
+          <h1>Investments</h1>
           <p>
             {showCreate
-              ? 'Valores e status vêm da API — sem filtro de dono no cliente.'
-              : 'Visão administrativa: listar e resgatar. Criação é só para Owners.'}
+              ? 'Amounts and status come from the API — no owner filtering in the client.'
+              : 'Admin view: list and withdraw. Only Owners can create investments.'}
           </p>
         </div>
         {showCreate ? (
           <Link className={styles.create} to="/investments/new">
-            Novo investimento
+            New investment
           </Link>
         ) : null}
       </header>
 
-      {loading ? <p>Carregando…</p> : null}
+      {loading ? <p>Loading…</p> : null}
       {error ? <p role="alert">{error}</p> : null}
 
       {!loading && !error && result && result.data.length === 0 ? (
         <div className={styles.empty}>
-          <p>Nenhum investimento ainda.</p>
-          {showCreate ? <Link to="/investments/new">Criar o primeiro</Link> : null}
+          <p>No investments yet.</p>
+          {showCreate ? <Link to="/investments/new">Create the first one</Link> : null}
         </div>
       ) : null}
 
@@ -81,12 +81,12 @@ export function InvestmentsListPage() {
             <table className={styles.table}>
               <thead>
                 <tr>
-                  <th>Dono</th>
-                  <th>Data</th>
-                  <th>Valor</th>
-                  <th>Saldo esperado</th>
+                  <th>Owner</th>
+                  <th>Date</th>
+                  <th>Amount</th>
+                  <th>Expected balance</th>
                   <th>Status</th>
-                  <th>Ações</th>
+                  <th>Actions</th>
                 </tr>
               </thead>
               <tbody>

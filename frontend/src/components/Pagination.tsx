@@ -12,23 +12,23 @@ export function Pagination({ currentPage, lastPage, onPageChange }: PaginationPr
   }
 
   return (
-    <nav className={styles.pagination} aria-label="Paginação">
+    <nav className={styles.pagination} aria-label="Pagination">
       <button
         type="button"
         disabled={currentPage <= 1}
         onClick={() => onPageChange(currentPage - 1)}
       >
-        Anterior
+        Previous
       </button>
       <span>
-        Página {currentPage} de {lastPage}
+        Page {currentPage} of {lastPage}
       </span>
       <button
         type="button"
         disabled={currentPage >= lastPage}
         onClick={() => onPageChange(currentPage + 1)}
       >
-        Próxima
+        Next
       </button>
     </nav>
   );

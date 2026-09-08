@@ -57,7 +57,7 @@ describe('InvestmentsListPage', () => {
     expect(screen.getByText('1000.00')).toBeInTheDocument();
     expect(screen.getByText('1005.20')).toBeInTheDocument();
     expect(screen.getByText('active')).toBeInTheDocument();
-    expect(screen.getByLabelText(/paginação/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/pagination/i)).toBeInTheDocument();
   });
 
   it('shows empty state when there are no investments', async () => {
@@ -80,8 +80,8 @@ describe('InvestmentsListPage', () => {
       </MemoryRouter>,
     );
 
-    expect(await screen.findByText(/nenhum investimento ainda/i)).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /criar o primeiro/i })).toBeInTheDocument();
+    expect(await screen.findByText(/no investments yet/i)).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /create the first one/i })).toBeInTheDocument();
   });
 
   it('requests the next page from the API when pagination is used', async () => {
@@ -112,7 +112,7 @@ describe('InvestmentsListPage', () => {
     );
 
     await screen.findByText('Maria');
-    await user.click(screen.getByRole('button', { name: /próxima/i }));
+    await user.click(screen.getByRole('button', { name: /^next$/i }));
 
     await waitFor(() => {
       expect(fetchMock.mock.calls.length).toBeGreaterThanOrEqual(2);
@@ -145,6 +145,6 @@ describe('InvestmentsListPage', () => {
     );
 
     expect(await screen.findByText('Maria')).toBeInTheDocument();
-    expect(screen.queryByRole('link', { name: /novo investimento/i })).not.toBeInTheDocument();
+    expect(screen.queryByRole('link', { name: /new investment/i })).not.toBeInTheDocument();
   });
 });

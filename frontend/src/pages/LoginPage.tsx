@@ -1,7 +1,8 @@
 import { FormEvent, useState } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { login } from '@/api/auth';
 import { ApiError } from '@/api/client';
+import { AUTH_FIELD_LIMITS } from '@/auth/limits';
 import { isAuthenticated } from '@/auth/session';
 import styles from '@/pages/LoginPage.module.css';
 
@@ -19,6 +20,12 @@ export function LoginPage() {
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
     setError(null);
+
+    if (email.length > AUTH_FIELD_LIMITS.email || password.length > AUTH_FIELD_LIMITS.password) {
+      setError('Email or password is too long.');
+      return;
+    }
+
     setBusy(true);
 
     try {
@@ -26,9 +33,11 @@ export function LoginPage() {
       navigate('/investments', { replace: true });
     } catch (err) {
       if (err instanceof ApiError && err.status === 401) {
-        setError('Não foi possível entrar. Verifique seus dados e tente novamente.');
+        setError('Could not sign in. Check your details and try again.');
+      } else if (err instanceof ApiError && err.status === 422) {
+        setError('Could not sign in. Check your details and try again.');
       } else {
-        setError('Não foi possível entrar. Tente novamente.');
+        setError('Could not sign in. Try again.');
       }
     } finally {
       setBusy(false);
@@ -38,43 +47,46 @@ export function LoginPage() {
   return (
     <div className={styles.page}>
       <section className={styles.hero} aria-labelledby="login-brand">
-        <img
-          src="/images/coderockr.banner.svg"
-          alt=""
-          className={styles.logo}
-        />
+        <img src="/images/coderockr.banner.svg" alt="" className={styles.logo} />
         <h1 id="login-brand" className={styles.brand}>
           Coderockr
         </h1>
-        <p className={styles.tagline}>Investimentos com ganhos e IR calculados no servidor.</p>
+        <p className={styles.tagline}>
+          Investments with gains and tax calculated on the server.
+        </p>
       </section>
 
       <form className={styles.form} onSubmit={handleSubmit} noValidate>
-        <h2>Entrar</h2>
-        <label htmlFor="email">E-mail</label>
+        <h2>Sign in</h2>
+        <label htmlFor="email">Email</label>
         <input
           id="email"
           name="email"
           type="email"
           autoComplete="username"
+          maxLength={AUTH_FIELD_LIMITS.email}
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
         />
-        <label htmlFor="password">Senha</label>
+        <label htmlFor="password">Password</label>
         <input
           id="password"
           name="password"
           type="password"
           autoComplete="current-password"
+          maxLength={AUTH_FIELD_LIMITS.password}
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
         />
         {error ? <p role="alert">{error}</p> : null}
         <button type="submit" disabled={busy}>
-          Continuar
+          Continue
         </button>
+        <p className={styles.switch}>
+          Need an account? <Link to="/register">Create one</Link>
+        </p>
       </form>
     </div>
   );

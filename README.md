@@ -106,7 +106,18 @@ php artisan serve      # http://localhost:8000
 
 API docs (Scribe): [http://localhost:8000/docs](http://localhost:8000/docs)
 
-Seed users use `SEED_*` variables from `.env.example` (never commit real passwords).
+### Seed users (for local testing)
+
+`php artisan migrate --seed` creates two accounts from `SEED_*` in `.env` / `.env.example`:
+
+| Role | Email (default) | Password (default) | Purpose |
+|------|-----------------|--------------------|---------|
+| **Admin** | `admin@example.com` | `password` | List and withdraw any investment; cannot create |
+| **Owner** | `owner@example.com` | `password` | Create, list, withdraw own investments |
+
+Override via `SEED_ADMIN_EMAIL`, `SEED_ADMIN_PASSWORD`, `SEED_OWNER_EMAIL`, `SEED_OWNER_PASSWORD`. Never commit real passwords.
+
+Public registration (`POST /api/register` / UI `/register`) always creates an **Owner**. Role cannot be chosen by the client.
 
 ### UI (React + Vite)
 

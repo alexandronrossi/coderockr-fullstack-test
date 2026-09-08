@@ -20,11 +20,12 @@ class LoginController extends Controller
      *
      * @unauthenticated
      *
-     * @bodyParam email string required User email. Example: owner@example.com
-     * @bodyParam password string required User password. Example: password
+     * @bodyParam email string required User email (max 255). Example: owner@example.com
+     * @bodyParam password string required User password (max 72). Example: password
      *
      * @response 200 scenario="ok" {"token": "1|plainTextToken", "user": {"id": 1, "name": "Owner", "email": "owner@example.com", "role": "owner"}}
      * @response 401 scenario="invalid" {"message": "Invalid credentials."}
+     * @response 422 scenario="oversized" {"message":"The email field must not be greater than 255 characters.","errors":{"email":["The email field must not be greater than 255 characters."]}}
      */
     public function __invoke(LoginRequest $request, LoginUser $loginUser): JsonResponse
     {

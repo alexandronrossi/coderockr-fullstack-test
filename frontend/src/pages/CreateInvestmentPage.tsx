@@ -27,22 +27,22 @@ export function CreateInvestmentPage() {
 
     const normalized = amount.trim();
     if (!normalized) {
-      setError('Informe o valor do investimento.');
+      setError('Enter the investment amount.');
       return;
     }
 
     if (normalized === '0' || normalized === '0.00' || Number(normalized) <= 0) {
-      setError('O valor deve ser maior que 0.00.');
+      setError('Amount must be greater than 0.00.');
       return;
     }
 
     if (!createdOn) {
-      setError('Informe a data de criação.');
+      setError('Enter the creation date.');
       return;
     }
 
     if (createdOn > today) {
-      setError('A data de criação não pode ser futura.');
+      setError('Creation date cannot be in the future.');
       return;
     }
 
@@ -54,11 +54,11 @@ export function CreateInvestmentPage() {
       if (err instanceof ApiError && err.status === 422) {
         const body = err.body as { errors?: Record<string, string[]> };
         setFieldErrors(body.errors ?? {});
-        setError('Verifique os campos e tente novamente.');
+        setError('Check the fields and try again.');
       } else if (err instanceof ApiError && err.status === 403) {
-        setError('Administradores não podem criar investimentos.');
+        setError('Administrators cannot create investments.');
       } else {
-        setError('Não foi possível criar o investimento.');
+        setError('Could not create the investment.');
       }
     } finally {
       setBusy(false);
@@ -67,23 +67,24 @@ export function CreateInvestmentPage() {
 
   return (
     <section className={styles.page}>
-      <h1>Novo investimento</h1>
-      <p>Só valor e data — dono, saldo e imposto ficam no servidor.</p>
+      <h1>New investment</h1>
+      <p>Amount and date only — owner, balance, and tax stay on the server.</p>
 
       <form className={styles.form} onSubmit={handleSubmit} noValidate>
-        <label htmlFor="amount">Valor</label>
+        <label htmlFor="amount">Amount</label>
         <input
           id="amount"
           name="amount"
           inputMode="decimal"
           placeholder="1000.00"
+          maxLength={32}
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
           required
         />
         {fieldErrors.amount ? <p role="alert">{fieldErrors.amount[0]}</p> : null}
 
-        <label htmlFor="created_on">Data de criação</label>
+        <label htmlFor="created_on">Creation date</label>
         <input
           id="created_on"
           name="created_on"
@@ -98,7 +99,7 @@ export function CreateInvestmentPage() {
         {error ? <p role="alert">{error}</p> : null}
 
         <button type="submit" disabled={busy}>
-          Criar
+          Create
         </button>
       </form>
     </section>

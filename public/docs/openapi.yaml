@@ -85,6 +85,33 @@ paths:
                 examples:
                   -
                     message: 'Invalid credentials.'
+        422:
+          description: oversized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    examples:
+                      - 'The email field must not be greater than 255 characters.'
+                  errors:
+                    type: object
+                    properties:
+                      email:
+                        type: array
+                        items:
+                          type: string
+                        examples:
+                          -
+                            - 'The email field must not be greater than 255 characters.'
+                examples:
+                  -
+                    message: 'The email field must not be greater than 255 characters.'
+                    errors:
+                      email:
+                        - 'The email field must not be greater than 255 characters.'
       tags:
         - Authentication
       requestBody:
@@ -96,17 +123,124 @@ paths:
               properties:
                 email:
                   type: string
-                  description: 'User email.'
+                  description: 'User email (max 255).'
                   examples:
                     - owner@example.com
                 password:
                   type: string
-                  description: 'User password.'
+                  description: 'User password (max 72).'
                   examples:
                     - password
               required:
                 - email
                 - password
+      security: []
+  /api/register:
+    post:
+      summary: Register
+      operationId: register
+      description: "Creates an Owner account and returns a Sanctum Bearer token.\nRole and user_id from the client are ignored; every registration is Owner."
+      parameters: []
+      responses:
+        201:
+          description: created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    examples:
+                      - 1|plainTextToken
+                  user:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        examples:
+                          - 3
+                      name:
+                        type: string
+                        examples:
+                          - 'New Owner'
+                      email:
+                        type: string
+                        examples:
+                          - new@example.com
+                      role:
+                        type: string
+                        examples:
+                          - owner
+                examples:
+                  -
+                    token: 1|plainTextToken
+                    user:
+                      id: 3
+                      name: 'New Owner'
+                      email: new@example.com
+                      role: owner
+        422:
+          description: invalid
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    examples:
+                      - 'The email has already been taken.'
+                  errors:
+                    type: object
+                    properties:
+                      email:
+                        type: array
+                        items:
+                          type: string
+                        examples:
+                          -
+                            - 'The email has already been taken.'
+                examples:
+                  -
+                    message: 'The email has already been taken.'
+                    errors:
+                      email:
+                        - 'The email has already been taken.'
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'Display name (max 255).'
+                  examples:
+                    - 'New Owner'
+                email:
+                  type: string
+                  description: 'Unique email (max 255).'
+                  examples:
+                    - new@example.com
+                password:
+                  type: string
+                  description: 'Password (8–72 chars).'
+                  examples:
+                    - password1
+                password_confirmation:
+                  type: string
+                  description: 'Must match password.'
+                  examples:
+                    - password1
+              required:
+                - name
+                - email
+                - password
+                - password_confirmation
       security: []
   /api/user:
     get:

@@ -40,11 +40,11 @@ export function AppShell({ children }: AppShellProps) {
             alt="Coderockr"
             className={styles.logo}
           />
-          <span className={styles.product}>Investimentos</span>
+          <span className={styles.product}>Investments</span>
         </div>
-        <nav className={styles.nav} aria-label="Principal">
-          <Link to="/investments">Lista</Link>
-          {showCreate ? <Link to="/investments/new">Novo</Link> : null}
+        <nav className={styles.nav} aria-label="Main">
+          <Link to="/investments">List</Link>
+          {showCreate ? <Link to="/investments/new">New</Link> : null}
         </nav>
         <div className={styles.user}>
           {user ? (
@@ -55,7 +55,7 @@ export function AppShell({ children }: AppShellProps) {
                 <span className={styles.role}>{user.role}</span>
               </div>
               <button type="button" onClick={handleLogout} disabled={busy}>
-                Sair
+                Sign out
               </button>
             </>
           ) : null}

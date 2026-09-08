@@ -27,8 +27,8 @@ describe('CreateInvestmentPage', () => {
     expect(document.querySelector('input[name="user_id"]')).toBeNull();
     expect(document.querySelector('input[name="status"]')).toBeNull();
     expect(document.querySelector('input[name="expected_balance"]')).toBeNull();
-    expect(screen.getByLabelText(/valor/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/data de criação/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/^amount$/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/creation date/i)).toBeInTheDocument();
   });
 
   it('rejects zero amount without calling the API', async () => {
@@ -42,10 +42,10 @@ describe('CreateInvestmentPage', () => {
       </MemoryRouter>,
     );
 
-    await user.type(screen.getByLabelText(/valor/i), '0.00');
-    await user.click(screen.getByRole('button', { name: /criar/i }));
+    await user.type(screen.getByLabelText(/^amount$/i), '0.00');
+    await user.click(screen.getByRole('button', { name: /^create$/i }));
 
-    expect(await screen.findByRole('alert')).toHaveTextContent(/maior que 0\.00/i);
+    expect(await screen.findByRole('alert')).toHaveTextContent(/greater than 0\.00/i);
     expect(fetchMock).not.toHaveBeenCalled();
   });
 
@@ -78,11 +78,11 @@ describe('CreateInvestmentPage', () => {
       </MemoryRouter>,
     );
 
-    await user.clear(screen.getByLabelText(/valor/i));
-    await user.type(screen.getByLabelText(/valor/i), '250.00');
-    await user.clear(screen.getByLabelText(/data de criação/i));
-    await user.type(screen.getByLabelText(/data de criação/i), '2024-03-01');
-    await user.click(screen.getByRole('button', { name: /criar/i }));
+    await user.clear(screen.getByLabelText(/^amount$/i));
+    await user.type(screen.getByLabelText(/^amount$/i), '250.00');
+    await user.clear(screen.getByLabelText(/creation date/i));
+    await user.type(screen.getByLabelText(/creation date/i), '2024-03-01');
+    await user.click(screen.getByRole('button', { name: /^create$/i }));
 
     await waitFor(() => expect(fetchMock).toHaveBeenCalled());
     const [, init] = fetchMock.mock.calls[0] as [string, RequestInit];

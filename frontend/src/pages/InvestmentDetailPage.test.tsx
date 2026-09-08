@@ -45,7 +45,7 @@ describe('InvestmentDetailPage', () => {
     expect(screen.getByText('1005.20')).toBeInTheDocument();
     expect(screen.getByText('5.20')).toBeInTheDocument();
     expect(screen.getByText('active')).toBeInTheDocument();
-    expect(screen.getByLabelText(/data do resgate/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/withdrawal date/i)).toBeInTheDocument();
   });
 
   it('shows not-found on 404 without inventing data', async () => {
@@ -67,7 +67,7 @@ describe('InvestmentDetailPage', () => {
       </MemoryRouter>,
     );
 
-    expect(await screen.findByText(/não encontrado/i)).toBeInTheDocument();
+    expect(await screen.findByText(/not found/i)).toBeInTheDocument();
     expect(screen.queryByText('1005.20')).not.toBeInTheDocument();
   });
 
@@ -105,10 +105,10 @@ describe('InvestmentDetailPage', () => {
       </MemoryRouter>,
     );
 
-    await screen.findByLabelText(/data do resgate/i);
-    await user.clear(screen.getByLabelText(/data do resgate/i));
-    await user.type(screen.getByLabelText(/data do resgate/i), '2024-06-01');
-    await user.click(screen.getByRole('button', { name: /confirmar resgate/i }));
+    await screen.findByLabelText(/withdrawal date/i);
+    await user.clear(screen.getByLabelText(/withdrawal date/i));
+    await user.type(screen.getByLabelText(/withdrawal date/i), '2024-06-01');
+    await user.click(screen.getByRole('button', { name: /confirm withdrawal/i }));
 
     await waitFor(() => {
       expect(screen.getByText('1.17')).toBeInTheDocument();

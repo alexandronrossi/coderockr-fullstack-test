@@ -39,9 +39,9 @@ describe('WithdrawForm', () => {
 
     expect(document.querySelector('input[name="tax"]')).toBeNull();
 
-    await user.clear(screen.getByLabelText(/data do resgate/i));
-    await user.type(screen.getByLabelText(/data do resgate/i), '2024-06-01');
-    await user.click(screen.getByRole('button', { name: /confirmar resgate/i }));
+    await user.clear(screen.getByLabelText(/withdrawal date/i));
+    await user.type(screen.getByLabelText(/withdrawal date/i), '2024-06-01');
+    await user.click(screen.getByRole('button', { name: /confirm withdrawal/i }));
 
     await vi.waitFor(() => expect(onSuccess).toHaveBeenCalled());
     const [, init] = fetchMock.mock.calls[0] as [string, RequestInit];
