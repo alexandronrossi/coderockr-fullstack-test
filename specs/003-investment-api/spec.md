@@ -137,7 +137,7 @@ A pessoa informa a data do resgate (hoje ou no passado, não antes da criação 
 
 - Autenticação e papéis Administrador / Owner já existem e não mudam nesta etapa.
 - As regras de ganho composto, aniversário civil e IR da etapa anterior são a única fonte de cálculo; esta etapa só persiste e autoriza.
-- Na criação, o dono é sempre a pessoa autenticada (Administrador também cria só para si). Administrador continua podendo listar, detalhar e resgatar os de qualquer dono.
+- Na criação, o dono é sempre a pessoa autenticada com papel Owner. Administrador **não** cria investimentos (só lista, detalha e resgata os de qualquer dono).
 - “Hoje” e “futuro” usam o calendário civil do servidor, no mesmo espírito da etapa de domínio (dia, não instante com fuso de negócio).
 - Ordenação padrão da lista: mais recentemente criados primeiro.
 - Tamanho de página padrão 15, máximo 100 (detalhe de entrega no plan; o produto limita abuso).

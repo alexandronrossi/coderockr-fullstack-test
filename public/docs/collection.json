@@ -10,7 +10,7 @@
     ],
     "info": {
         "name": "Investment API",
-        "_postman_id": "3993fa16-573e-4fcd-840c-b2babe4e5674",
+        "_postman_id": "a8d87913-4aa1-4b36-8e5b-4cdf5cecc79f",
         "description": "JSON API for creating, listing, viewing, and withdrawing investments.",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
@@ -225,6 +225,12 @@
                             "code": 401,
                             "body": "{\"message\":\"Unauthenticated.\"}",
                             "name": "unauthenticated"
+                        },
+                        {
+                            "header": [],
+                            "code": 403,
+                            "body": "{\"message\":\"This action is unauthorized.\"}",
+                            "name": "admin"
                         },
                         {
                             "header": [],

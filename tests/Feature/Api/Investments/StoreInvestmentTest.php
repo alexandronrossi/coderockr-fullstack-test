@@ -83,4 +83,19 @@ class StoreInvestmentTest extends TestCase
 
         $this->assertDatabaseCount('investments', 0);
     }
+
+    public function test_admin_cannot_create_an_investment(): void
+    {
+        $admin = User::factory()->admin()->create();
+        $token = $admin->createToken('api')->plainTextToken;
+
+        $this->postJson('/api/investments', [
+            'amount' => '1000.00',
+            'created_on' => '2025-01-15',
+        ], [
+            'Authorization' => 'Bearer '.$token,
+        ])->assertForbidden();
+
+        $this->assertDatabaseCount('investments', 0);
+    }
 }

@@ -2,6 +2,7 @@ import { MemoryRouter } from 'react-router-dom';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { setSession } from '@/auth/session';
 import { InvestmentsListPage } from '@/pages/InvestmentsListPage';
 
 const pagePayload = {
@@ -25,6 +26,13 @@ const pagePayload = {
 describe('InvestmentsListPage', () => {
   beforeEach(() => {
     vi.restoreAllMocks();
+    sessionStorage.clear();
+    setSession('tok', {
+      id: 1,
+      name: 'Owner',
+      email: 'owner@example.com',
+      role: 'owner',
+    });
   });
 
   it('renders owner, date, amount, expected_balance and status from the API', async () => {
@@ -110,5 +118,33 @@ describe('InvestmentsListPage', () => {
       expect(fetchMock.mock.calls.length).toBeGreaterThanOrEqual(2);
       expect(String(fetchMock.mock.calls[1][0])).toContain('page=2');
     });
+  });
+
+  it('hides create actions for admins', async () => {
+    setSession('tok', {
+      id: 2,
+      name: 'Admin',
+      email: 'admin@example.com',
+      role: 'admin',
+    });
+
+    vi.stubGlobal(
+      'fetch',
+      vi.fn().mockResolvedValue(
+        new Response(JSON.stringify(pagePayload), {
+          status: 200,
+          headers: { 'Content-Type': 'application/json' },
+        }),
+      ),
+    );
+
+    render(
+      <MemoryRouter>
+        <InvestmentsListPage />
+      </MemoryRouter>,
+    );
+
+    expect(await screen.findByText('Maria')).toBeInTheDocument();
+    expect(screen.queryByRole('link', { name: /novo investimento/i })).not.toBeInTheDocument();
   });
 });

@@ -14,16 +14,18 @@ describe('WithdrawForm', () => {
     const fetchMock = vi.fn().mockResolvedValue(
       new Response(
         JSON.stringify({
-          id: 3,
-          owner: { id: 1, name: 'A', email: 'a@b.com' },
-          amount: '1000.00',
-          created_on: '2024-01-01',
-          status: 'withdrawn',
-          withdrawn_on: '2024-06-01',
-          expected_balance: '1005.20',
-          gain: '5.20',
-          tax: '1.17',
-          net: '1004.03',
+          data: {
+            id: 3,
+            owner: { id: 1, name: 'A', email: 'a@b.com' },
+            amount: '1000.00',
+            created_on: '2024-01-01',
+            status: 'withdrawn',
+            withdrawn_on: '2024-06-01',
+            expected_balance: '1005.20',
+            gain: '5.20',
+            tax: '1.17',
+            net: '1004.03',
+          },
         }),
         { status: 200, headers: { 'Content-Type': 'application/json' } },
       ),

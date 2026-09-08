@@ -30,49 +30,54 @@ describe('investments api', () => {
     expect(url).not.toContain('user_id');
   });
 
-  it('create sends only amount and created_on', async () => {
+  it('create sends only amount and created_on and unwraps data', async () => {
     const fetchMock = vi.fn().mockResolvedValue(
       new Response(
         JSON.stringify({
-          id: 9,
-          owner: { id: 1, name: 'A', email: 'a@b.com' },
-          amount: '100.00',
-          created_on: '2024-01-01',
-          status: 'active',
-          withdrawn_on: null,
-          expected_balance: '100.00',
-          gain: '0.00',
-          tax: '0.00',
-          net: '100.00',
+          data: {
+            id: 9,
+            owner: { id: 1, name: 'A', email: 'a@b.com' },
+            amount: '100.00',
+            created_on: '2024-01-01',
+            status: 'active',
+            withdrawn_on: null,
+            expected_balance: '100.00',
+            gain: '0.00',
+            tax: '0.00',
+            net: '100.00',
+          },
         }),
         { status: 201, headers: { 'Content-Type': 'application/json' } },
       ),
     );
     vi.stubGlobal('fetch', fetchMock);
 
-    await create({ amount: '100.00', created_on: '2024-01-01' });
+    const created = await create({ amount: '100.00', created_on: '2024-01-01' });
 
     const [, init] = fetchMock.mock.calls[0] as [string, RequestInit];
     const body = JSON.parse(String(init.body)) as Record<string, unknown>;
     expect(Object.keys(body).sort()).toEqual(['amount', 'created_on']);
     expect(body).not.toHaveProperty('user_id');
     expect(body).not.toHaveProperty('expected_balance');
+    expect(created.id).toBe(9);
   });
 
-  it('show fetches investment by id', async () => {
+  it('show fetches investment by id and unwraps data', async () => {
     const fetchMock = vi.fn().mockResolvedValue(
       new Response(
         JSON.stringify({
-          id: 3,
-          owner: { id: 1, name: 'A', email: 'a@b.com' },
-          amount: '1000.00',
-          created_on: '2024-01-01',
-          status: 'active',
-          withdrawn_on: null,
-          expected_balance: '1005.20',
-          gain: '5.20',
-          tax: '0.00',
-          net: '1005.20',
+          data: {
+            id: 3,
+            owner: { id: 1, name: 'A', email: 'a@b.com' },
+            amount: '1000.00',
+            created_on: '2024-01-01',
+            status: 'active',
+            withdrawn_on: null,
+            expected_balance: '1005.20',
+            gain: '5.20',
+            tax: '0.00',
+            net: '1005.20',
+          },
         }),
         { status: 200, headers: { 'Content-Type': 'application/json' } },
       ),
@@ -86,30 +91,34 @@ describe('investments api', () => {
     expect(result.gain).toBe('5.20');
   });
 
-  it('withdraw sends only withdrawn_on', async () => {
+  it('withdraw sends only withdrawn_on and unwraps data', async () => {
     const fetchMock = vi.fn().mockResolvedValue(
       new Response(
         JSON.stringify({
-          id: 3,
-          owner: { id: 1, name: 'A', email: 'a@b.com' },
-          amount: '1000.00',
-          created_on: '2024-01-01',
-          status: 'withdrawn',
-          withdrawn_on: '2024-06-01',
-          expected_balance: '1005.20',
-          gain: '5.20',
-          tax: '1.17',
-          net: '1004.03',
+          data: {
+            id: 3,
+            owner: { id: 1, name: 'A', email: 'a@b.com' },
+            amount: '1000.00',
+            created_on: '2024-01-01',
+            status: 'withdrawn',
+            withdrawn_on: '2024-06-01',
+            expected_balance: '1005.20',
+            gain: '5.20',
+            tax: '1.17',
+            net: '1004.03',
+          },
         }),
         { status: 200, headers: { 'Content-Type': 'application/json' } },
       ),
     );
     vi.stubGlobal('fetch', fetchMock);
 
-    await withdraw(3, { withdrawn_on: '2024-06-01' });
+    const result = await withdraw(3, { withdrawn_on: '2024-06-01' });
 
     const [, init] = fetchMock.mock.calls[0] as [string, RequestInit];
     const body = JSON.parse(String(init.body)) as Record<string, unknown>;
     expect(Object.keys(body)).toEqual(['withdrawn_on']);
+    expect(result.status).toBe('withdrawn');
+    expect(result.tax).toBe('1.17');
   });
 });

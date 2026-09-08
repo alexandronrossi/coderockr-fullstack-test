@@ -373,6 +373,20 @@ paths:
                 examples:
                   -
                     message: Unauthenticated.
+        403:
+          description: admin
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    examples:
+                      - 'This action is unauthorized.'
+                examples:
+                  -
+                    message: 'This action is unauthorized.'
         422:
           description: invalid
           content:

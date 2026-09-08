@@ -44,23 +44,25 @@ class ListInvestmentsTest extends TestCase
 
     public function test_admin_lists_investments_from_all_owners(): void
     {
-        $owner = User::factory()->owner()->create();
+        $alice = User::factory()->owner()->create();
+        $bob = User::factory()->owner()->create();
         $admin = User::factory()->admin()->create();
-        $ownerToken = $owner->createToken('api')->plainTextToken;
+        $aliceToken = $alice->createToken('api')->plainTextToken;
+        $bobToken = $bob->createToken('api')->plainTextToken;
         $adminToken = $admin->createToken('api')->plainTextToken;
 
         $this->postJson('/api/investments', [
             'amount' => '1000.00',
             'created_on' => '2025-01-10',
         ], [
-            'Authorization' => 'Bearer '.$ownerToken,
-        ]);
+            'Authorization' => 'Bearer '.$aliceToken,
+        ])->assertCreated();
         $this->postJson('/api/investments', [
             'amount' => '3000.00',
             'created_on' => '2025-01-11',
         ], [
-            'Authorization' => 'Bearer '.$adminToken,
-        ]);
+            'Authorization' => 'Bearer '.$bobToken,
+        ])->assertCreated();
 
         $this->getJson('/api/investments', [
             'Authorization' => 'Bearer '.$adminToken,

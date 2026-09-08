@@ -39,4 +39,24 @@ describe('AppShell logout', () => {
       expect(getToken()).toBeNull();
     });
   });
+
+  it('hides the create nav link for admins', () => {
+    setSession('tok', {
+      id: 2,
+      name: 'Admin',
+      email: 'admin@example.com',
+      role: 'admin',
+    });
+
+    render(
+      <MemoryRouter initialEntries={['/investments']}>
+        <AppShell>
+          <div>Content</div>
+        </AppShell>
+      </MemoryRouter>,
+    );
+
+    expect(screen.getByRole('link', { name: /lista/i })).toBeInTheDocument();
+    expect(screen.queryByRole('link', { name: /^novo$/i })).not.toBeInTheDocument();
+  });
 });
