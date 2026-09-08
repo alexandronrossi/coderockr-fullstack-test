@@ -14,6 +14,7 @@ describe('investments api', () => {
         JSON.stringify({
           data: [],
           meta: { current_page: 2, per_page: 10, total: 0, last_page: 1 },
+          summary: { total_balance: '0.00' },
         }),
         { status: 200, headers: { 'Content-Type': 'application/json' } },
       ),

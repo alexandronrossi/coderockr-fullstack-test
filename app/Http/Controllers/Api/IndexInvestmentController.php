@@ -16,6 +16,8 @@ class IndexInvestmentController extends Controller
      *
      * Paginated investments visible to the current user. Owners see only their own
      * records. Admins see every owner's investments. Query user_id is ignored.
+     * `summary.total_balance` is the server-computed sum of expected balances for
+     * all active investments in that same visibility scope (not only the current page).
      *
      * @group Investments
      *
@@ -24,19 +26,20 @@ class IndexInvestmentController extends Controller
      * @queryParam page integer Page number. Example: 1
      * @queryParam per_page integer Items per page (1-100, default 15). Example: 15
      *
-     * @response 200 scenario="ok" {"data":[],"links":{},"meta":{"current_page":1,"per_page":15,"total":0}}
+     * @response 200 scenario="ok" {"data":[],"links":{},"meta":{"current_page":1,"per_page":15,"total":0},"summary":{"total_balance":"0.00"}}
      * @response 401 scenario="unauthenticated" {"message":"Unauthenticated."}
      */
     public function __invoke(IndexInvestmentRequest $request, ListInvestments $listInvestments): AnonymousResourceCollection
     {
         $this->authorize('viewAny', Investment::class);
 
-        $page = $listInvestments->handle(
+        $result = $listInvestments->handle(
             $request->user(),
             $request->page(),
             $request->perPage(),
         );
 
-        return InvestmentResource::collection($page);
+        return InvestmentResource::collection($result->page)
+            ->additional(['summary' => $result->summary]);
     }
 }

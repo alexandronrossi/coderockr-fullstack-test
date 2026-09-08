@@ -68,6 +68,13 @@ export function InvestmentsListPage() {
       {loading ? <p>Loading…</p> : null}
       {error ? <p role="alert">{error}</p> : null}
 
+      {!loading && !error && result ? (
+        <div className={styles.summary} aria-live="polite">
+          <p className={styles.summaryLabel}>Total balance</p>
+          <p className={styles.summaryValue}>{result.summary.total_balance}</p>
+        </div>
+      ) : null}
+
       {!loading && !error && result && result.data.length === 0 ? (
         <div className={styles.empty}>
           <p>No investments yet.</p>

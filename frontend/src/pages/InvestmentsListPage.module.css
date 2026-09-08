@@ -16,6 +16,26 @@
   margin-bottom: 1.5rem;
 }
 
+.summary {
+  margin-bottom: 1.25rem;
+}
+
+.summaryLabel {
+  margin: 0 0 0.2rem;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-ink-muted);
+}
+
+.summaryValue {
+  margin: 0;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--color-ink);
+  font-variant-numeric: tabular-nums;
+}
+
 .create {
   display: inline-flex;
   align-items: center;

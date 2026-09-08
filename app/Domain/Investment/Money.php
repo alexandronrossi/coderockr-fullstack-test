@@ -53,6 +53,11 @@ final class Money
         return self::fromCents($this->multiplyAndRoundHalfUp($basisPoints, 10_000));
     }
 
+    public function plus(self $other): self
+    {
+        return self::fromCents($this->cents + $other->cents);
+    }
+
     public function minus(self $other): self
     {
         $difference = $this->cents - $other->cents;

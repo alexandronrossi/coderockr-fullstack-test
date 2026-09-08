@@ -10,7 +10,7 @@
     ],
     "info": {
         "name": "Investment API",
-        "_postman_id": "d0a41501-14b3-43c6-9e89-f3cf9fcb5df4",
+        "_postman_id": "c6e8e708-ee3e-4a00-bc17-ce2c2525fc06",
         "description": "JSON API for creating, listing, viewing, and withdrawing investments.",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
@@ -220,13 +220,13 @@
                             "mode": "raw",
                             "raw": "{\"page\":16,\"per_page\":22}"
                         },
-                        "description": "Paginated investments visible to the current user. Owners see only their own\nrecords. Admins see every owner's investments. Query user_id is ignored."
+                        "description": "Paginated investments visible to the current user. Owners see only their own\nrecords. Admins see every owner's investments. Query user_id is ignored.\n`summary.total_balance` is the server-computed sum of expected balances for\nall active investments in that same visibility scope (not only the current page)."
                     },
                     "response": [
                         {
                             "header": [],
                             "code": 200,
-                            "body": "{\"data\":[],\"links\":{},\"meta\":{\"current_page\":1,\"per_page\":15,\"total\":0}}",
+                            "body": "{\"data\":[],\"links\":{},\"meta\":{\"current_page\":1,\"per_page\":15,\"total\":0},\"summary\":{\"total_balance\":\"0.00\"}}",
                             "name": "ok"
                         },
                         {
