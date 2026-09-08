@@ -8,6 +8,9 @@ servers:
     url: 'http://localhost:8000'
 tags:
   -
+    name: Authentication
+    description: ''
+  -
     name: System
     description: ''
 components:
@@ -20,6 +23,147 @@ security:
   -
     default: []
 paths:
+  /api/login:
+    post:
+      summary: 'Sign in'
+      operationId: signIn
+      description: "Authenticates with email and password and returns a Sanctum Bearer token.\nExtra fields such as role or user_id are ignored."
+      parameters: []
+      responses:
+        200:
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    examples:
+                      - 1|plainTextToken
+                  user:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        examples:
+                          - 1
+                      name:
+                        type: string
+                        examples:
+                          - Owner
+                      email:
+                        type: string
+                        examples:
+                          - owner@example.com
+                      role:
+                        type: string
+                        examples:
+                          - owner
+                examples:
+                  -
+                    token: 1|plainTextToken
+                    user:
+                      id: 1
+                      name: Owner
+                      email: owner@example.com
+                      role: owner
+        401:
+          description: invalid
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    examples:
+                      - 'Invalid credentials.'
+                examples:
+                  -
+                    message: 'Invalid credentials.'
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: 'User email.'
+                  examples:
+                    - owner@example.com
+                password:
+                  type: string
+                  description: 'User password.'
+                  examples:
+                    - password
+              required:
+                - email
+                - password
+      security: []
+  /api/user:
+    get:
+      summary: 'Current user'
+      operationId: currentUser
+      description: 'Returns the profile of the authenticated token owner. Client-supplied ids are ignored.'
+      parameters: []
+      responses:
+        200:
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        examples:
+                          - 1
+                      name:
+                        type: string
+                        examples:
+                          - Owner
+                      email:
+                        type: string
+                        examples:
+                          - owner@example.com
+                      role:
+                        type: string
+                        examples:
+                          - owner
+                examples:
+                  -
+                    data:
+                      id: 1
+                      name: Owner
+                      email: owner@example.com
+                      role: owner
+      tags:
+        - Authentication
+  /api/logout:
+    post:
+      summary: 'Sign out'
+      operationId: signOut
+      description: 'Revokes the current Bearer token.'
+      parameters: []
+      responses:
+        204:
+          description: ok
+          content:
+            text/plain:
+              schema:
+                type: string
+                examples:
+                  - ''
+      tags:
+        - Authentication
   /api/health:
     get:
       summary: 'Check API health'
