@@ -1,16 +1,16 @@
 # Graph Report - coderockr-fullstack-test  (2026-09-08)
 
 ## Corpus Check
-- 77 files · ~48,862 words
+- 103 files · ~59,024 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 555 nodes · 532 edges · 66 communities (43 shown, 9 thin omitted)
+- 746 nodes · 798 edges · 70 communities (49 shown, 7 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `bc5be56d`
+- Built from commit: `a0f430f4`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -35,18 +35,18 @@
 - Architecture-Security Plan: [FEATURE]
 - Core Principles
 - 22. Test Agent — Security Tests
-- HealthController
+- Controller
 - Code Review Agent
 - Git / Pull Request Agent
-- TestCase
+- Architecture-Security Plan: Autenticação e papéis Admin / Owner
 - Implementation Plan: [FEATURE]
 - Architecture / Security Agent
 - SDD Orchestrator
 - speckit-checklist/SKILL.md
 - speckit-implement/SKILL.md
 - speckit-clarify/SKILL.md
-- AppServiceProvider
-- bootstrap/app.php
+- AppServiceProvider.php
+- Tasks: Autenticação e papéis Admin / Owner
 - speckit-constitution/SKILL.md
 - 28. Severity
 - 5. SOLID obrigatório
@@ -58,7 +58,7 @@
 - Laravel Application
 - scribe.php
 - Code Agent
-- ExampleTest
+- PHPUnit\Framework\TestCase
 - 25. Code Review Gate
 - 30.1 Commit e Pull Request — Boas práticas (obrigatório)
 - console.php
@@ -67,35 +67,43 @@
 - 12. Hardcoded Secrets
 - 30.2 Graphify — consulta prioritária e rebuild no PR (obrigatório)
 - 8. DATABASE SECURITY — RLS / Authorization
+- Data Model: Autenticação Admin / Owner
+- UserFactory
+- Research: Autenticação Admin / Owner
+- sanctum.php
 
 ## God Nodes (most connected - your core abstractions)
-1. `Tasks: [FEATURE NAME]` - 13 edges
-2. `Fullstack Test Project <img src="https://raw.githubusercontent.com/Coderockr/fullstack-test/refs/heads/main/coderockr.banner.svg" align="right" height="50px" />` - 11 edges
-3. `scripts` - 10 edges
-4. `Create tests (before code)` - 10 edges
-5. `22. Test Agent — Security Tests` - 10 edges
-6. `Architecture-Security Plan: [FEATURE]` - 10 edges
-7. `User` - 9 edges
-8. `require-dev` - 9 edges
-9. `Git / Pull Request Agent` - 8 edges
-10. `setup` - 7 edges
+1. `User` - 32 edges
+2. `TestCase` - 21 edges
+3. `Tasks: Autenticação e papéis Admin / Owner` - 14 edges
+4. `Tasks: [FEATURE NAME]` - 13 edges
+5. `Fullstack Test Project <img src="https://raw.githubusercontent.com/Coderockr/fullstack-test/refs/heads/main/coderockr.banner.svg" align="right" height="50px" />` - 11 edges
+6. `Research: Autenticação Admin / Owner` - 11 edges
+7. `UserRole` - 10 edges
+8. `scripts` - 10 edges
+9. `Create tests (before code)` - 10 edges
+10. `22. Test Agent — Security Tests` - 10 edges
 
 ## Surprising Connections (you probably didn't know these)
+- `CurrentUserController` --inherits--> `Controller`  [EXTRACTED]
+  app/Http/Controllers/Api/CurrentUserController.php → app/Http/Controllers/Controller.php
 - `HealthController` --inherits--> `Controller`  [EXTRACTED]
   app/Http/Controllers/Api/HealthController.php → app/Http/Controllers/Controller.php
-- `HealthTest` --inherits--> `TestCase`  [EXTRACTED]
-  tests/Feature/Api/HealthTest.php → tests/TestCase.php
-- `ExampleTest` --inherits--> `TestCase`  [EXTRACTED]
-  tests/Feature/ExampleTest.php → tests/TestCase.php
+- `LoginController` --inherits--> `Controller`  [EXTRACTED]
+  app/Http/Controllers/Api/LoginController.php → app/Http/Controllers/Controller.php
+- `LogoutController` --inherits--> `Controller`  [EXTRACTED]
+  app/Http/Controllers/Api/LogoutController.php → app/Http/Controllers/Controller.php
+- `CurrentUserTest` --inherits--> `TestCase`  [EXTRACTED]
+  tests/Feature/Api/Auth/CurrentUserTest.php → tests/TestCase.php
 
 ## Import Cycles
 - None detected.
 
-## Communities (66 total, 9 thin omitted)
+## Communities (70 total, 7 thin omitted)
 
 ### Community 0 - "composer.json"
 Cohesion: 0.05
-Nodes (41): pestphp/pest-plugin, php-http/discovery, autoload, autoload-dev, psr-4, psr-4, config, allow-plugins (+33 more)
+Nodes (42): pestphp/pest-plugin, php-http/discovery, autoload, autoload-dev, psr-4, psr-4, config, allow-plugins (+34 more)
 
 ### Community 1 - "sdd-multi-agent.md"
 Cohesion: 0.07
@@ -110,8 +118,8 @@ Cohesion: 0.07
 Nodes (26): Dependencies & Execution Order, Format: `[ID] [P?] [Story] Description`, Implementation for User Story 1, Implementation for User Story 2, Implementation for User Story 3, Implementation Strategy, Incremental Delivery, MVP First (User Story 1 Only) (+18 more)
 
 ### Community 4 - "User"
-Cohesion: 0.10
-Nodes (15): User, UserFactory, DatabaseSeeder, Illuminate\Database\Console\Seeds\WithoutModelEvents, Illuminate\Database\Eloquent\Attributes\Fillable, Illuminate\Database\Eloquent\Attributes\Hidden, Illuminate\Database\Eloquent\Factories\Factory, Illuminate\Database\Eloquent\Factories\HasFactory (+7 more)
+Cohesion: 0.05
+Nodes (24): UserRole, User, DatabaseSeeder, Factory, Illuminate\Database\Console\Seeds\WithoutModelEvents, Illuminate\Database\Eloquent\Attributes\Fillable, Illuminate\Database\Eloquent\Attributes\Hidden, Illuminate\Database\Eloquent\Factories\HasFactory (+16 more)
 
 ### Community 5 - "speckit-analyze/SKILL.md"
 Cohesion: 0.08
@@ -150,7 +158,7 @@ Cohesion: 0.17
 Nodes (11): Checklist Format (REQUIRED), Completion Report, Done When, Mandatory Post-Execution Hooks, Outline, Phase Structure, Pre-Execution Checks, SDD Task Ordering (mandatory) (+3 more)
 
 ### Community 14 - "0001_01_01_000000_create_users_table.php"
-Cohesion: 0.23
+Cohesion: 0.16
 Nodes (3): Illuminate\Database\Migrations\Migration, Illuminate\Database\Schema\Blueprint, Illuminate\Support\Facades\Schema
 
 ### Community 15 - "Coderockr Fullstack Constitution"
@@ -173,9 +181,9 @@ Nodes (10): Core Principles, Governance, [PRINCIPLE_1_NAME], [PRINCIPLE_2_NAME],
 Cohesion: 0.20
 Nodes (10): 22. Test Agent — Security Tests, Authorization, Concurrency, IDOR, Injection, Mass assignment, Privilege escalation, Secrets (+2 more)
 
-### Community 20 - "HealthController"
-Cohesion: 0.28
-Nodes (4): HealthController, Controller, Illuminate\Http\JsonResponse, Illuminate\Support\Facades\Route
+### Community 20 - "Controller"
+Cohesion: 0.10
+Nodes (17): CurrentUserController, HealthController, LoginController, LogoutController, Controller, LoginRequest, UserResource, LoginUser (+9 more)
 
 ### Community 21 - "Code Review Agent"
 Cohesion: 0.22
@@ -185,9 +193,9 @@ Nodes (8): Architecture, Code Quality, Code Review Agent, File-by-file (obrigat�
 Cohesion: 0.22
 Nodes (8): Branching (obrigatório), Commits — boas práticas (obrigatório), Dependency security, Diff security review, Final report, Git / Pull Request Agent, Graphify (obrigatório no fim do PR), Pull Request — boas práticas (obrigatório)
 
-### Community 23 - "TestCase"
-Cohesion: 0.28
-Nodes (4): Illuminate\Foundation\Testing\TestCase, HealthTest, ExampleTest, TestCase
+### Community 23 - "Architecture-Security Plan: Autenticação e papéis Admin / Owner"
+Cohesion: 0.05
+Nodes (38): API Inventory, Architecture, Architecture-Security Plan: Autenticação e papéis Admin / Owner, Arquivos existentes, Arquivos novos, Design Patterns, File-by-file Analysis, Line-by-line Analysis (+30 more)
 
 ### Community 24 - "Implementation Plan: [FEATURE]"
 Cohesion: 0.22
@@ -213,9 +221,13 @@ Nodes (7): Completion Report, Done When, Mandatory Post-Execution Hooks, Outline
 Cohesion: 0.29
 Nodes (6): Completion Report, Done When, Mandatory Post-Execution Hooks, Outline, Pre-Execution Checks, User Input
 
-### Community 31 - "bootstrap/app.php"
-Cohesion: 0.40
-Nodes (4): Illuminate\Foundation\Application, Illuminate\Foundation\Configuration\Exceptions, Illuminate\Foundation\Configuration\Middleware, Illuminate\Http\Request
+### Community 30 - "AppServiceProvider.php"
+Cohesion: 0.29
+Nodes (4): AppServiceProvider, Illuminate\Cache\RateLimiting\Limit, Illuminate\Support\Facades\RateLimiter, Illuminate\Support\ServiceProvider
+
+### Community 31 - "Tasks: Autenticação e papéis Admin / Owner"
+Cohesion: 0.06
+Nodes (30): Dependencies & Execution Order, Format: `[ID] [P?] [Story] Description`, Implementation, Implementation for User Story 1, Implementation for User Story 2, Implementation for User Story 4, Implementation Strategy, Incremental Delivery (+22 more)
 
 ### Community 32 - "speckit-constitution/SKILL.md"
 Cohesion: 0.33
@@ -257,6 +269,10 @@ Nodes (3): Knuckles\Scribe\Config\AuthIn, Knuckles\Scribe\Config\Defaults, Knuck
 Cohesion: 0.50
 Nodes (3): Code Agent, Proibido, Required
 
+### Community 43 - "PHPUnit\Framework\TestCase"
+Cohesion: 0.38
+Nodes (3): PHPUnit\Framework\TestCase, ExampleTest, UserRoleTest
+
 ### Community 44 - "25. Code Review Gate"
 Cohesion: 0.50
 Nodes (4): 25. Code Review Gate, Architecture, Code Quality, Security
@@ -265,22 +281,38 @@ Nodes (4): 25. Code Review Gate, Architecture, Code Quality, Security
 Cohesion: 0.50
 Nodes (4): 30.1 Commit e Pull Request — Boas práticas (obrigatório), Branching (obrigatório), Commit, Pull Request
 
+### Community 66 - "Data Model: Autenticação Admin / Owner"
+Cohesion: 0.09
+Nodes (21): Data Model: Autenticação Admin / Owner, Factory states, Out of scope, Seed records, Session (token Sanctum), State transitions, User (Pessoa), UserRole (enum) (+13 more)
+
+### Community 67 - "UserFactory"
+Cohesion: 0.16
+Nodes (7): UserFactory, Illuminate\Auth\AuthenticationException, Illuminate\Database\Eloquent\Factories\Factory, Illuminate\Support\Facades\Hash, Illuminate\Support\Str, Pdo\Mysql, static
+
+### Community 68 - "Research: Autenticação Admin / Owner"
+Cohesion: 0.17
+Nodes (11): 1. Mecanismo de sessão da API, 2. Onde vive o papel, 3. Camadas (Controller vs Service), 4. Endpoints e IDOR, 5. Rate limit (FR-011), 6. Mensagem de falha (FR-009 / SC-006), 7. Seed e secrets, 8. Scribe (+3 more)
+
+### Community 69 - "sanctum.php"
+Cohesion: 0.40
+Nodes (4): Illuminate\Cookie\Middleware\EncryptCookies, Illuminate\Foundation\Http\Middleware\ValidateCsrfToken, Laravel\Sanctum\Http\Middleware\AuthenticateSession, Laravel\Sanctum\Sanctum
+
 ## Knowledge Gaps
-- **325 isolated node(s):** `$schema`, `name`, `type`, `description`, `laravel` (+320 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 397 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **9 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **404 isolated node(s):** `$schema`, `name`, `type`, `description`, `laravel` (+399 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 500 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **7 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `scripts` connect `scripts` to `composer.json`?**
-  _High betweenness centrality (0.009) - this node is a cross-community bridge._
-- **Why does `22. Test Agent — Security Tests` connect `22. Test Agent — Security Tests` to `sdd-multi-agent.md`?**
-  _High betweenness centrality (0.004) - this node is a cross-community bridge._
+- **Why does `User` connect `User` to `UserFactory`?**
+  _High betweenness centrality (0.017) - this node is a cross-community bridge._
+- **Why does `LoginUser` connect `Controller` to `UserFactory`, `User`?**
+  _High betweenness centrality (0.007) - this node is a cross-community bridge._
 - **What connects `$schema`, `name`, `type` to the rest of the system?**
-  _325 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _404 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `composer.json` be split into smaller, more focused modules?**
-  _Cohesion score 0.047619047619047616 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.046511627906976744 - nodes in this community are weakly interconnected._
 - **Should `sdd-multi-agent.md` be split into smaller, more focused modules?**
   _Cohesion score 0.06896551724137931 - nodes in this community are weakly interconnected._
 - **Should `scripts` be split into smaller, more focused modules?**
