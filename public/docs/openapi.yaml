@@ -305,7 +305,7 @@ paths:
     get:
       summary: 'List investments'
       operationId: listInvestments
-      description: "Paginated investments visible to the current user. Owners see only their own\nrecords. Admins see every owner's investments. Query user_id is ignored."
+      description: "Paginated investments visible to the current user. Owners see only their own\nrecords. Admins see every owner's investments. Query user_id is ignored.\n`summary.total_balance` is the server-computed sum of expected balances for\nall active investments in that same visibility scope (not only the current page)."
       parameters:
         -
           in: query
@@ -357,6 +357,13 @@ paths:
                         type: integer
                         examples:
                           - 0
+                  summary:
+                    type: object
+                    properties:
+                      total_balance:
+                        type: string
+                        examples:
+                          - '0.00'
                 examples:
                   -
                     data: []
@@ -365,6 +372,8 @@ paths:
                       current_page: 1
                       per_page: 15
                       total: 0
+                    summary:
+                      total_balance: '0.00'
         401:
           description: unauthenticated
           content:

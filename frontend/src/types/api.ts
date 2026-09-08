@@ -37,9 +37,14 @@ export interface InvestmentPageMeta {
   last_page?: number;
 }
 
+export interface InvestmentListSummary {
+  total_balance: string;
+}
+
 export interface InvestmentPage {
   data: Investment[];
   meta: InvestmentPageMeta;
+  summary: InvestmentListSummary;
 }
 
 export interface LoginCredentials {

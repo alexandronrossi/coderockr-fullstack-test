@@ -30,4 +30,12 @@ class MoneyTest extends TestCase
 
         Money::fromCents(-1);
     }
+
+    public function test_plus_adds_cents(): void
+    {
+        $sum = Money::fromDecimalString('1000.00')
+            ->plus(Money::fromDecimalString('1005.20'));
+
+        $this->assertSame('2005.20', $sum->toDecimalString());
+    }
 }

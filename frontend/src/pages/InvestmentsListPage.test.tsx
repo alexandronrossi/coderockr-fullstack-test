@@ -21,6 +21,7 @@ const pagePayload = {
     },
   ],
   meta: { current_page: 1, per_page: 15, total: 16, last_page: 2 },
+  summary: { total_balance: '16083.20' },
 };
 
 describe('InvestmentsListPage', () => {
@@ -57,6 +58,8 @@ describe('InvestmentsListPage', () => {
     expect(screen.getByText('1000.00')).toBeInTheDocument();
     expect(screen.getByText('1005.20')).toBeInTheDocument();
     expect(screen.getByText('active')).toBeInTheDocument();
+    expect(screen.getByText('Total balance')).toBeInTheDocument();
+    expect(screen.getByText('16083.20')).toBeInTheDocument();
     expect(screen.getByLabelText(/pagination/i)).toBeInTheDocument();
   });
 
@@ -68,6 +71,7 @@ describe('InvestmentsListPage', () => {
           JSON.stringify({
             data: [],
             meta: { current_page: 1, per_page: 15, total: 0, last_page: 1 },
+            summary: { total_balance: '0.00' },
           }),
           { status: 200, headers: { 'Content-Type': 'application/json' } },
         ),
@@ -81,6 +85,8 @@ describe('InvestmentsListPage', () => {
     );
 
     expect(await screen.findByText(/no investments yet/i)).toBeInTheDocument();
+    expect(screen.getByText('Total balance')).toBeInTheDocument();
+    expect(screen.getByText('0.00')).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /create the first one/i })).toBeInTheDocument();
   });
 

@@ -900,7 +900,9 @@ You can check the Dev Tools console for debugging information.</code></pre>
 </p>
 
 <p>Paginated investments visible to the current user. Owners see only their own
-records. Admins see every owner's investments. Query user_id is ignored.</p>
+records. Admins see every owner's investments. Query user_id is ignored.
+<code>summary.total_balance</code> is the server-computed sum of expected balances for
+all active investments in that same visibility scope (not only the current page).</p>
 
 <span id="example-requests-GETapi-investments">
 <blockquote>Example request:</blockquote>
@@ -988,6 +990,9 @@ print_r(json_decode((string) $body));</code></pre></div>
         &quot;current_page&quot;: 1,
         &quot;per_page&quot;: 15,
         &quot;total&quot;: 0
+    },
+    &quot;summary&quot;: {
+        &quot;total_balance&quot;: &quot;0.00&quot;
     }
 }</code>
  </pre>
