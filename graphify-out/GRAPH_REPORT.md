@@ -1,16 +1,16 @@
 # Graph Report - coderockr-fullstack-test  (2026-09-08)
 
 ## Corpus Check
-- 103 files · ~59,024 words
+- 123 files · ~66,518 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 746 nodes · 798 edges · 70 communities (49 shown, 7 thin omitted)
-- Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
+- 913 nodes · 1041 edges · 73 communities (52 shown, 7 thin omitted)
+- Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 3 edges (avg confidence: 0.85)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `a0f430f4`
+- Built from commit: `8216f68c`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -45,7 +45,7 @@
 - speckit-checklist/SKILL.md
 - speckit-implement/SKILL.md
 - speckit-clarify/SKILL.md
-- AppServiceProvider.php
+- Architecture-Security Plan: Ganho composto no dia civil e imposto no resgate
 - Tasks: Autenticação e papéis Admin / Owner
 - speckit-constitution/SKILL.md
 - 28. Severity
@@ -58,7 +58,7 @@
 - Laravel Application
 - scribe.php
 - Code Agent
-- PHPUnit\Framework\TestCase
+- Money
 - 25. Code Review Gate
 - 30.1 Commit e Pull Request — Boas práticas (obrigatório)
 - console.php
@@ -71,35 +71,38 @@
 - UserFactory
 - Research: Autenticação Admin / Owner
 - sanctum.php
+- Tasks: Ganho composto no dia civil e imposto no resgate
+- Data Model: Ganho composto e imposto
+- Research: Ganho composto e imposto
 
 ## God Nodes (most connected - your core abstractions)
-1. `User` - 32 edges
-2. `TestCase` - 21 edges
-3. `Tasks: Autenticação e papéis Admin / Owner` - 14 edges
-4. `Tasks: [FEATURE NAME]` - 13 edges
-5. `Fullstack Test Project <img src="https://raw.githubusercontent.com/Coderockr/fullstack-test/refs/heads/main/coderockr.banner.svg" align="right" height="50px" />` - 11 edges
-6. `Research: Autenticação Admin / Owner` - 11 edges
-7. `UserRole` - 10 edges
-8. `scripts` - 10 edges
-9. `Create tests (before code)` - 10 edges
-10. `22. Test Agent — Security Tests` - 10 edges
+1. `Money` - 33 edges
+2. `User` - 32 edges
+3. `TestCase` - 21 edges
+4. `Tasks: Autenticação e papéis Admin / Owner` - 14 edges
+5. `Tasks: Ganho composto no dia civil e imposto no resgate` - 14 edges
+6. `Tasks: [FEATURE NAME]` - 13 edges
+7. `WithdrawalTaxCalculator` - 12 edges
+8. `Fullstack Test Project <img src="https://raw.githubusercontent.com/Coderockr/fullstack-test/refs/heads/main/coderockr.banner.svg" align="right" height="50px" />` - 11 edges
+9. `Research: Autenticação Admin / Owner` - 11 edges
+10. `CivilMonthAnniversary` - 10 edges
 
 ## Surprising Connections (you probably didn't know these)
+- `InvestmentValuation` --references--> `CompoundGainCalculator`  [EXTRACTED]
+  app/Domain/Investment/InvestmentValuation.php → app/Domain/Investment/CompoundGainCalculator.php
+- `InvestmentValuation` --references--> `WithdrawalTaxCalculator`  [EXTRACTED]
+  app/Domain/Investment/InvestmentValuation.php → app/Domain/Investment/WithdrawalTaxCalculator.php
 - `CurrentUserController` --inherits--> `Controller`  [EXTRACTED]
   app/Http/Controllers/Api/CurrentUserController.php → app/Http/Controllers/Controller.php
 - `HealthController` --inherits--> `Controller`  [EXTRACTED]
   app/Http/Controllers/Api/HealthController.php → app/Http/Controllers/Controller.php
 - `LoginController` --inherits--> `Controller`  [EXTRACTED]
   app/Http/Controllers/Api/LoginController.php → app/Http/Controllers/Controller.php
-- `LogoutController` --inherits--> `Controller`  [EXTRACTED]
-  app/Http/Controllers/Api/LogoutController.php → app/Http/Controllers/Controller.php
-- `CurrentUserTest` --inherits--> `TestCase`  [EXTRACTED]
-  tests/Feature/Api/Auth/CurrentUserTest.php → tests/TestCase.php
 
 ## Import Cycles
 - None detected.
 
-## Communities (70 total, 7 thin omitted)
+## Communities (73 total, 7 thin omitted)
 
 ### Community 0 - "composer.json"
 Cohesion: 0.05
@@ -119,7 +122,7 @@ Nodes (26): Dependencies & Execution Order, Format: `[ID] [P?] [Story] Descripti
 
 ### Community 4 - "User"
 Cohesion: 0.05
-Nodes (24): UserRole, User, DatabaseSeeder, Factory, Illuminate\Database\Console\Seeds\WithoutModelEvents, Illuminate\Database\Eloquent\Attributes\Fillable, Illuminate\Database\Eloquent\Attributes\Hidden, Illuminate\Database\Eloquent\Factories\HasFactory (+16 more)
+Nodes (26): UserRole, User, DatabaseSeeder, Factory, Illuminate\Database\Console\Seeds\WithoutModelEvents, Illuminate\Database\Eloquent\Attributes\Fillable, Illuminate\Database\Eloquent\Attributes\Hidden, Illuminate\Database\Eloquent\Factories\HasFactory (+18 more)
 
 ### Community 5 - "speckit-analyze/SKILL.md"
 Cohesion: 0.08
@@ -182,8 +185,8 @@ Cohesion: 0.20
 Nodes (10): 22. Test Agent — Security Tests, Authorization, Concurrency, IDOR, Injection, Mass assignment, Privilege escalation, Secrets (+2 more)
 
 ### Community 20 - "Controller"
-Cohesion: 0.10
-Nodes (17): CurrentUserController, HealthController, LoginController, LogoutController, Controller, LoginRequest, UserResource, LoginUser (+9 more)
+Cohesion: 0.08
+Nodes (20): CurrentUserController, HealthController, LoginController, LogoutController, Controller, LoginRequest, UserResource, AppServiceProvider (+12 more)
 
 ### Community 21 - "Code Review Agent"
 Cohesion: 0.22
@@ -221,9 +224,9 @@ Nodes (7): Completion Report, Done When, Mandatory Post-Execution Hooks, Outline
 Cohesion: 0.29
 Nodes (6): Completion Report, Done When, Mandatory Post-Execution Hooks, Outline, Pre-Execution Checks, User Input
 
-### Community 30 - "AppServiceProvider.php"
-Cohesion: 0.29
-Nodes (4): AppServiceProvider, Illuminate\Cache\RateLimiting\Limit, Illuminate\Support\Facades\RateLimiter, Illuminate\Support\ServiceProvider
+### Community 30 - "Architecture-Security Plan: Ganho composto no dia civil e imposto no resgate"
+Cohesion: 0.05
+Nodes (36): API Inventory, Architecture, Architecture-Security Plan: Ganho composto no dia civil e imposto no resgate, Design Patterns, File-by-file Analysis, Line-by-line Analysis, Remaining Risks, Required Tests (+28 more)
 
 ### Community 31 - "Tasks: Autenticação e papéis Admin / Owner"
 Cohesion: 0.06
@@ -269,9 +272,9 @@ Nodes (3): Knuckles\Scribe\Config\AuthIn, Knuckles\Scribe\Config\Defaults, Knuck
 Cohesion: 0.50
 Nodes (3): Code Agent, Proibido, Required
 
-### Community 43 - "PHPUnit\Framework\TestCase"
-Cohesion: 0.38
-Nodes (3): PHPUnit\Framework\TestCase, ExampleTest, UserRoleTest
+### Community 43 - "Money"
+Cohesion: 0.06
+Nodes (17): CivilMonthAnniversary, CompoundGainCalculator, InvalidInvestmentDate, InvestmentValuation, Money, WithdrawalTaxCalculator, Carbon\CarbonImmutable, DomainException (+9 more)
 
 ### Community 44 - "25. Code Review Gate"
 Cohesion: 0.50
@@ -297,25 +300,37 @@ Nodes (11): 1. Mecanismo de sessão da API, 2. Onde vive o papel, 3. Camadas (Co
 Cohesion: 0.40
 Nodes (4): Illuminate\Cookie\Middleware\EncryptCookies, Illuminate\Foundation\Http\Middleware\ValidateCsrfToken, Laravel\Sanctum\Http\Middleware\AuthenticateSession, Laravel\Sanctum\Sanctum
 
+### Community 70 - "Tasks: Ganho composto no dia civil e imposto no resgate"
+Cohesion: 0.06
+Nodes (31): Dependencies & Execution Order, Format: `[ID] [P?] [Story] Description`, Implementation, Implementation for User Story 1, Implementation for User Story 2, Implementation for User Story 3, Implementation for User Story 4, Implementation Strategy (+23 more)
+
+### Community 71 - "Data Model: Ganho composto e imposto"
+Cohesion: 0.10
+Nodes (17): CivilMonthAnniversary, CompoundGainCalculator, Domain contract: compound gain and withdrawal tax, InvestmentValuation, WithdrawalTaxCalculator, Civil anniversary, Compound gain input, Data Model: Ganho composto e imposto (+9 more)
+
+### Community 72 - "Research: Ganho composto e imposto"
+Cohesion: 0.20
+Nodes (9): 1. Onde vive o cálculo, 2. Representação de dinheiro, 3. Compostagem e arredondamento, 4. Aniversário civil (clamp), 5. Imposto (faixas), 6. Data inválida e freeze, 7. HTTP / Scribe / Auth, Research: Ganho composto e imposto (+1 more)
+
 ## Knowledge Gaps
-- **404 isolated node(s):** `$schema`, `name`, `type`, `description`, `laravel` (+399 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 500 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **477 isolated node(s):** `$schema`, `name`, `type`, `description`, `laravel` (+472 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 579 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
 - **7 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
+- **Why does `UserRole` connect `User` to `UserFactory`?**
+  _High betweenness centrality (0.022) - this node is a cross-community bridge._
 - **Why does `User` connect `User` to `UserFactory`?**
-  _High betweenness centrality (0.017) - this node is a cross-community bridge._
+  _High betweenness centrality (0.019) - this node is a cross-community bridge._
 - **Why does `LoginUser` connect `Controller` to `UserFactory`, `User`?**
-  _High betweenness centrality (0.007) - this node is a cross-community bridge._
+  _High betweenness centrality (0.009) - this node is a cross-community bridge._
 - **What connects `$schema`, `name`, `type` to the rest of the system?**
-  _404 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _477 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `composer.json` be split into smaller, more focused modules?**
   _Cohesion score 0.046511627906976744 - nodes in this community are weakly interconnected._
 - **Should `sdd-multi-agent.md` be split into smaller, more focused modules?**
   _Cohesion score 0.06896551724137931 - nodes in this community are weakly interconnected._
 - **Should `scripts` be split into smaller, more focused modules?**
-  _Cohesion score 0.07407407407407407 - nodes in this community are weakly interconnected._
-- **Should `Tasks: [FEATURE NAME]` be split into smaller, more focused modules?**
   _Cohesion score 0.07407407407407407 - nodes in this community are weakly interconnected._
