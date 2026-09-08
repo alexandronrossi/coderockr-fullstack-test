@@ -1,0 +1,136 @@
+openapi: 3.0.3
+info:
+  title: Investment API — Authentication
+  version: 0.1.0
+  description: >
+    Login, current profile, and logout. Bearer token after login.
+    Role is server-assigned (admin | owner) and never taken from the client.
+servers:
+  - url: /api
+paths:
+  /login:
+    post:
+      tags: [Authentication]
+      summary: Sign in with email and password
+      operationId: login
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, password]
+              additionalProperties: true
+              properties:
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+                  format: password
+              description: Extra fields (role, user_id, is_admin) MUST be ignored.
+      responses:
+        '200':
+          description: Session issued
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [token, user]
+                properties:
+                  token:
+                    type: string
+                    description: Sanctum plain-text token; send as Bearer
+                  user:
+                    $ref: '#/components/schemas/User'
+        '401':
+          description: Invalid credentials (same body whether email exists or not)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+              example:
+                message: Invalid credentials.
+        '422':
+          description: Malformed input (empty email/password or invalid email format)
+        '429':
+          description: Too many login attempts
+  /logout:
+    post:
+      tags: [Authentication]
+      summary: End the current token session
+      operationId: logout
+      security:
+        - bearerAuth: []
+      responses:
+        '204':
+          description: Token revoked
+        '401':
+          description: Missing or invalid token
+  /user:
+    get:
+      tags: [Authentication]
+      summary: Current authenticated profile
+      operationId: currentUser
+      security:
+        - bearerAuth: []
+      parameters: []
+      responses:
+        '200':
+          description: Profile of the token owner only (ignore any client-supplied id/role)
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [data]
+                properties:
+                  data:
+                    $ref: '#/components/schemas/User'
+        '401':
+          description: Missing or invalid token
+  /health:
+    get:
+      tags: [System]
+      summary: Liveness (unchanged; public)
+      security: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: ok
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: Sanctum
+  schemas:
+    User:
+      type: object
+      required: [id, name, email, role]
+      additionalProperties: false
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        role:
+          type: string
+          enum: [admin, owner]
+      description: NEVER includes password or remember_token.
+    Message:
+      type: object
+      required: [message]
+      properties:
+        message:
+          type: string

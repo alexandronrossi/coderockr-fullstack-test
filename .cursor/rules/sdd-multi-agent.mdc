@@ -1,0 +1,28 @@
+---
+description: SDD multi-agent workflow gates — architecture, tests-first, security, review, PR
+alwaysApply: true
+---
+
+# SDD Multi-Agent Gates
+
+When turning a specification into code, follow `.specify/memory/sdd-multi-agent.md`. Do not skip gates. State-driven only.
+
+Order: Specification → Architecture/Security Agent → Test Agent (create tests) → Code Agent → Test Agent (validate) → Code Review → Security Review → Git/PR.
+
+If tests fail: `TESTS_FAILED` → Code Agent. If review fails: `REVIEW_CHANGES_REQUESTED` → Code Agent → Test Agent → `TESTS_PASSED` → Code Review. Never `REVIEW_CHANGES_REQUESTED` → Code Agent → PR.
+
+Read the matching skill before each gate:
+
+- `.cursor/skills/sdd-orchestrator/SKILL.md`
+- `.cursor/skills/sdd-architecture-security/SKILL.md`
+- `.cursor/skills/sdd-test-agent/SKILL.md`
+- `.cursor/skills/sdd-code-agent/SKILL.md`
+- `.cursor/skills/sdd-code-review/SKILL.md`
+- `.cursor/skills/sdd-security-review/SKILL.md`
+- `.cursor/skills/sdd-git-pr/SKILL.md`
+
+Frontend permission ≠ security permission. Authenticated ≠ authorized for any ID. No secrets in source. Commits and PRs use assertive titles and descriptions (SDD 30.1). Create `development` from `main`; every PR targets `development`, never `main`.
+
+**Graphify (SDD 30.2):** if `graphify-out/graph.json` exists, query it first (`graphify query` / `path` / `explain`). Only Read/Grep/Glob the code when Graphify is absent or returns nothing useful. Rebuild with `graphify update .` at the end of every PR and commit `graphify-out/`.
+
+DoD is `PR_CREATED` only after every `[PASS]` in section 32.

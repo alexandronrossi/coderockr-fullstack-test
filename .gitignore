@@ -6,7 +6,11 @@
 .phpactor.json
 .phpunit.result.cache
 /.codex
-/.cursor/
+/.cursor/*
+!/.cursor/skills/
+!/.cursor/skills/**
+!/.cursor/rules/
+!/.cursor/rules/**
 /.idea
 /.nova
 /.phpunit.cache
@@ -14,6 +18,10 @@
 /.zed
 /auth.json
 /node_modules
+/frontend/node_modules
+/frontend/dist
+/frontend/.env
+/.tools
 /public/build
 /public/fonts-manifest.dev.json
 /public/hot
@@ -21,6 +29,8 @@
 /storage/*.key
 /storage/pail
 /vendor
+/.scribe
+graphify-out/cost.json
 _ide_helper.php
 Homestead.json
 Homestead.yaml

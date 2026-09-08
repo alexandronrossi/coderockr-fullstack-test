@@ -92,6 +92,58 @@ Use the following checklist to ensure high quality of the project.
 - The API has unit tests?
 - Is the backend and frontend deploy-independent?
 
+## How to run
+
+### API (Laravel)
+
+```bash
+composer install
+cp .env.example .env   # if needed
+php artisan key:generate
+php artisan migrate --seed
+php artisan serve      # http://localhost:8000
+```
+
+API docs (Scribe): [http://localhost:8000/docs](http://localhost:8000/docs)
+
+### Seed users (for local testing)
+
+`php artisan migrate --seed` creates two accounts from `SEED_*` in `.env` / `.env.example`:
+
+| Role | Email (default) | Password (default) | Purpose |
+|------|-----------------|--------------------|---------|
+| **Admin** | `admin@example.com` | `password` | List and withdraw any investment; cannot create |
+| **Owner** | `owner@example.com` | `password` | Create, list, withdraw own investments |
+
+Override via `SEED_ADMIN_EMAIL`, `SEED_ADMIN_PASSWORD`, `SEED_OWNER_EMAIL`, `SEED_OWNER_PASSWORD`. Never commit real passwords.
+
+Public registration (`POST /api/register` / UI `/register`) always creates an **Owner**. Role cannot be chosen by the client.
+
+### UI (React + Vite)
+
+```bash
+cd frontend
+cp .env.example .env   # VITE_API_URL=http://localhost:8000/api
+npm install
+npm run dev            # http://localhost:5173
+npm test               # Vitest
+```
+
+CORS already allows `http://localhost:5173`. The SPA stores the Sanctum Bearer token in `sessionStorage` and never recalculates gains or tax — those values come only from the API.
+
+### Screenshots
+
+See [`screenshots/`](screenshots/) (list + post-withdraw detail).
+
+## Stack choices (short)
+
+| Layer | Choice | Why |
+|-------|--------|-----|
+| API | Laravel + Sanctum | JSON API, auth, existing domain valuation |
+| Domain | Pure PHP value objects | Compound civil-month gains and tax only on profit |
+| UI | React 19 + Vite + TypeScript + React Router | Thin SPA over the API; Vitest for client contracts |
+| Docs | Scribe | Generated OpenAPI-style HTML under `/docs` |
+
 ## Submission
 1. A link to the Github repository.
 2. Briefly describe how you decided on the tools that you used.

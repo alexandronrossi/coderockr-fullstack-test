@@ -1,0 +1,459 @@
+{
+    "variable": [
+        {
+            "id": "baseUrl",
+            "key": "baseUrl",
+            "type": "string",
+            "name": "string",
+            "value": "http:\/\/localhost:8000"
+        }
+    ],
+    "info": {
+        "name": "Investment API",
+        "_postman_id": "c6e8e708-ee3e-4a00-bc17-ce2c2525fc06",
+        "description": "JSON API for creating, listing, viewing, and withdrawing investments.",
+        "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
+    },
+    "item": [
+        {
+            "name": "Authentication",
+            "description": "",
+            "item": [
+                {
+                    "name": "Sign in",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/login",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/login"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"email\":\"owner@example.com\",\"password\":\"password\"}"
+                        },
+                        "description": "Authenticates with email and password and returns a Sanctum Bearer token.\nExtra fields such as role or user_id are ignored.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\"token\": \"1|plainTextToken\", \"user\": {\"id\": 1, \"name\": \"Owner\", \"email\": \"owner@example.com\", \"role\": \"owner\"}}",
+                            "name": "ok"
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\"message\": \"Invalid credentials.\"}",
+                            "name": "invalid"
+                        },
+                        {
+                            "header": [],
+                            "code": 422,
+                            "body": "{\"message\":\"The email field must not be greater than 255 characters.\",\"errors\":{\"email\":[\"The email field must not be greater than 255 characters.\"]}}",
+                            "name": "oversized"
+                        }
+                    ]
+                },
+                {
+                    "name": "Register",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/register",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/register"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"New Owner\",\"email\":\"new@example.com\",\"password\":\"password1\",\"password_confirmation\":\"password1\"}"
+                        },
+                        "description": "Creates an Owner account and returns a Sanctum Bearer token.\nRole and user_id from the client are ignored; every registration is Owner.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "{\"token\": \"1|plainTextToken\", \"user\": {\"id\": 3, \"name\": \"New Owner\", \"email\": \"new@example.com\", \"role\": \"owner\"}}",
+                            "name": "created"
+                        },
+                        {
+                            "header": [],
+                            "code": 422,
+                            "body": "{\"message\":\"The email has already been taken.\",\"errors\":{\"email\":[\"The email has already been taken.\"]}}",
+                            "name": "invalid"
+                        }
+                    ]
+                },
+                {
+                    "name": "Current user",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/user",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/user"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Returns the profile of the authenticated token owner. Client-supplied ids are ignored."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\"data\": {\"id\": 1, \"name\": \"Owner\", \"email\": \"owner@example.com\", \"role\": \"owner\"}}",
+                            "name": "ok"
+                        }
+                    ]
+                },
+                {
+                    "name": "Sign out",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/logout",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/logout"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Revokes the current Bearer token."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 204,
+                            "body": "",
+                            "name": "ok"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Investments",
+            "description": "",
+            "item": [
+                {
+                    "name": "List investments",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/investments",
+                            "query": [
+                                {
+                                    "key": "page",
+                                    "value": "1",
+                                    "description": "Page number.",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "per_page",
+                                    "value": "15",
+                                    "description": "Items per page (1-100, default 15).",
+                                    "disabled": false
+                                }
+                            ],
+                            "raw": "{{baseUrl}}\/api\/investments?page=1&per_page=15"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"page\":16,\"per_page\":22}"
+                        },
+                        "description": "Paginated investments visible to the current user. Owners see only their own\nrecords. Admins see every owner's investments. Query user_id is ignored.\n`summary.total_balance` is the server-computed sum of expected balances for\nall active investments in that same visibility scope (not only the current page)."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\"data\":[],\"links\":{},\"meta\":{\"current_page\":1,\"per_page\":15,\"total\":0},\"summary\":{\"total_balance\":\"0.00\"}}",
+                            "name": "ok"
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": "unauthenticated"
+                        }
+                    ]
+                },
+                {
+                    "name": "Create investment",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/investments",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/investments"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"amount\":\"1000.00\",\"created_on\":\"2025-01-15\"}"
+                        },
+                        "description": "Registers an investment owned by the authenticated user. Extra fields such as\nuser_id, status, expected_balance, tax, or withdrawn_on are ignored."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "{\"data\":{\"id\":1,\"owner\":{\"id\":2,\"name\":\"Owner\",\"email\":\"owner@example.com\"},\"amount\":\"1000.00\",\"created_on\":\"2025-01-15\",\"status\":\"active\",\"withdrawn_on\":null,\"expected_balance\":\"1000.00\",\"gain\":\"0.00\",\"tax\":\"0.00\",\"net\":\"1000.00\",\"rate\":\"0.225\",\"complete_months\":0}}",
+                            "name": "created"
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": "unauthenticated"
+                        },
+                        {
+                            "header": [],
+                            "code": 403,
+                            "body": "{\"message\":\"This action is unauthorized.\"}",
+                            "name": "admin"
+                        },
+                        {
+                            "header": [],
+                            "code": 422,
+                            "body": "{\"message\":\"The amount field format is invalid.\",\"errors\":{\"amount\":[\"The amount field format is invalid.\"]}}",
+                            "name": "invalid"
+                        }
+                    ]
+                },
+                {
+                    "name": "Show investment",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/investments\/:investment",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/investments\/:investment",
+                            "variable": [
+                                {
+                                    "id": "investment",
+                                    "key": "investment",
+                                    "value": 1,
+                                    "description": "Investment id."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Returns one visible investment with server-computed expected balance.\nOwners receive 404 for another person's id (same as a missing id)."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\"data\":{\"id\":1,\"amount\":\"1000.00\",\"status\":\"active\",\"expected_balance\":\"1005.20\"}}",
+                            "name": "ok"
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": "unauthenticated"
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\"message\":\"No query results for model [App\\\\Models\\\\Investment] 1\"}",
+                            "name": "missing or forbidden"
+                        }
+                    ]
+                },
+                {
+                    "name": "Withdraw investment",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/investments\/:investment\/withdraw",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/investments\/:investment\/withdraw",
+                            "variable": [
+                                {
+                                    "id": "investment",
+                                    "key": "investment",
+                                    "value": 1,
+                                    "description": "Investment id."
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"withdrawn_on\":\"2025-02-15\"}"
+                        },
+                        "description": "Full withdrawal on a civil date. Tax is computed on the gain only. Extra\nfields such as tax, net, expected_balance, or rate are ignored."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\"data\":{\"id\":1,\"status\":\"withdrawn\",\"expected_balance\":\"1005.20\",\"tax\":\"1.17\",\"net\":\"1004.03\"}}",
+                            "name": "withdrawn"
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": "unauthenticated"
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\"message\":\"No query results for model [App\\\\Models\\\\Investment] 1\"}",
+                            "name": "missing or forbidden"
+                        },
+                        {
+                            "header": [],
+                            "code": 422,
+                            "body": "{\"message\":\"This investment has already been withdrawn.\"}",
+                            "name": "already withdrawn or invalid date"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "System",
+            "description": "",
+            "item": [
+                {
+                    "name": "Check API health",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/health",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/health"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Returns a simple payload so clients and Scribe can verify the API is reachable.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\"status\": \"ok\"}",
+                            "name": "ok"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "auth": {
+        "type": "bearer",
+        "bearer": [
+            {
+                "key": "Authorization",
+                "type": "string"
+            }
+        ]
+    }
+}

@@ -1,0 +1,798 @@
+openapi: 3.1.0
+info:
+  title: 'Investment API'
+  description: 'JSON API for creating, listing, viewing, and withdrawing investments.'
+  version: 1.0.0
+servers:
+  -
+    url: 'http://localhost:8000'
+tags:
+  -
+    name: Authentication
+    description: ''
+  -
+    name: Investments
+    description: ''
+  -
+    name: System
+    description: ''
+components:
+  securitySchemes:
+    default:
+      type: http
+      scheme: bearer
+      description: 'Send a Sanctum Bearer token in the `Authorization` header. **Admin** may access every investment; **Owner** may access only their own. Endpoints that do not require a token are marked as unauthenticated.'
+security:
+  -
+    default: []
+paths:
+  /api/login:
+    post:
+      summary: 'Sign in'
+      operationId: signIn
+      description: "Authenticates with email and password and returns a Sanctum Bearer token.\nExtra fields such as role or user_id are ignored."
+      parameters: []
+      responses:
+        200:
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    examples:
+                      - 1|plainTextToken
+                  user:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        examples:
+                          - 1
+                      name:
+                        type: string
+                        examples:
+                          - Owner
+                      email:
+                        type: string
+                        examples:
+                          - owner@example.com
+                      role:
+                        type: string
+                        examples:
+                          - owner
+                examples:
+                  -
+                    token: 1|plainTextToken
+                    user:
+                      id: 1
+                      name: Owner
+                      email: owner@example.com
+                      role: owner
+        401:
+          description: invalid
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    examples:
+                      - 'Invalid credentials.'
+                examples:
+                  -
+                    message: 'Invalid credentials.'
+        422:
+          description: oversized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    examples:
+                      - 'The email field must not be greater than 255 characters.'
+                  errors:
+                    type: object
+                    properties:
+                      email:
+                        type: array
+                        items:
+                          type: string
+                        examples:
+                          -
+                            - 'The email field must not be greater than 255 characters.'
+                examples:
+                  -
+                    message: 'The email field must not be greater than 255 characters.'
+                    errors:
+                      email:
+                        - 'The email field must not be greater than 255 characters.'
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: 'User email (max 255).'
+                  examples:
+                    - owner@example.com
+                password:
+                  type: string
+                  description: 'User password (max 72).'
+                  examples:
+                    - password
+              required:
+                - email
+                - password
+      security: []
+  /api/register:
+    post:
+      summary: Register
+      operationId: register
+      description: "Creates an Owner account and returns a Sanctum Bearer token.\nRole and user_id from the client are ignored; every registration is Owner."
+      parameters: []
+      responses:
+        201:
+          description: created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    examples:
+                      - 1|plainTextToken
+                  user:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        examples:
+                          - 3
+                      name:
+                        type: string
+                        examples:
+                          - 'New Owner'
+                      email:
+                        type: string
+                        examples:
+                          - new@example.com
+                      role:
+                        type: string
+                        examples:
+                          - owner
+                examples:
+                  -
+                    token: 1|plainTextToken
+                    user:
+                      id: 3
+                      name: 'New Owner'
+                      email: new@example.com
+                      role: owner
+        422:
+          description: invalid
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    examples:
+                      - 'The email has already been taken.'
+                  errors:
+                    type: object
+                    properties:
+                      email:
+                        type: array
+                        items:
+                          type: string
+                        examples:
+                          -
+                            - 'The email has already been taken.'
+                examples:
+                  -
+                    message: 'The email has already been taken.'
+                    errors:
+                      email:
+                        - 'The email has already been taken.'
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'Display name (max 255).'
+                  examples:
+                    - 'New Owner'
+                email:
+                  type: string
+                  description: 'Unique email (max 255).'
+                  examples:
+                    - new@example.com
+                password:
+                  type: string
+                  description: 'Password (8–72 chars).'
+                  examples:
+                    - password1
+                password_confirmation:
+                  type: string
+                  description: 'Must match password.'
+                  examples:
+                    - password1
+              required:
+                - name
+                - email
+                - password
+                - password_confirmation
+      security: []
+  /api/user:
+    get:
+      summary: 'Current user'
+      operationId: currentUser
+      description: 'Returns the profile of the authenticated token owner. Client-supplied ids are ignored.'
+      parameters: []
+      responses:
+        200:
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        examples:
+                          - 1
+                      name:
+                        type: string
+                        examples:
+                          - Owner
+                      email:
+                        type: string
+                        examples:
+                          - owner@example.com
+                      role:
+                        type: string
+                        examples:
+                          - owner
+                examples:
+                  -
+                    data:
+                      id: 1
+                      name: Owner
+                      email: owner@example.com
+                      role: owner
+      tags:
+        - Authentication
+  /api/logout:
+    post:
+      summary: 'Sign out'
+      operationId: signOut
+      description: 'Revokes the current Bearer token.'
+      parameters: []
+      responses:
+        204:
+          description: ok
+          content:
+            text/plain:
+              schema:
+                type: string
+                examples:
+                  - ''
+      tags:
+        - Authentication
+  /api/investments:
+    get:
+      summary: 'List investments'
+      operationId: listInvestments
+      description: "Paginated investments visible to the current user. Owners see only their own\nrecords. Admins see every owner's investments. Query user_id is ignored.\n`summary.total_balance` is the server-computed sum of expected balances for\nall active investments in that same visibility scope (not only the current page)."
+      parameters:
+        -
+          in: query
+          name: page
+          description: 'Page number.'
+          required: false
+          schema:
+            type: integer
+            description: 'Page number.'
+            examples:
+              - 1
+        -
+          in: query
+          name: per_page
+          description: 'Items per page (1-100, default 15).'
+          required: false
+          schema:
+            type: integer
+            description: 'Items per page (1-100, default 15).'
+            examples:
+              - 15
+      responses:
+        200:
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    examples:
+                      - []
+                  links:
+                    type: object
+                    properties: {}
+                  meta:
+                    type: object
+                    properties:
+                      current_page:
+                        type: integer
+                        examples:
+                          - 1
+                      per_page:
+                        type: integer
+                        examples:
+                          - 15
+                      total:
+                        type: integer
+                        examples:
+                          - 0
+                  summary:
+                    type: object
+                    properties:
+                      total_balance:
+                        type: string
+                        examples:
+                          - '0.00'
+                examples:
+                  -
+                    data: []
+                    links: {}
+                    meta:
+                      current_page: 1
+                      per_page: 15
+                      total: 0
+                    summary:
+                      total_balance: '0.00'
+        401:
+          description: unauthenticated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    examples:
+                      - Unauthenticated.
+                examples:
+                  -
+                    message: Unauthenticated.
+      tags:
+        - Investments
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                page:
+                  type: integer
+                  description: 'Must be at least 1.'
+                  examples:
+                    - 16
+                per_page:
+                  type: integer
+                  description: 'Must be at least 1. Must not be greater than 100.'
+                  examples:
+                    - 22
+    post:
+      summary: 'Create investment'
+      operationId: createInvestment
+      description: "Registers an investment owned by the authenticated user. Extra fields such as\nuser_id, status, expected_balance, tax, or withdrawn_on are ignored."
+      parameters: []
+      responses:
+        201:
+          description: created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        examples:
+                          - 1
+                      owner:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            examples:
+                              - 2
+                          name:
+                            type: string
+                            examples:
+                              - Owner
+                          email:
+                            type: string
+                            examples:
+                              - owner@example.com
+                      amount:
+                        type: string
+                        examples:
+                          - '1000.00'
+                      created_on:
+                        type: string
+                        examples:
+                          - '2025-01-15'
+                      status:
+                        type: string
+                        examples:
+                          - active
+                      withdrawn_on:
+                        type:
+                          - string
+                          - 'null'
+                        examples:
+                          - null
+                      expected_balance:
+                        type: string
+                        examples:
+                          - '1000.00'
+                      gain:
+                        type: string
+                        examples:
+                          - '0.00'
+                      tax:
+                        type: string
+                        examples:
+                          - '0.00'
+                      net:
+                        type: string
+                        examples:
+                          - '1000.00'
+                      rate:
+                        type: string
+                        examples:
+                          - '0.225'
+                      complete_months:
+                        type: integer
+                        examples:
+                          - 0
+                examples:
+                  -
+                    data:
+                      id: 1
+                      owner:
+                        id: 2
+                        name: Owner
+                        email: owner@example.com
+                      amount: '1000.00'
+                      created_on: '2025-01-15'
+                      status: active
+                      withdrawn_on: null
+                      expected_balance: '1000.00'
+                      gain: '0.00'
+                      tax: '0.00'
+                      net: '1000.00'
+                      rate: '0.225'
+                      complete_months: 0
+        401:
+          description: unauthenticated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    examples:
+                      - Unauthenticated.
+                examples:
+                  -
+                    message: Unauthenticated.
+        403:
+          description: admin
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    examples:
+                      - 'This action is unauthorized.'
+                examples:
+                  -
+                    message: 'This action is unauthorized.'
+        422:
+          description: invalid
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    examples:
+                      - 'The amount field format is invalid.'
+                  errors:
+                    type: object
+                    properties:
+                      amount:
+                        type: array
+                        items:
+                          type: string
+                        examples:
+                          -
+                            - 'The amount field format is invalid.'
+                examples:
+                  -
+                    message: 'The amount field format is invalid.'
+                    errors:
+                      amount:
+                        - 'The amount field format is invalid.'
+      tags:
+        - Investments
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                amount:
+                  type: string
+                  description: 'Amount with two decimal places, greater than 0.00.'
+                  examples:
+                    - '1000.00'
+                created_on:
+                  type: date
+                  description: 'Creation date (today or past).'
+                  examples:
+                    - '2025-01-15'
+              required:
+                - amount
+                - created_on
+  '/api/investments/{investment}':
+    get:
+      summary: 'Show investment'
+      operationId: showInvestment
+      description: "Returns one visible investment with server-computed expected balance.\nOwners receive 404 for another person's id (same as a missing id)."
+      parameters: []
+      responses:
+        200:
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        examples:
+                          - 1
+                      amount:
+                        type: string
+                        examples:
+                          - '1000.00'
+                      status:
+                        type: string
+                        examples:
+                          - active
+                      expected_balance:
+                        type: string
+                        examples:
+                          - '1005.20'
+                examples:
+                  -
+                    data:
+                      id: 1
+                      amount: '1000.00'
+                      status: active
+                      expected_balance: '1005.20'
+        401:
+          description: unauthenticated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    examples:
+                      - Unauthenticated.
+                examples:
+                  -
+                    message: Unauthenticated.
+        404:
+          description: 'missing or forbidden'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    examples:
+                      - 'No query results for model [App\Models\Investment] 1'
+                examples:
+                  -
+                    message: 'No query results for model [App\Models\Investment] 1'
+      tags:
+        - Investments
+    parameters:
+      -
+        in: path
+        name: investment
+        description: 'Investment id.'
+        required: true
+        schema:
+          type: integer
+          examples:
+            - 1
+  '/api/investments/{investment}/withdraw':
+    post:
+      summary: 'Withdraw investment'
+      operationId: withdrawInvestment
+      description: "Full withdrawal on a civil date. Tax is computed on the gain only. Extra\nfields such as tax, net, expected_balance, or rate are ignored."
+      parameters: []
+      responses:
+        200:
+          description: withdrawn
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        examples:
+                          - 1
+                      status:
+                        type: string
+                        examples:
+                          - withdrawn
+                      expected_balance:
+                        type: string
+                        examples:
+                          - '1005.20'
+                      tax:
+                        type: string
+                        examples:
+                          - '1.17'
+                      net:
+                        type: string
+                        examples:
+                          - '1004.03'
+                examples:
+                  -
+                    data:
+                      id: 1
+                      status: withdrawn
+                      expected_balance: '1005.20'
+                      tax: '1.17'
+                      net: '1004.03'
+        401:
+          description: unauthenticated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    examples:
+                      - Unauthenticated.
+                examples:
+                  -
+                    message: Unauthenticated.
+        404:
+          description: 'missing or forbidden'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    examples:
+                      - 'No query results for model [App\Models\Investment] 1'
+                examples:
+                  -
+                    message: 'No query results for model [App\Models\Investment] 1'
+        422:
+          description: 'already withdrawn or invalid date'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    examples:
+                      - 'This investment has already been withdrawn.'
+                examples:
+                  -
+                    message: 'This investment has already been withdrawn.'
+      tags:
+        - Investments
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                withdrawn_on:
+                  type: date
+                  description: 'Withdrawal date (today or past, not before creation).'
+                  examples:
+                    - '2025-02-15'
+              required:
+                - withdrawn_on
+    parameters:
+      -
+        in: path
+        name: investment
+        description: 'Investment id.'
+        required: true
+        schema:
+          type: integer
+          examples:
+            - 1
+  /api/health:
+    get:
+      summary: 'Check API health'
+      operationId: checkAPIHealth
+      description: 'Returns a simple payload so clients and Scribe can verify the API is reachable.'
+      parameters: []
+      responses:
+        200:
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    examples:
+                      - ok
+                examples:
+                  -
+                    status: ok
+      tags:
+        - System
+      security: []
