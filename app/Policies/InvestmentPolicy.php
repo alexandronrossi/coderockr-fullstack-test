@@ -19,7 +19,7 @@ class InvestmentPolicy
 
     public function create(User $user): bool
     {
-        return true;
+        return $user->isOwner();
     }
 
     public function withdraw(User $user, Investment $investment): bool

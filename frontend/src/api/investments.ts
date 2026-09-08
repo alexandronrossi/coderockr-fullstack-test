@@ -15,20 +15,25 @@ export async function list(page = 1, perPage = 15): Promise<InvestmentPage> {
   return apiRequest<InvestmentPage>(`/investments?${params.toString()}`);
 }
 
+type ResourceEnvelope<T> = { data: T };
+
 export async function create(input: CreateInvestmentInput): Promise<Investment> {
   const body = {
     amount: input.amount,
     created_on: input.created_on,
   };
 
-  return apiRequest<Investment>('/investments', {
+  const response = await apiRequest<ResourceEnvelope<Investment>>('/investments', {
     method: 'POST',
     body,
   });
+
+  return response.data;
 }
 
 export async function show(id: number): Promise<Investment> {
-  return apiRequest<Investment>(`/investments/${id}`);
+  const response = await apiRequest<ResourceEnvelope<Investment>>(`/investments/${id}`);
+  return response.data;
 }
 
 export async function withdraw(id: number, input: WithdrawInput): Promise<Investment> {
@@ -36,8 +41,10 @@ export async function withdraw(id: number, input: WithdrawInput): Promise<Invest
     withdrawn_on: input.withdrawn_on,
   };
 
-  return apiRequest<Investment>(`/investments/${id}/withdraw`, {
+  const response = await apiRequest<ResourceEnvelope<Investment>>(`/investments/${id}/withdraw`, {
     method: 'POST',
     body,
   });
+
+  return response.data;
 }

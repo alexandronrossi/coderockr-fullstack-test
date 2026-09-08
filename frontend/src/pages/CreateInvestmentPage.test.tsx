@@ -2,11 +2,19 @@ import { MemoryRouter } from 'react-router-dom';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { setSession } from '@/auth/session';
 import { CreateInvestmentPage } from '@/pages/CreateInvestmentPage';
 
 describe('CreateInvestmentPage', () => {
   beforeEach(() => {
     vi.restoreAllMocks();
+    sessionStorage.clear();
+    setSession('tok', {
+      id: 1,
+      name: 'Owner',
+      email: 'owner@example.com',
+      role: 'owner',
+    });
   });
 
   it('has no owner, status or balance inputs', () => {
@@ -46,16 +54,18 @@ describe('CreateInvestmentPage', () => {
     const fetchMock = vi.fn().mockResolvedValue(
       new Response(
         JSON.stringify({
-          id: 12,
-          owner: { id: 1, name: 'A', email: 'a@b.com' },
-          amount: '250.00',
-          created_on: '2024-03-01',
-          status: 'active',
-          withdrawn_on: null,
-          expected_balance: '250.00',
-          gain: '0.00',
-          tax: '0.00',
-          net: '250.00',
+          data: {
+            id: 12,
+            owner: { id: 1, name: 'A', email: 'a@b.com' },
+            amount: '250.00',
+            created_on: '2024-03-01',
+            status: 'active',
+            withdrawn_on: null,
+            expected_balance: '250.00',
+            gain: '0.00',
+            tax: '0.00',
+            net: '250.00',
+          },
         }),
         { status: 201, headers: { 'Content-Type': 'application/json' } },
       ),

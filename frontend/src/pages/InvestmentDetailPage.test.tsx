@@ -26,7 +26,7 @@ describe('InvestmentDetailPage', () => {
     vi.stubGlobal(
       'fetch',
       vi.fn().mockResolvedValue(
-        new Response(JSON.stringify(activeInvestment), {
+        new Response(JSON.stringify({ data: activeInvestment }), {
           status: 200,
           headers: { 'Content-Type': 'application/json' },
         }),
@@ -76,7 +76,7 @@ describe('InvestmentDetailPage', () => {
     const fetchMock = vi
       .fn()
       .mockResolvedValueOnce(
-        new Response(JSON.stringify(activeInvestment), {
+        new Response(JSON.stringify({ data: activeInvestment }), {
           status: 200,
           headers: { 'Content-Type': 'application/json' },
         }),
@@ -84,11 +84,13 @@ describe('InvestmentDetailPage', () => {
       .mockResolvedValueOnce(
         new Response(
           JSON.stringify({
-            ...activeInvestment,
-            status: 'withdrawn',
-            withdrawn_on: '2024-06-01',
-            tax: '1.17',
-            net: '1004.03',
+            data: {
+              ...activeInvestment,
+              status: 'withdrawn',
+              withdrawn_on: '2024-06-01',
+              tax: '1.17',
+              net: '1004.03',
+            },
           }),
           { status: 200, headers: { 'Content-Type': 'application/json' } },
         ),

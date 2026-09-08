@@ -1,17 +1,24 @@
 import { FormEvent, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { create } from '@/api/investments';
 import { ApiError } from '@/api/client';
+import { canCreateInvestments } from '@/auth/permissions';
+import { getUser } from '@/auth/session';
 import styles from '@/pages/CreateInvestmentPage.module.css';
 
 export function CreateInvestmentPage() {
   const navigate = useNavigate();
+  const user = getUser();
   const today = new Date().toISOString().slice(0, 10);
   const [amount, setAmount] = useState('');
   const [createdOn, setCreatedOn] = useState(today);
   const [error, setError] = useState<string | null>(null);
   const [fieldErrors, setFieldErrors] = useState<Record<string, string[]>>({});
   const [busy, setBusy] = useState(false);
+
+  if (!canCreateInvestments(user)) {
+    return <Navigate to="/investments" replace />;
+  }
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
@@ -48,6 +55,8 @@ export function CreateInvestmentPage() {
         const body = err.body as { errors?: Record<string, string[]> };
         setFieldErrors(body.errors ?? {});
         setError('Verifique os campos e tente novamente.');
+      } else if (err instanceof ApiError && err.status === 403) {
+        setError('Administradores não podem criar investimentos.');
       } else {
         setError('Não foi possível criar o investimento.');
       }

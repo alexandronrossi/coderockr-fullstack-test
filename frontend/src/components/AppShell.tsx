@@ -1,6 +1,7 @@
 import { FormEvent, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { logout } from '@/api/auth';
+import { canCreateInvestments } from '@/auth/permissions';
 import { getUser } from '@/auth/session';
 import styles from '@/components/AppShell.module.css';
 
@@ -12,6 +13,7 @@ export function AppShell({ children }: AppShellProps) {
   const navigate = useNavigate();
   const user = getUser();
   const [busy, setBusy] = useState(false);
+  const showCreate = canCreateInvestments(user);
 
   async function handleLogout(event: FormEvent) {
     event.preventDefault();
@@ -42,7 +44,7 @@ export function AppShell({ children }: AppShellProps) {
         </div>
         <nav className={styles.nav} aria-label="Principal">
           <Link to="/investments">Lista</Link>
-          <Link to="/investments/new">Novo</Link>
+          {showCreate ? <Link to="/investments/new">Novo</Link> : null}
         </nav>
         <div className={styles.user}>
           {user ? (

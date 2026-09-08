@@ -1,12 +1,16 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { list } from '@/api/investments';
+import { canCreateInvestments } from '@/auth/permissions';
+import { getUser } from '@/auth/session';
 import { InvestmentRow } from '@/components/InvestmentRow';
 import { Pagination } from '@/components/Pagination';
 import type { InvestmentPage } from '@/types/api';
 import styles from '@/pages/InvestmentsListPage.module.css';
 
 export function InvestmentsListPage() {
+  const user = getUser();
+  const showCreate = canCreateInvestments(user);
   const [page, setPage] = useState(1);
   const [result, setResult] = useState<InvestmentPage | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -48,11 +52,17 @@ export function InvestmentsListPage() {
       <header className={styles.header}>
         <div>
           <h1>Investimentos</h1>
-          <p>Valores e status vêm da API — sem filtro de dono no cliente.</p>
+          <p>
+            {showCreate
+              ? 'Valores e status vêm da API — sem filtro de dono no cliente.'
+              : 'Visão administrativa: listar e resgatar. Criação é só para Owners.'}
+          </p>
         </div>
-        <Link className={styles.create} to="/investments/new">
-          Novo investimento
-        </Link>
+        {showCreate ? (
+          <Link className={styles.create} to="/investments/new">
+            Novo investimento
+          </Link>
+        ) : null}
       </header>
 
       {loading ? <p>Carregando…</p> : null}
@@ -61,7 +71,7 @@ export function InvestmentsListPage() {
       {!loading && !error && result && result.data.length === 0 ? (
         <div className={styles.empty}>
           <p>Nenhum investimento ainda.</p>
-          <Link to="/investments/new">Criar o primeiro</Link>
+          {showCreate ? <Link to="/investments/new">Criar o primeiro</Link> : null}
         </div>
       ) : null}
 

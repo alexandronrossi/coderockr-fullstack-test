@@ -26,6 +26,7 @@ class StoreInvestmentController extends Controller
      *
      * @response 201 scenario="created" {"data":{"id":1,"owner":{"id":2,"name":"Owner","email":"owner@example.com"},"amount":"1000.00","created_on":"2025-01-15","status":"active","withdrawn_on":null,"expected_balance":"1000.00","gain":"0.00","tax":"0.00","net":"1000.00","rate":"0.225","complete_months":0}}
      * @response 401 scenario="unauthenticated" {"message":"Unauthenticated."}
+     * @response 403 scenario="admin" {"message":"This action is unauthorized."}
      * @response 422 scenario="invalid" {"message":"The amount field format is invalid.","errors":{"amount":["The amount field format is invalid."]}}
      */
     public function __invoke(StoreInvestmentRequest $request, CreateInvestment $createInvestment): JsonResponse
