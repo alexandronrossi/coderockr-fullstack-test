@@ -10,7 +10,7 @@
     ],
     "info": {
         "name": "Investment API",
-        "_postman_id": "1056395b-40f6-488d-a321-e62154a1e107",
+        "_postman_id": "3993fa16-573e-4fcd-840c-b2babe4e5674",
         "description": "JSON API for creating, listing, viewing, and withdrawing investments.",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
@@ -124,6 +124,226 @@
                             "code": 204,
                             "body": "",
                             "name": "ok"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Investments",
+            "description": "",
+            "item": [
+                {
+                    "name": "List investments",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/investments",
+                            "query": [
+                                {
+                                    "key": "page",
+                                    "value": "1",
+                                    "description": "Page number.",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "per_page",
+                                    "value": "15",
+                                    "description": "Items per page (1-100, default 15).",
+                                    "disabled": false
+                                }
+                            ],
+                            "raw": "{{baseUrl}}\/api\/investments?page=1&per_page=15"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"page\":16,\"per_page\":22}"
+                        },
+                        "description": "Paginated investments visible to the current user. Owners see only their own\nrecords. Admins see every owner's investments. Query user_id is ignored."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\"data\":[],\"links\":{},\"meta\":{\"current_page\":1,\"per_page\":15,\"total\":0}}",
+                            "name": "ok"
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": "unauthenticated"
+                        }
+                    ]
+                },
+                {
+                    "name": "Create investment",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/investments",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/investments"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"amount\":\"1000.00\",\"created_on\":\"2025-01-15\"}"
+                        },
+                        "description": "Registers an investment owned by the authenticated user. Extra fields such as\nuser_id, status, expected_balance, tax, or withdrawn_on are ignored."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "{\"data\":{\"id\":1,\"owner\":{\"id\":2,\"name\":\"Owner\",\"email\":\"owner@example.com\"},\"amount\":\"1000.00\",\"created_on\":\"2025-01-15\",\"status\":\"active\",\"withdrawn_on\":null,\"expected_balance\":\"1000.00\",\"gain\":\"0.00\",\"tax\":\"0.00\",\"net\":\"1000.00\",\"rate\":\"0.225\",\"complete_months\":0}}",
+                            "name": "created"
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": "unauthenticated"
+                        },
+                        {
+                            "header": [],
+                            "code": 422,
+                            "body": "{\"message\":\"The amount field format is invalid.\",\"errors\":{\"amount\":[\"The amount field format is invalid.\"]}}",
+                            "name": "invalid"
+                        }
+                    ]
+                },
+                {
+                    "name": "Show investment",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/investments\/:investment",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/investments\/:investment",
+                            "variable": [
+                                {
+                                    "id": "investment",
+                                    "key": "investment",
+                                    "value": 1,
+                                    "description": "Investment id."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Returns one visible investment with server-computed expected balance.\nOwners receive 404 for another person's id (same as a missing id)."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\"data\":{\"id\":1,\"amount\":\"1000.00\",\"status\":\"active\",\"expected_balance\":\"1005.20\"}}",
+                            "name": "ok"
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": "unauthenticated"
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\"message\":\"No query results for model [App\\\\Models\\\\Investment] 1\"}",
+                            "name": "missing or forbidden"
+                        }
+                    ]
+                },
+                {
+                    "name": "Withdraw investment",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/investments\/:investment\/withdraw",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/investments\/:investment\/withdraw",
+                            "variable": [
+                                {
+                                    "id": "investment",
+                                    "key": "investment",
+                                    "value": 1,
+                                    "description": "Investment id."
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"withdrawn_on\":\"2025-02-15\"}"
+                        },
+                        "description": "Full withdrawal on a civil date. Tax is computed on the gain only. Extra\nfields such as tax, net, expected_balance, or rate are ignored."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\"data\":{\"id\":1,\"status\":\"withdrawn\",\"expected_balance\":\"1005.20\",\"tax\":\"1.17\",\"net\":\"1004.03\"}}",
+                            "name": "withdrawn"
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": "unauthenticated"
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\"message\":\"No query results for model [App\\\\Models\\\\Investment] 1\"}",
+                            "name": "missing or forbidden"
+                        },
+                        {
+                            "header": [],
+                            "code": 422,
+                            "body": "{\"message\":\"This investment has already been withdrawn.\"}",
+                            "name": "already withdrawn or invalid date"
                         }
                     ]
                 }

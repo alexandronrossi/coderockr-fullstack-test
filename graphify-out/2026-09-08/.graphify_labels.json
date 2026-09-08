@@ -29,7 +29,7 @@
   "27": "speckit-checklist/SKILL.md",
   "28": "speckit-implement/SKILL.md",
   "29": "speckit-clarify/SKILL.md",
-  "30": "AppServiceProvider.php",
+  "30": "Architecture-Security Plan: Ganho composto no dia civil e imposto no resgate",
   "31": "Tasks: Autenticação e papéis Admin / Owner",
   "32": "speckit-constitution/SKILL.md",
   "33": "28. Severity",
@@ -42,7 +42,7 @@
   "40": "Laravel Application",
   "41": "scribe.php",
   "42": "Code Agent",
-  "43": "PHPUnit\\Framework\\TestCase",
+  "43": "Money",
   "44": "25. Code Review Gate",
   "45": "30.1 Commit e Pull Request — Boas práticas (obrigatório)",
   "46": "console.php",
@@ -68,5 +68,8 @@
   "66": "Data Model: Autenticação Admin / Owner",
   "67": "UserFactory",
   "68": "Research: Autenticação Admin / Owner",
-  "69": "sanctum.php"
+  "69": "sanctum.php",
+  "70": "Tasks: Ganho composto no dia civil e imposto no resgate",
+  "71": "Data Model: Ganho composto e imposto",
+  "72": "Research: Ganho composto e imposto"
 }

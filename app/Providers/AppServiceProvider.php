@@ -27,5 +27,11 @@ class AppServiceProvider extends ServiceProvider
 
             return Limit::perMinute(5)->by($email.'|'.$request->ip());
         });
+
+        RateLimiter::for('investments', function (Request $request) {
+            $key = (string) ($request->user()?->id ?: 'guest');
+
+            return Limit::perMinute(60)->by($key.'|'.$request->ip());
+        });
     }
 }

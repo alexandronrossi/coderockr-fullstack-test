@@ -1,0 +1,235 @@
+openapi: 3.0.3
+info:
+  title: Investment API — Investments
+  version: 0.3.0
+  description: >
+    Authenticated create, paginated list, show, and full withdrawal.
+    Expected balance and tax are computed on the server. Owner sees only
+    own records (unknown ids and other people's ids both 404). Admin sees all.
+servers:
+  - url: /api
+tags:
+  - name: Investments
+paths:
+  /investments:
+    get:
+      tags: [Investments]
+      summary: Paginated investments visible to the current user
+      operationId: listInvestments
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+        - name: per_page
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 15
+        - name: user_id
+          in: query
+          description: MUST be ignored; does not widen Owner scope
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Page of investments (owner summary + valuation)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvestmentPage'
+        '401':
+          description: Missing or invalid token
+        '422':
+          description: Invalid page or per_page
+    post:
+      tags: [Investments]
+      summary: Create an investment owned by the authenticated user
+      operationId: createInvestment
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [amount, created_on]
+              additionalProperties: true
+              properties:
+                amount:
+                  type: string
+                  pattern: '^\d+\.\d{2}$'
+                  example: '1000.00'
+                  description: Strictly greater than 0.00
+                created_on:
+                  type: string
+                  format: date
+                  description: Today or past; never future
+              description: Extra fields (user_id, status, expected_balance, tax, withdrawn_on) MUST be ignored.
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Investment'
+        '401':
+          description: Missing or invalid token
+        '422':
+          description: Invalid amount or created_on
+  /investments/{investment}:
+    get:
+      tags: [Investments]
+      summary: Show one visible investment with valuation
+      operationId: showInvestment
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/InvestmentId'
+      responses:
+        '200':
+          description: Investment with computed valuation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Investment'
+        '401':
+          description: Missing or invalid token
+        '404':
+          description: Missing id, or Owner requesting another person's investment
+  /investments/{investment}/withdraw:
+    post:
+      tags: [Investments]
+      summary: Full withdrawal on a civil date (tax on gain only)
+      operationId: withdrawInvestment
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/InvestmentId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [withdrawn_on]
+              additionalProperties: true
+              properties:
+                withdrawn_on:
+                  type: string
+                  format: date
+                  description: Today or past; not before created_on; not future
+              description: Extra fields (tax, net, expected_balance, rate) MUST be ignored.
+      responses:
+        '200':
+          description: Withdrawn; valuation frozen on withdrawn_on
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Investment'
+        '401':
+          description: Missing or invalid token
+        '404':
+          description: Missing id, or Owner requesting another person's investment
+        '422':
+          description: Invalid date, already withdrawn, or withdrawn_on before created_on
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+  parameters:
+    InvestmentId:
+      name: investment
+      in: path
+      required: true
+      schema:
+        type: integer
+  schemas:
+    OwnerSummary:
+      type: object
+      required: [id, name, email]
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+      description: Never includes password or role elevation fields beyond public profile.
+    Investment:
+      type: object
+      required:
+        - id
+        - owner
+        - amount
+        - created_on
+        - status
+        - expected_balance
+        - gain
+      properties:
+        id:
+          type: integer
+        owner:
+          $ref: '#/components/schemas/OwnerSummary'
+        amount:
+          type: string
+          example: '1000.00'
+        created_on:
+          type: string
+          format: date
+        status:
+          type: string
+          enum: [active, withdrawn]
+        withdrawn_on:
+          type: string
+          format: date
+          nullable: true
+        expected_balance:
+          type: string
+        gain:
+          type: string
+        tax:
+          type: string
+          description: Present when withdrawn; may also be present on active preview as computed-for-today (implementation: include tax/net whenever valuation runs)
+        net:
+          type: string
+        rate:
+          type: string
+          enum: ['0.225', '0.185', '0.15']
+        complete_months:
+          type: integer
+    InvestmentPage:
+      type: object
+      required: [data, meta]
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Investment'
+        meta:
+          type: object
+          required: [current_page, per_page, total]
+          properties:
+            current_page:
+              type: integer
+            per_page:
+              type: integer
+            total:
+              type: integer
+            last_page:
+              type: integer
+    Message:
+      type: object
+      required: [message]
+      properties:
+        message:
+          type: string
