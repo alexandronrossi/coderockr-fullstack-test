@@ -10,11 +10,125 @@
     ],
     "info": {
         "name": "Investment API",
-        "_postman_id": "b9bfbc10-f003-4b9f-83a1-610f8af5a67e",
+        "_postman_id": "1056395b-40f6-488d-a321-e62154a1e107",
         "description": "JSON API for creating, listing, viewing, and withdrawing investments.",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
     "item": [
+        {
+            "name": "Authentication",
+            "description": "",
+            "item": [
+                {
+                    "name": "Sign in",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/login",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/login"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"email\":\"owner@example.com\",\"password\":\"password\"}"
+                        },
+                        "description": "Authenticates with email and password and returns a Sanctum Bearer token.\nExtra fields such as role or user_id are ignored.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\"token\": \"1|plainTextToken\", \"user\": {\"id\": 1, \"name\": \"Owner\", \"email\": \"owner@example.com\", \"role\": \"owner\"}}",
+                            "name": "ok"
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\"message\": \"Invalid credentials.\"}",
+                            "name": "invalid"
+                        }
+                    ]
+                },
+                {
+                    "name": "Current user",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/user",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/user"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Returns the profile of the authenticated token owner. Client-supplied ids are ignored."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\"data\": {\"id\": 1, \"name\": \"Owner\", \"email\": \"owner@example.com\", \"role\": \"owner\"}}",
+                            "name": "ok"
+                        }
+                    ]
+                },
+                {
+                    "name": "Sign out",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/logout",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/logout"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Revokes the current Bearer token."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 204,
+                            "body": "",
+                            "name": "ok"
+                        }
+                    ]
+                }
+            ]
+        },
         {
             "name": "System",
             "description": "",
