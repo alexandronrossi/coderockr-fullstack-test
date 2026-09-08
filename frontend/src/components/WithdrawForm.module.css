@@ -1,0 +1,48 @@
+.form {
+  margin-top: 1.5rem;
+  padding: 1.25rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  display: grid;
+  gap: 0.65rem;
+  max-width: 28rem;
+}
+
+.form h2 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.hint {
+  margin: 0;
+  color: var(--color-ink-muted);
+  font-size: 0.9rem;
+}
+
+.form input {
+  padding: 0.65rem 0.75rem;
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+}
+
+.form button {
+  justify-self: start;
+  margin-top: 0.35rem;
+  background: var(--color-brand);
+  color: white;
+  border: 0;
+  border-radius: 999px;
+  padding: 0.65rem 1.1rem;
+  cursor: pointer;
+}
+
+.form button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.form [role='alert'] {
+  color: var(--color-danger);
+  margin: 0;
+}

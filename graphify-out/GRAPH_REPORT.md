@@ -1,16 +1,16 @@
 # Graph Report - coderockr-fullstack-test  (2026-09-08)
 
 ## Corpus Check
-- 156 files · ~78,855 words
+- 265 files · ~281,145 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1149 nodes · 1474 edges · 93 communities (65 shown, 14 thin omitted)
-- Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 27 edges (avg confidence: 0.85)
+- 2003 nodes · 2419 edges · 165 communities (139 shown, 10 thin omitted)
+- Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 27 edges (avg confidence: 0.85)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `569d5488`
+- Built from commit: `b914e7e9`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -35,7 +35,7 @@
 - Architecture-Security Plan: [FEATURE]
 - Core Principles
 - 22. Test Agent — Security Tests
-- Controller
+- Illuminate\Http\Request
 - Code Review Agent
 - Git / Pull Request Agent
 - Architecture-Security Plan: Autenticação e papéis Admin / Owner
@@ -54,8 +54,8 @@
 - logging.php
 - speckit-taskstoissues/SKILL.md
 - [CHECKLIST TYPE] Checklist: [FEATURE NAME]
-- Laravel Application
-- Laravel Application
+- Laravel Boost Guidelines
+- Laravel Boost Guidelines
 - scribe.php
 - Code Agent
 - Money
@@ -68,7 +68,7 @@
 - 30.2 Graphify — consulta prioritária e rebuild no PR (obrigatório)
 - 8. DATABASE SECURITY — RLS / Authorization
 - Data Model: Autenticação Admin / Owner
-- Investment.php
+- InvestmentFactory
 - Research: Autenticação Admin / Owner
 - sanctum.php
 - Tasks: Ganho composto no dia civil e imposto no resgate
@@ -77,23 +77,93 @@
 - Architecture-Security Plan: Criar, listar, detalhar e resgatar investimentos
 - Tasks: Criar, listar, detalhar e resgatar investimentos
 - User
-- Data Model: Investimentos
+- Quickstart: Interface web de investimentos
 - Investment
-- CarbonImmutable
-- InvestmentValuation
-- Illuminate\Foundation\Testing\RefreshDatabase
+- api.ts
+- InvestmentResource
+- Architecture-Security Plan: Interface web de investimentos
 - Research: API de investimentos
-- WithdrawalTaxCalculator
-- InvalidInvestmentDate
+- devDependencies
+- Tasks: Interface web de investimentos
 - AppServiceProvider.php
-- PHPUnit\Framework\TestCase
+- compilerOptions
 - LoginTest
-- InvestmentUnauthenticatedTest
-- ListInvestmentsTest
+- Illuminate\Foundation\Http\FormRequest
+- Research: Interface web de investimentos
 - DatabaseSeeder
-- ShowInvestmentTest
-- UserTest
-- InvestmentMassAssignmentTest
+- User.php
+- UserRole
+- Detection Checklist
+- Process
+- Security Best Practices
+- Detection Checklist
+- Process
+- Architecture Best Practices
+- Data Model: Interface (visão cliente)
+- Architecture Best Practices
+- Tailwind CSS Development
+- Security Best Practices
+- Tailwind CSS Development
+- Advanced Query Best Practices
+- Events and Notifications Best Practices
+- Migration Best Practices
+- Queue and Job Best Practices
+- Advanced Query Best Practices
+- Events and Notifications Best Practices
+- Migration Best Practices
+- Queue and Job Best Practices
+- api.php
+- IndexInvestmentRequest
+- LoginController.php
+- Caching Best Practices
+- Database Performance Best Practices
+- Eloquent Best Practices
+- Caching Best Practices
+- Database Performance Best Practices
+- Eloquent Best Practices
+- Blade and View Best Practices
+- Error Handling Best Practices
+- Task Scheduling Best Practices
+- Endpoint Tests
+- Blade and View Best Practices
+- Error Handling Best Practices
+- Task Scheduling Best Practices
+- Endpoint Tests
+- Controller
+- .claude/skills/laravel-best-practices/SKILL.md
+- Collection Best Practices
+- HTTP Client Best Practices
+- Mail Best Practices
+- Routing and Controller Best Practices
+- Convention and Style Best Practices
+- Validation and Forms Best Practices
+- Assertions
+- .claude/skills/testing-best-practices/SKILL.md
+- Fakes, Mocks, and Determinism
+- Test Suite Performance
+- Reviewing Tests
+- Collection Best Practices
+- HTTP Client Best Practices
+- Mail Best Practices
+- Routing and Controller Best Practices
+- .cursor/skills/laravel-best-practices/SKILL.md
+- Convention and Style Best Practices
+- Validation and Forms Best Practices
+- Assertions
+- .cursor/skills/testing-best-practices/SKILL.md
+- Fakes, Mocks, and Determinism
+- Test Suite Performance
+- Reviewing Tests
+- Configuration Best Practices
+- Naming and Structure
+- Configuration Best Practices
+- Naming and Structure
+- Factories and Test Data
+- Testing Best Practices
+- Factories and Test Data
+- Testing Best Practices
+- vite-env.d.ts
+- laravel-boost
 
 ## God Nodes (most connected - your core abstractions)
 1. `User` - 78 edges
@@ -101,32 +171,32 @@
 3. `TestCase` - 35 edges
 4. `Investment` - 29 edges
 5. `InvestmentValuation` - 23 edges
-6. `Controller` - 18 edges
-7. `Tasks: Autenticação e papéis Admin / Owner` - 14 edges
-8. `Tasks: Ganho composto no dia civil e imposto no resgate` - 14 edges
-9. `Tasks: Criar, listar, detalhar e resgatar investimentos` - 14 edges
-10. `Tasks: [FEATURE NAME]` - 13 edges
+6. `compilerOptions` - 20 edges
+7. `Controller` - 18 edges
+8. `Tasks: Interface web de investimentos` - 15 edges
+9. `Tasks: Autenticação e papéis Admin / Owner` - 14 edges
+10. `Tasks: Ganho composto no dia civil e imposto no resgate` - 14 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `InvestmentValuation` --references--> `CompoundGainCalculator`  [EXTRACTED]
-  app/Domain/Investment/InvestmentValuation.php → app/Domain/Investment/CompoundGainCalculator.php
-- `InvestmentValuation` --references--> `WithdrawalTaxCalculator`  [EXTRACTED]
-  app/Domain/Investment/InvestmentValuation.php → app/Domain/Investment/WithdrawalTaxCalculator.php
-- `WithdrawInvestment` --references--> `InvestmentValuation`  [EXTRACTED]
-  app/Services/Investment/WithdrawInvestment.php → app/Domain/Investment/InvestmentValuation.php
-- `CurrentUserTest` --inherits--> `TestCase`  [EXTRACTED]
-  tests/Feature/Api/Auth/CurrentUserTest.php → tests/TestCase.php
-- `DatabaseSeederAuthTest` --inherits--> `TestCase`  [EXTRACTED]
-  tests/Feature/Api/Auth/DatabaseSeederAuthTest.php → tests/TestCase.php
+- `CreateInvestment` --references--> `InvestmentValuation`  [EXTRACTED]
+  app/Services/Investment/CreateInvestment.php → app/Domain/Investment/InvestmentValuation.php
+- `ShowInvestment` --references--> `InvestmentValuation`  [EXTRACTED]
+  app/Services/Investment/ShowInvestment.php → app/Domain/Investment/InvestmentValuation.php
+- `CurrentUserController` --inherits--> `Controller`  [EXTRACTED]
+  app/Http/Controllers/Api/CurrentUserController.php → app/Http/Controllers/Controller.php
+- `HealthController` --inherits--> `Controller`  [EXTRACTED]
+  app/Http/Controllers/Api/HealthController.php → app/Http/Controllers/Controller.php
+- `IndexInvestmentController` --inherits--> `Controller`  [EXTRACTED]
+  app/Http/Controllers/Api/IndexInvestmentController.php → app/Http/Controllers/Controller.php
 
 ## Import Cycles
 - None detected.
 
-## Communities (93 total, 14 thin omitted)
+## Communities (165 total, 10 thin omitted)
 
 ### Community 0 - "composer.json"
 Cohesion: 0.05
-Nodes (42): pestphp/pest-plugin, php-http/discovery, autoload, autoload-dev, psr-4, psr-4, config, allow-plugins (+34 more)
+Nodes (43): pestphp/pest-plugin, php-http/discovery, autoload, autoload-dev, psr-4, psr-4, config, allow-plugins (+35 more)
 
 ### Community 1 - "sdd-multi-agent.md"
 Cohesion: 0.07
@@ -141,8 +211,8 @@ Cohesion: 0.07
 Nodes (26): Dependencies & Execution Order, Format: `[ID] [P?] [Story] Description`, Implementation for User Story 1, Implementation for User Story 2, Implementation for User Story 3, Implementation Strategy, Incremental Delivery, MVP First (User Story 1 Only) (+18 more)
 
 ### Community 4 - "TestCase"
-Cohesion: 0.13
-Nodes (7): Factory, Illuminate\Foundation\Testing\TestCase, LoginRateLimitTest, LogoutTest, HealthTest, ExampleTest, TestCase
+Cohesion: 0.06
+Nodes (15): Factory, Illuminate\Foundation\Testing\RefreshDatabase, Illuminate\Foundation\Testing\TestCase, Illuminate\Support\Facades\RateLimiter, CurrentUserTest, DatabaseSeederAuthTest, LoginRateLimitTest, LogoutTest (+7 more)
 
 ### Community 5 - "speckit-analyze/SKILL.md"
 Cohesion: 0.08
@@ -153,8 +223,8 @@ Cohesion: 0.10
 Nodes (20): concurrently, @laravel/multiplex, laravel-vite-plugin, devDependencies, concurrently, laravel-vite-plugin, tailwindcss, @tailwindcss/vite (+12 more)
 
 ### Community 7 - "Fullstack Test Project <img src="https://raw.githubusercontent.com/Coderockr/fullstack-test/refs/heads/main/coderockr.banner.svg" align="right" height="50px" />"
-Cohesion: 0.12
-Nodes (16): Backend (API), Coding Standards, Credits, Deliverables, Design Reference, Frontend (UI), Fullstack Test Project <img src="https://raw.githubusercontent.com/Coderockr/fullstack-test/refs/heads/main/coderockr.banner.svg" align="right" height="50px" />, Gain Calculation (+8 more)
+Cohesion: 0.09
+Nodes (21): API (Laravel), Backend (API), Coding Standards, Credits, Deliverables, Design Reference, Frontend (UI), Fullstack Test Project <img src="https://raw.githubusercontent.com/Coderockr/fullstack-test/refs/heads/main/coderockr.banner.svg" align="right" height="50px" /> (+13 more)
 
 ### Community 8 - "Execution Steps"
 Cohesion: 0.12
@@ -204,9 +274,9 @@ Nodes (10): Core Principles, Governance, [PRINCIPLE_1_NAME], [PRINCIPLE_2_NAME],
 Cohesion: 0.20
 Nodes (10): 22. Test Agent — Security Tests, Authorization, Concurrency, IDOR, Injection, Mass assignment, Privilege escalation, Secrets (+2 more)
 
-### Community 20 - "Controller"
-Cohesion: 0.05
-Nodes (28): CurrentUserController, HealthController, IndexInvestmentController, LoginController, LogoutController, ShowInvestmentController, StoreInvestmentController, WithdrawInvestmentController (+20 more)
+### Community 20 - "Illuminate\Http\Request"
+Cohesion: 0.22
+Nodes (7): CurrentUserController, UserResource, Illuminate\Foundation\Application, Illuminate\Foundation\Configuration\Exceptions, Illuminate\Foundation\Configuration\Middleware, Illuminate\Http\Request, Illuminate\Http\Resources\Json\JsonResource
 
 ### Community 21 - "Code Review Agent"
 Cohesion: 0.22
@@ -276,13 +346,13 @@ Nodes (4): Outline, Post-Execution Checks, Pre-Execution Checks, User Input
 Cohesion: 0.40
 Nodes (4): [Category 1], [Category 2], [CHECKLIST TYPE] Checklist: [FEATURE NAME], Notes
 
-### Community 39 - "Laravel Application"
-Cohesion: 0.50
-Nodes (3): Agent Setup, Laravel Application, Prerequisites
+### Community 39 - "Laravel Boost Guidelines"
+Cohesion: 0.07
+Nodes (28): APIs & Eloquent Resources, Application Structure & Architecture, Artisan, Conventions, Deployment, Do Things the Laravel Way, Documentation Files, Foundational Context (+20 more)
 
-### Community 40 - "Laravel Application"
-Cohesion: 0.50
-Nodes (3): Agent Setup, Laravel Application, Prerequisites
+### Community 40 - "Laravel Boost Guidelines"
+Cohesion: 0.07
+Nodes (28): APIs & Eloquent Resources, Application Structure & Architecture, Artisan, Conventions, Deployment, Do Things the Laravel Way, Documentation Files, Foundational Context (+20 more)
 
 ### Community 41 - "scribe.php"
 Cohesion: 0.50
@@ -293,8 +363,8 @@ Cohesion: 0.50
 Nodes (3): Code Agent, Proibido, Required
 
 ### Community 43 - "Money"
-Cohesion: 0.15
-Nodes (4): Money, self, InvalidArgumentException, MoneyTest
+Cohesion: 0.06
+Nodes (22): CivilMonthAnniversary, CompoundGainCalculator, InvalidInvestmentDate, InvestmentAlreadyWithdrawn, InvestmentValuation, Money, self, WithdrawalTaxCalculator (+14 more)
 
 ### Community 44 - "25. Code Review Gate"
 Cohesion: 0.50
@@ -308,9 +378,9 @@ Nodes (4): 30.1 Commit e Pull Request — Boas práticas (obrigatório), Branchi
 Cohesion: 0.09
 Nodes (21): Data Model: Autenticação Admin / Owner, Factory states, Out of scope, Seed records, Session (token Sanctum), State transitions, User (Pessoa), UserRole (enum) (+13 more)
 
-### Community 67 - "Investment.php"
-Cohesion: 0.07
-Nodes (18): InvestmentFactory, static, static, UserFactory, Illuminate\Auth\AuthenticationException, Illuminate\Database\Eloquent\Attributes\Fillable, Illuminate\Database\Eloquent\Attributes\Hidden, Illuminate\Database\Eloquent\Builder (+10 more)
+### Community 67 - "InvestmentFactory"
+Cohesion: 0.14
+Nodes (7): InvestmentFactory, static, Illuminate\Auth\AuthenticationException, Illuminate\Database\Eloquent\Factories\Factory, Illuminate\Support\Facades\Hash, Illuminate\Support\Str, Pdo\Mysql
 
 ### Community 68 - "Research: Autenticação Admin / Owner"
 Cohesion: 0.17
@@ -341,67 +411,363 @@ Cohesion: 0.06
 Nodes (31): Dependencies & Execution Order, Format: `[ID] [P?] [Story] Description`, Implementation, Implementation for User Story 1, Implementation for User Story 2, Implementation for User Story 3, Implementation for User Story 4, Implementation Strategy (+23 more)
 
 ### Community 75 - "User"
-Cohesion: 0.11
-Nodes (6): User, InvestmentPolicy, Illuminate\Foundation\Auth\User, InvestmentAuthorizationTest, StoreInvestmentTest, WithdrawInvestmentTest
-
-### Community 76 - "Data Model: Investimentos"
 Cohesion: 0.10
-Nodes (19): Data Model: Investimentos, Evaluation (não persistida), Factory, Investment, Out of scope, State transitions, User (existente), Validation rules (+11 more)
+Nodes (6): User, Illuminate\Foundation\Auth\User, InvestmentAuthorizationTest, ListInvestmentsTest, StoreInvestmentTest, WithdrawInvestmentTest
+
+### Community 76 - "Quickstart: Interface web de investimentos"
+Cohesion: 0.05
+Nodes (37): Data Model: Investimentos, Evaluation (não persistida), Factory, Investment, Out of scope, State transitions, User (existente), Validation rules (+29 more)
 
 ### Community 77 - "Investment"
-Cohesion: 0.18
-Nodes (5): Investment, self, ValuedInvestment, Carbon\CarbonImmutable, Illuminate\Contracts\Pagination\LengthAwarePaginator
+Cohesion: 0.09
+Nodes (13): Investment, InvestmentPolicy, CreateInvestment, self, ValuedInvestment, Illuminate\Database\Eloquent\Attributes\Fillable, Illuminate\Database\Eloquent\Builder, Illuminate\Database\Eloquent\Factories\HasFactory (+5 more)
 
-### Community 78 - "CarbonImmutable"
-Cohesion: 0.24
-Nodes (5): CivilMonthAnniversary, CompoundGainCalculator, CarbonImmutable, CivilMonthAnniversaryTest, CompoundGainCalculatorTest
+### Community 78 - "api.ts"
+Cohesion: 0.06
+Nodes (49): login(), logout(), apiBaseUrl(), ApiError, apiRequest(), RequestOptions, user, create() (+41 more)
 
-### Community 79 - "InvestmentValuation"
-Cohesion: 0.19
-Nodes (7): InvestmentValuation, CreateInvestment, ListInvestments, ShowInvestment, Illuminate\Database\Eloquent\ModelNotFoundException, Illuminate\Validation\ValidationException, InvestmentValuationTest
+### Community 79 - "InvestmentResource"
+Cohesion: 0.38
+Nodes (3): ShowInvestmentController, InvestmentResource, ShowInvestment
 
-### Community 80 - "Illuminate\Foundation\Testing\RefreshDatabase"
-Cohesion: 0.17
-Nodes (5): UserRole, Illuminate\Foundation\Testing\RefreshDatabase, CurrentUserTest, DatabaseSeederAuthTest, PrivilegeEscalationTest
+### Community 80 - "Architecture-Security Plan: Interface web de investimentos"
+Cohesion: 0.05
+Nodes (37): API Inventory, Architecture, Architecture-Security Plan: Interface web de investimentos, Design Patterns, File-by-file Analysis, Line-by-line Analysis, Remaining Risks, Required Tests (+29 more)
 
 ### Community 81 - "Research: API de investimentos"
 Cohesion: 0.15
 Nodes (12): 10. Scribe, 1. Camadas, 2. Autorização e IDOR (FR-004, FR-005, SC-003), 3. Mass assignment e dono (FR-003), 4. Dinheiro e datas, 5. Exemplo 1000 / 1200 / 45 no HTTP, 6. Paginação (FR-009), 7. Concorrência de resgate (FR-013) (+4 more)
 
-### Community 83 - "InvalidInvestmentDate"
-Cohesion: 0.24
-Nodes (4): InvalidInvestmentDate, InvestmentAlreadyWithdrawn, DomainException, Illuminate\Support\Facades\DB
+### Community 82 - "devDependencies"
+Cohesion: 0.05
+Nodes (38): dependencies, react, react-dom, react-router-dom, devDependencies, jsdom, @testing-library/jest-dom, @testing-library/react (+30 more)
+
+### Community 83 - "Tasks: Interface web de investimentos"
+Cohesion: 0.06
+Nodes (34): Dependencies & Execution Order, Format: `[ID] [P?] [Story] Description`, Implementation, Implementation for User Story 1, Implementation for User Story 2, Implementation for User Story 3, Implementation for User Story 4, Implementation for User Story 5 (+26 more)
 
 ### Community 84 - "AppServiceProvider.php"
-Cohesion: 0.29
-Nodes (4): AppServiceProvider, Illuminate\Cache\RateLimiting\Limit, Illuminate\Support\Facades\RateLimiter, Illuminate\Support\ServiceProvider
+Cohesion: 0.33
+Nodes (3): AppServiceProvider, Illuminate\Cache\RateLimiting\Limit, Illuminate\Support\ServiceProvider
 
-### Community 85 - "PHPUnit\Framework\TestCase"
-Cohesion: 0.32
-Nodes (3): PHPUnit\Framework\TestCase, ExampleTest, UserRoleTest
+### Community 85 - "compilerOptions"
+Cohesion: 0.07
+Nodes (26): compilerOptions, allowImportingTsExtensions, baseUrl, isolatedModules, jsx, lib, module, moduleDetection (+18 more)
+
+### Community 87 - "Illuminate\Foundation\Http\FormRequest"
+Cohesion: 0.19
+Nodes (4): WithdrawInvestmentController, StoreInvestmentRequest, WithdrawInvestmentRequest, Illuminate\Foundation\Http\FormRequest
+
+### Community 88 - "Research: Interface web de investimentos"
+Cohesion: 0.15
+Nodes (12): 10. Scribe / API, 1. Onde vive a SPA, 2. Sessão no browser, 3. Papel Admin / Owner na UI, 4. Cálculos monetários, 5. Roteamento e telas, 6. Cliente HTTP, 7. Visual / Figma (+4 more)
 
 ### Community 89 - "DatabaseSeeder"
 Cohesion: 0.60
 Nodes (3): DatabaseSeeder, Illuminate\Database\Console\Seeds\WithoutModelEvents, Illuminate\Database\Seeder
 
+### Community 90 - "User.php"
+Cohesion: 0.21
+Nodes (6): static, UserFactory, Illuminate\Database\Eloquent\Attributes\Hidden, Illuminate\Database\Eloquent\Relations\HasMany, Illuminate\Notifications\Notifiable, Laravel\Sanctum\HasApiTokens
+
+### Community 91 - "UserRole"
+Cohesion: 0.20
+Nodes (3): UserRole, UserRoleTest, UserTest
+
+### Community 92 - "Detection Checklist"
+Cohesion: 0.17
+Nodes (11): A. Validation & HTTP input, B. Controllers & routing, C. Authorization, D. Eloquent & models, Detection Checklist, E. Architecture & organization, F. Frontend & views, G. Database & migrations (+3 more)
+
+### Community 93 - "Process"
+Cohesion: 0.17
+Nodes (11): Edge cases, Glob mapping, Ground Rules (read before you start), Infer Conventions, Process, Step 0: Orient, Step 1: Predefined sweep, Step 2: Open-ended pass (+3 more)
+
+### Community 94 - "Security Best Practices"
+Cohesion: 0.17
+Nodes (11): Apply Cross-Site Request Forgery Protection, Audit Dependencies, Authorize Protected Actions, Bind Query Parameters, Control Mass Assignment, Encrypt Sensitive Attributes When Appropriate, Escape Output in Its Context, Keep Secrets Out of Application Code (+3 more)
+
+### Community 95 - "Detection Checklist"
+Cohesion: 0.17
+Nodes (11): A. Validation & HTTP input, B. Controllers & routing, C. Authorization, D. Eloquent & models, Detection Checklist, E. Architecture & organization, F. Frontend & views, G. Database & migrations (+3 more)
+
+### Community 96 - "Process"
+Cohesion: 0.17
+Nodes (11): Edge cases, Glob mapping, Ground Rules (read before you start), Infer Conventions, Process, Step 0: Orient, Step 1: Predefined sweep, Step 2: Open-ended pass (+3 more)
+
+### Community 97 - "Architecture Best Practices"
+Cohesion: 0.17
+Nodes (11): Architecture Best Practices, Depend on Contracts at Boundaries, Extract Focused Business Operations, Follow Framework Conventions, Inject Required Dependencies, Specify a Deterministic Sort Order, Use Atomic Locks for Race Conditions, Use `Concurrency::run()` for Parallel Execution (+3 more)
+
+### Community 98 - "Data Model: Interface (visão cliente)"
+Cohesion: 0.17
+Nodes (11): Create, Data Model: Interface (visão cliente), Formulários (só input), Investment (visão), InvestmentPage, Login, Out of scope, Session (+3 more)
+
+### Community 99 - "Architecture Best Practices"
+Cohesion: 0.18
+Nodes (11): Architecture Best Practices, Depend on Contracts at Boundaries, Extract Focused Business Operations, Follow Framework Conventions, Inject Required Dependencies, Specify a Deterministic Sort Order, Use Atomic Locks for Race Conditions, Use `Concurrency::run()` for Parallel Execution (+3 more)
+
+### Community 100 - "Tailwind CSS Development"
+Cohesion: 0.18
+Nodes (10): Basic Usage, Common Pitfalls, CSS-First Configuration, Dark Mode, Documentation, Import Syntax, Replaced Utilities, Spacing (+2 more)
+
+### Community 101 - "Security Best Practices"
+Cohesion: 0.18
+Nodes (11): Apply Cross-Site Request Forgery Protection, Audit Dependencies, Authorize Protected Actions, Bind Query Parameters, Control Mass Assignment, Encrypt Sensitive Attributes When Appropriate, Escape Output in Its Context, Keep Secrets Out of Application Code (+3 more)
+
+### Community 102 - "Tailwind CSS Development"
+Cohesion: 0.18
+Nodes (10): Basic Usage, Common Pitfalls, CSS-First Configuration, Dark Mode, Documentation, Import Syntax, Replaced Utilities, Spacing (+2 more)
+
+### Community 103 - "Advanced Query Best Practices"
+Cohesion: 0.20
+Nodes (9): Advanced Query Best Practices, Combine Related Counts with Conditional Aggregates, Compare `whereHas()` with an `IN` Subquery, Consider a Correlated Subquery for Has-Many Ordering, Create Dynamic Relationships with a Subquery Foreign Key, Design Composite Indexes for the Query, Measure Two Simple Queries Against One Complex Query, Reuse Loaded Parent Models with `setRelation()` (+1 more)
+
+### Community 104 - "Events and Notifications Best Practices"
+Cohesion: 0.20
+Nodes (9): Cache Event Discovery During Production Deployment, Dispatch Queued Notifications After Commit, Events and Notifications Best Practices, Implement `HasLocalePreference` on Notifiable Models, Queue Slow Notifications, Rely on Event Discovery, Route Notification Channels to Dedicated Queues, Use On-Demand Notifications for Non-User Recipients (+1 more)
+
+### Community 105 - "Migration Best Practices"
+Cohesion: 0.20
+Nodes (9): Define Foreign-Key Constraints Deliberately, Design Indexes for Real Queries, Generate Migrations with Artisan, Keep Migrations Focused, Make Rollbacks Honest, Migration Best Practices, Mirror Defaults Only When Unsaved Models Need Them, Stage Changes That Affect Existing Rows (+1 more)
+
+### Community 106 - "Queue and Job Best Practices"
+Cohesion: 0.20
+Nodes (9): Back Off Transient Failures, Batch Jobs for Group Coordination, Configure Time-Based Retry Limits Deliberately, Handle Terminal Failure When Needed, Keep Reservation Time Longer Than Execution Time, Queue and Job Best Practices, Rate Limit External Calls, Use Horizon for Redis Queue Operations (+1 more)
+
+### Community 107 - "Advanced Query Best Practices"
+Cohesion: 0.20
+Nodes (9): Advanced Query Best Practices, Combine Related Counts with Conditional Aggregates, Compare `whereHas()` with an `IN` Subquery, Consider a Correlated Subquery for Has-Many Ordering, Create Dynamic Relationships with a Subquery Foreign Key, Design Composite Indexes for the Query, Measure Two Simple Queries Against One Complex Query, Reuse Loaded Parent Models with `setRelation()` (+1 more)
+
+### Community 108 - "Events and Notifications Best Practices"
+Cohesion: 0.20
+Nodes (9): Cache Event Discovery During Production Deployment, Dispatch Queued Notifications After Commit, Events and Notifications Best Practices, Implement `HasLocalePreference` on Notifiable Models, Queue Slow Notifications, Rely on Event Discovery, Route Notification Channels to Dedicated Queues, Use On-Demand Notifications for Non-User Recipients (+1 more)
+
+### Community 109 - "Migration Best Practices"
+Cohesion: 0.20
+Nodes (9): Define Foreign-Key Constraints Deliberately, Design Indexes for Real Queries, Generate Migrations with Artisan, Keep Migrations Focused, Make Rollbacks Honest, Migration Best Practices, Mirror Defaults Only When Unsaved Models Need Them, Stage Changes That Affect Existing Rows (+1 more)
+
+### Community 110 - "Queue and Job Best Practices"
+Cohesion: 0.20
+Nodes (9): Back Off Transient Failures, Batch Jobs for Group Coordination, Configure Time-Based Retry Limits Deliberately, Handle Terminal Failure When Needed, Keep Reservation Time Longer Than Execution Time, Queue and Job Best Practices, Rate Limit External Calls, Use Horizon for Redis Queue Operations (+1 more)
+
+### Community 111 - "api.php"
+Cohesion: 0.28
+Nodes (4): HealthController, StoreInvestmentController, Illuminate\Http\JsonResponse, Illuminate\Support\Facades\Route
+
+### Community 112 - "IndexInvestmentRequest"
+Cohesion: 0.28
+Nodes (3): IndexInvestmentController, IndexInvestmentRequest, Illuminate\Http\Resources\Json\AnonymousResourceCollection
+
+### Community 113 - "LoginController.php"
+Cohesion: 0.28
+Nodes (3): LoginController, LoginRequest, LoginUser
+
+### Community 114 - "Caching Best Practices"
+Cohesion: 0.22
+Nodes (8): Caching Best Practices, Configure Failover Cache Stores in Production, Consider `Cache::flexible()` for Stale-While-Revalidate, Use `Cache::add()` for Atomic Conditional Writes, Use `Cache::memo()` to Avoid Redundant Hits Within an Execution, Use `Cache::remember()` for Cache-Aside Reads, Use Cache Tags to Invalidate Related Groups, Use `once()` for In-Process Memoization
+
+### Community 115 - "Database Performance Best Practices"
+Cohesion: 0.22
+Nodes (8): Add Indexes for Measured Query Patterns, Count Relationships Without Loading Them, Database Performance Best Practices, Eager Load Relationships Before Iterating, Keep Queries Out of Blade Templates, Prevent Lazy Loading in Development, Process Large Data Sets Incrementally, Select Only Needed Columns
+
+### Community 116 - "Eloquent Best Practices"
+Cohesion: 0.22
+Nodes (8): Apply Global Scopes Sparingly, Cast Date and Time Attributes, Define Attribute Casts, Define Precise Relationship Types, Eloquent Best Practices, Keep Application Queries Model-Aware, Use Local Scopes for Reusable Queries, Use `whereBelongsTo()` for Relationship Queries
+
+### Community 117 - "Caching Best Practices"
+Cohesion: 0.22
+Nodes (8): Caching Best Practices, Configure Failover Cache Stores in Production, Consider `Cache::flexible()` for Stale-While-Revalidate, Use `Cache::add()` for Atomic Conditional Writes, Use `Cache::memo()` to Avoid Redundant Hits Within an Execution, Use `Cache::remember()` for Cache-Aside Reads, Use Cache Tags to Invalidate Related Groups, Use `once()` for In-Process Memoization
+
+### Community 118 - "Database Performance Best Practices"
+Cohesion: 0.22
+Nodes (8): Add Indexes for Measured Query Patterns, Count Relationships Without Loading Them, Database Performance Best Practices, Eager Load Relationships Before Iterating, Keep Queries Out of Blade Templates, Prevent Lazy Loading in Development, Process Large Data Sets Incrementally, Select Only Needed Columns
+
+### Community 119 - "Eloquent Best Practices"
+Cohesion: 0.22
+Nodes (8): Apply Global Scopes Sparingly, Cast Date and Time Attributes, Define Attribute Casts, Define Precise Relationship Types, Eloquent Best Practices, Keep Application Queries Model-Aware, Use Local Scopes for Reusable Queries, Use `whereBelongsTo()` for Relationship Queries
+
+### Community 120 - "Blade and View Best Practices"
+Cohesion: 0.25
+Nodes (7): Blade and View Best Practices, Prefer Components for Explicit Interfaces, Return Blade Fragments for Partial Rendering, Share Compatible View Data with a View Composer, Share Parent Component Props with `@aware`, Use `$attributes->merge()` in Component Templates, Use `@pushOnce` for Per-Component Scripts
+
+### Community 121 - "Error Handling Best Practices"
+Cohesion: 0.25
+Nodes (7): Add Context to Exception Classes, Choose Where to Report and Render Exceptions, Define JSON Rendering for API Routes, Error Handling Best Practices, Mark Exceptions the Handler Should Not Report, Prevent Duplicate Reports of One Exception Instance, Throttle High-Volume Exception Reports
+
+### Community 122 - "Task Scheduling Best Practices"
+Cohesion: 0.25
+Nodes (7): Bound Work Inside the Task, Group Shared Configuration, Prevent Unwanted Overlap, Restrict Tasks by Environment, Run a Task on One Server, Run Eligible Commands in the Background, Task Scheduling Best Practices
+
+### Community 123 - "Endpoint Tests"
+Cohesion: 0.25
+Nodes (7): Endpoint Coverage, Endpoint Tests, How to Write the Test, Tenant Isolation, Test Authorization at the Policy Level, Testing Validation, Which Layer Owns Which Case
+
+### Community 124 - "Blade and View Best Practices"
+Cohesion: 0.25
+Nodes (7): Blade and View Best Practices, Prefer Components for Explicit Interfaces, Return Blade Fragments for Partial Rendering, Share Compatible View Data with a View Composer, Share Parent Component Props with `@aware`, Use `$attributes->merge()` in Component Templates, Use `@pushOnce` for Per-Component Scripts
+
+### Community 125 - "Error Handling Best Practices"
+Cohesion: 0.25
+Nodes (7): Add Context to Exception Classes, Choose Where to Report and Render Exceptions, Define JSON Rendering for API Routes, Error Handling Best Practices, Mark Exceptions the Handler Should Not Report, Prevent Duplicate Reports of One Exception Instance, Throttle High-Volume Exception Reports
+
+### Community 126 - "Task Scheduling Best Practices"
+Cohesion: 0.25
+Nodes (7): Bound Work Inside the Task, Group Shared Configuration, Prevent Unwanted Overlap, Restrict Tasks by Environment, Run a Task on One Server, Run Eligible Commands in the Background, Task Scheduling Best Practices
+
+### Community 127 - "Endpoint Tests"
+Cohesion: 0.25
+Nodes (7): Endpoint Coverage, Endpoint Tests, How to Write the Test, Tenant Isolation, Test Authorization at the Policy Level, Testing Validation, Which Layer Owns Which Case
+
+### Community 128 - "Controller"
+Cohesion: 0.43
+Nodes (4): LogoutController, Controller, Illuminate\Foundation\Auth\Access\AuthorizesRequests, Illuminate\Http\Response
+
+### Community 129 - ".claude/skills/laravel-best-practices/SKILL.md"
+Cohesion: 0.29
+Nodes (5): Consistency First, Decision Rules, How to Apply, Laravel Best Practices, Rule Index
+
+### Community 130 - "Collection Best Practices"
+Cohesion: 0.29
+Nodes (6): Choose Between `cursor()` and `lazy()`, Collection Best Practices, Use `#[CollectedBy]` for Custom Collection Classes, Use Higher-Order Messages for Simple Operations, Use `lazyById()` When Updating Records While Iterating, Use `toQuery()` for Bulk Operations on Collections
+
+### Community 131 - "HTTP Client Best Practices"
+Cohesion: 0.29
+Nodes (6): Fake HTTP Requests in Tests, Handle Errors Explicitly, HTTP Client Best Practices, Pool Independent Requests, Retry Only Safe Operations, Set Explicit Timeouts
+
+### Community 132 - "Mail Best Practices"
+Cohesion: 0.29
+Nodes (6): Assert the Delivery Mode, Dispatch Queued Mail After Commit, Mail Best Practices, Queue Slow Mail Delivery, Separate Content and Delivery Tests, Use Markdown Mailables When They Fit
+
+### Community 133 - "Routing and Controller Best Practices"
+Cohesion: 0.29
+Nodes (6): Keep Controllers Focused on HTTP Concerns, Organize Controllers Around Resources, Routing and Controller Best Practices, Scope Nested Bindings, Use Implicit Route Model Binding, Use Resource Routes for Resourceful Actions
+
+### Community 134 - "Convention and Style Best Practices"
+Cohesion: 0.29
+Nodes (6): Convention and Style Best Practices, Follow Project Naming Conventions, Keep Presentation Code Maintainable, Prefer Clear, Idiomatic Syntax, Use Utilities When They Clarify Intent, Write Comments That Explain Why
+
+### Community 135 - "Validation and Forms Best Practices"
+Cohesion: 0.29
+Nodes (6): Add Cross-Field Validation After Base Rules, Express Conditional Rules Clearly, Extract Validation When It Improves the Boundary, Prefer Readable Rule Syntax, Use Only Intended Validated Data, Validation and Forms Best Practices
+
+### Community 136 - "Assertions"
+Cohesion: 0.29
+Nodes (6): Arrange, Act, Assert, Assert a Known Value, Assert the Complete Result, Assertions, How to Find the Correct Assertion, Named Response Assertions
+
+### Community 137 - ".claude/skills/testing-best-practices/SKILL.md"
+Cohesion: 0.29
+Nodes (3): Built-in Laravel Assertion Methods, How to Find Test Framework Features, Security Tests
+
+### Community 138 - "Fakes, Mocks, and Determinism"
+Cohesion: 0.29
+Nodes (7): Database, Fakes, Mocks, and Determinism, Framework Fakes, How to Isolate a Dependency, Mocking, Outbound HTTP Testing, Time and Randomness
+
+### Community 139 - "Test Suite Performance"
+Cohesion: 0.29
+Nodes (6): Common Errors, Global Fakes, How to Find a Slow Test, How to Run the Suite in Parallel, Test Environment, Test Suite Performance
+
+### Community 140 - "Reviewing Tests"
+Cohesion: 0.29
+Nodes (6): Assertions, Coverage, Data and Determinism, Names and Structure, Reviewing Tests, Test Value
+
+### Community 141 - "Collection Best Practices"
+Cohesion: 0.29
+Nodes (6): Choose Between `cursor()` and `lazy()`, Collection Best Practices, Use `#[CollectedBy]` for Custom Collection Classes, Use Higher-Order Messages for Simple Operations, Use `lazyById()` When Updating Records While Iterating, Use `toQuery()` for Bulk Operations on Collections
+
+### Community 142 - "HTTP Client Best Practices"
+Cohesion: 0.29
+Nodes (6): Fake HTTP Requests in Tests, Handle Errors Explicitly, HTTP Client Best Practices, Pool Independent Requests, Retry Only Safe Operations, Set Explicit Timeouts
+
+### Community 143 - "Mail Best Practices"
+Cohesion: 0.29
+Nodes (6): Assert the Delivery Mode, Dispatch Queued Mail After Commit, Mail Best Practices, Queue Slow Mail Delivery, Separate Content and Delivery Tests, Use Markdown Mailables When They Fit
+
+### Community 144 - "Routing and Controller Best Practices"
+Cohesion: 0.29
+Nodes (6): Keep Controllers Focused on HTTP Concerns, Organize Controllers Around Resources, Routing and Controller Best Practices, Scope Nested Bindings, Use Implicit Route Model Binding, Use Resource Routes for Resourceful Actions
+
+### Community 145 - ".cursor/skills/laravel-best-practices/SKILL.md"
+Cohesion: 0.29
+Nodes (5): Consistency First, Decision Rules, How to Apply, Laravel Best Practices, Rule Index
+
+### Community 146 - "Convention and Style Best Practices"
+Cohesion: 0.29
+Nodes (6): Convention and Style Best Practices, Follow Project Naming Conventions, Keep Presentation Code Maintainable, Prefer Clear, Idiomatic Syntax, Use Utilities When They Clarify Intent, Write Comments That Explain Why
+
+### Community 147 - "Validation and Forms Best Practices"
+Cohesion: 0.29
+Nodes (6): Add Cross-Field Validation After Base Rules, Express Conditional Rules Clearly, Extract Validation When It Improves the Boundary, Prefer Readable Rule Syntax, Use Only Intended Validated Data, Validation and Forms Best Practices
+
+### Community 148 - "Assertions"
+Cohesion: 0.29
+Nodes (6): Arrange, Act, Assert, Assert a Known Value, Assert the Complete Result, Assertions, How to Find the Correct Assertion, Named Response Assertions
+
+### Community 149 - ".cursor/skills/testing-best-practices/SKILL.md"
+Cohesion: 0.29
+Nodes (3): Built-in Laravel Assertion Methods, How to Find Test Framework Features, Security Tests
+
+### Community 150 - "Fakes, Mocks, and Determinism"
+Cohesion: 0.29
+Nodes (7): Database, Fakes, Mocks, and Determinism, Framework Fakes, How to Isolate a Dependency, Mocking, Outbound HTTP Testing, Time and Randomness
+
+### Community 151 - "Test Suite Performance"
+Cohesion: 0.29
+Nodes (6): Common Errors, Global Fakes, How to Find a Slow Test, How to Run the Suite in Parallel, Test Environment, Test Suite Performance
+
+### Community 152 - "Reviewing Tests"
+Cohesion: 0.29
+Nodes (6): Assertions, Coverage, Data and Determinism, Names and Structure, Reviewing Tests, Test Value
+
+### Community 153 - "Configuration Best Practices"
+Cohesion: 0.33
+Nodes (5): Configuration Best Practices, Name Repeated Domain Values, Protect Production Secrets, Read Environment Variables in Configuration Files, Use `App::environment()` for Environment Checks
+
+### Community 154 - "Naming and Structure"
+Cohesion: 0.33
+Nodes (5): File Layout, Grouping, Naming and Structure, Naming Tests, Test Class and Methods
+
+### Community 155 - "Configuration Best Practices"
+Cohesion: 0.33
+Nodes (5): Configuration Best Practices, Name Repeated Domain Values, Protect Production Secrets, Read Environment Variables in Configuration Files, Use `App::environment()` for Environment Checks
+
+### Community 156 - "Naming and Structure"
+Cohesion: 0.33
+Nodes (5): File Layout, Grouping, Naming and Structure, Naming Tests, Test Class and Methods
+
+### Community 157 - "Factories and Test Data"
+Cohesion: 0.40
+Nodes (4): Data Providers, Each Test Makes Its Own Data, Factories and Test Data, Record Construction
+
+### Community 158 - "Testing Best Practices"
+Cohesion: 0.40
+Nodes (5): Consistency First, How to Apply, Rule Index, Testing Best Practices, What to Test
+
+### Community 159 - "Factories and Test Data"
+Cohesion: 0.40
+Nodes (4): Data Providers, Each Test Makes Its Own Data, Factories and Test Data, Record Construction
+
+### Community 160 - "Testing Best Practices"
+Cohesion: 0.40
+Nodes (5): Consistency First, How to Apply, Rule Index, Testing Best Practices, What to Test
+
 ## Knowledge Gaps
-- **554 isolated node(s):** `$schema`, `name`, `type`, `description`, `laravel` (+549 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 677 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **14 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **1139 isolated node(s):** `php`, `$schema`, `name`, `type`, `description` (+1134 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 1273 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **10 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `User` connect `User` to `Investment.php`, `TestCase`, `Investment`, `InvestmentValuation`, `Illuminate\Foundation\Testing\RefreshDatabase`, `InvalidInvestmentDate`, `Controller`, `LoginTest`, `ListInvestmentsTest`, `DatabaseSeeder`, `ShowInvestmentTest`, `UserTest`, `InvestmentMassAssignmentTest`?**
-  _High betweenness centrality (0.047) - this node is a cross-community bridge._
-- **Why does `Investment` connect `Investment` to `Investment.php`, `Money`, `User`, `InvestmentValuation`, `InvalidInvestmentDate`, `Controller`?**
-  _High betweenness centrality (0.016) - this node is a cross-community bridge._
-- **Why does `Money` connect `Money` to `Investment.php`, `Investment`, `CarbonImmutable`, `InvestmentValuation`, `WithdrawalTaxCalculator`, `InvalidInvestmentDate`, `PHPUnit\Framework\TestCase`?**
-  _High betweenness centrality (0.012) - this node is a cross-community bridge._
-- **What connects `$schema`, `name`, `type` to the rest of the system?**
-  _554 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **Why does `User` connect `User` to `InvestmentFactory`, `TestCase`, `Money`, `Investment`, `LoginController.php`, `LoginTest`, `DatabaseSeeder`, `User.php`, `UserRole`?**
+  _High betweenness centrality (0.014) - this node is a cross-community bridge._
+- **Why does `Money` connect `Money` to `Investment`?**
+  _High betweenness centrality (0.007) - this node is a cross-community bridge._
+- **Why does `Investment` connect `Investment` to `IndexInvestmentRequest`, `InvestmentFactory`, `Money`?**
+  _High betweenness centrality (0.005) - this node is a cross-community bridge._
+- **What connects `php`, `$schema`, `name` to the rest of the system?**
+  _1139 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `composer.json` be split into smaller, more focused modules?**
-  _Cohesion score 0.046511627906976744 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.045454545454545456 - nodes in this community are weakly interconnected._
 - **Should `sdd-multi-agent.md` be split into smaller, more focused modules?**
   _Cohesion score 0.06896551724137931 - nodes in this community are weakly interconnected._
 - **Should `scripts` be split into smaller, more focused modules?**
