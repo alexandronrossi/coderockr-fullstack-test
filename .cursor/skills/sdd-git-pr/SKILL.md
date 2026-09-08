@@ -101,6 +101,23 @@ Tarefas só de configuração SDD/tooling (sem código de aplicação) podem ser
 
 `PR_CREATED` só vale com título e descrição assertivos no commit **e** no PR, e com base `development`.
 
+## Graphify (obrigatório no fim do PR)
+
+Se o Graphify existir neste repo:
+
+1. Consultar o grafo **antes** de Grep/Read na revisão de diff, quando precisar de contexto de arquitetura.
+2. **Refazer o grafo** imediatamente antes do commit final:
+
+```bash
+graphify update .
+```
+
+Se `graphify-out/graph.json` não existir: `graphify extract . --code-only`.
+
+3. Incluir `graphify-out/` no PR (não commitar `graphify-out/cost.json`). Sem rebuild, não fechar o PR.
+
+Se o CLI ou o grafo não existirem, seguir só com o código e documentar a ausência no Implementation Summary.
+
 ## Final report
 
 ```text

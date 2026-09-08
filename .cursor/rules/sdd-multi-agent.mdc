@@ -21,4 +21,8 @@ Read the matching skill before each gate:
 - `.cursor/skills/sdd-security-review/SKILL.md`
 - `.cursor/skills/sdd-git-pr/SKILL.md`
 
-Frontend permission ≠ security permission. Authenticated ≠ authorized for any ID. No secrets in source. Commits and PRs use assertive titles and descriptions (SDD 30.1). Create `development` from `main`; every PR targets `development`, never `main`. DoD is `PR_CREATED` only after every `[PASS]` in section 32.
+Frontend permission ≠ security permission. Authenticated ≠ authorized for any ID. No secrets in source. Commits and PRs use assertive titles and descriptions (SDD 30.1). Create `development` from `main`; every PR targets `development`, never `main`.
+
+**Graphify (SDD 30.2):** if `graphify-out/graph.json` exists, query it first (`graphify query` / `path` / `explain`). Only Read/Grep/Glob the code when Graphify is absent or returns nothing useful. Rebuild with `graphify update .` at the end of every PR and commit `graphify-out/`.
+
+DoD is `PR_CREATED` only after every `[PASS]` in section 32.

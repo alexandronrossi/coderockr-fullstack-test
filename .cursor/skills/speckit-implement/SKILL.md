@@ -30,6 +30,7 @@ This project uses Spec-Driven Development with specialized agents. **Read and fo
 - GitHub commits and PRs must use assertive titles and descriptions (SDD 30.1). Vague messages (`update`, `fix`, `ajustes`, `WIP`) are not allowed.
 - Create `development` from `main` if missing. Every PR targets `development`, never `main`.
 - New or changed API endpoints MUST regenerate Scribe docs (`php artisan scribe:generate`) and commit `public/docs` in the same PR.
+- Graphify first when `graphify-out/graph.json` exists; fallback to code if missing or no useful hit (SDD 30.2). Rebuild (`graphify update .`) and commit `graphify-out/` before `PR_CREATED`.
 
 ## Pre-Execution Checks
 

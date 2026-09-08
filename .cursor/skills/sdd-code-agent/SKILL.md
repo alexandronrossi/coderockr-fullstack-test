@@ -12,6 +12,8 @@ Implementar **somente** depois de `TESTS_CREATED` (ou ao retornar de `TESTS_FAIL
 
 Seguir o `architecture-security-plan` arquivo por arquivo e linha por linha.
 
+**Graphify primeiro (SDD 30.2):** localizar símbolos e dependências no grafo antes de abrir arquivos. Fallback: código.
+
 ## Proibido
 
 O Code Agent **não pode**:

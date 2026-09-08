@@ -87,6 +87,8 @@ Write the architecture-security-plan to `specs/<feature>/architecture-security-p
 
 New or changed `routes/api.php` endpoints: regenerate Scribe (`php artisan scribe:generate`) and commit `public/docs` before `PR_CREATED`.
 
+**Graphify (SDD 30.2):** if `graphify-out/graph.json` exists, query it **before** Read/Grep/Glob. If Graphify is missing or the query has no useful hit, go to the code. Before `PR_CREATED`, run `graphify update .` and commit `graphify-out/`.
+
 ## Definition of Done
 
 Implementation is complete only when:
@@ -105,6 +107,7 @@ Implementation is complete only when:
 [PASS] Security Review
 [PASS] Git Diff Review
 [PASS] Secrets Check
+[PASS] Graphify rebuild
 [PASS] Commit e PR assertivos
 [PASS] PR
 ```

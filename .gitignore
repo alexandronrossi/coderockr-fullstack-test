@@ -26,6 +26,7 @@
 /storage/pail
 /vendor
 /.scribe
+graphify-out/cost.json
 _ide_helper.php
 Homestead.json
 Homestead.yaml

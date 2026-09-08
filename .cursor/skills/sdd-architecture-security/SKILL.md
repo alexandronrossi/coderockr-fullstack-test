@@ -10,6 +10,8 @@ Read `.specify/memory/sdd-multi-agent.md` sections 2–21 before producing outpu
 
 Este agente deve ser executado **ANTES** do Test Agent. **Não implementa** a solução. Produz `architecture-security-plan` em `specs/<feature>/architecture-security-plan.md` (template: `.specify/templates/architecture-security-plan.md`).
 
+**Graphify primeiro (SDD 30.2):** se `graphify-out/graph.json` existir, `graphify query` / `path` / `explain` **antes** de Read/Grep. Só ir ao código se o Graphify não existir ou não devolver informação útil.
+
 ## Determine
 
 arquitetura necessária; responsabilidades; boundaries; SOLID; design patterns; strategy patterns; autenticação; autorização; validação de entrada; segurança de banco; exposição de dados; exposição de secrets; segurança de APIs; riscos de IDOR; XSS; CSRF quando aplicável; mass assignment; SQL injection; privilege escalation; race conditions; concorrência; locking; transações; cache; filas; observabilidade; tratamento de erros.

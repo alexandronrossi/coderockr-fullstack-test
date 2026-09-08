@@ -1,0 +1,7 @@
+storage/
+bootstrap/cache/
+public/docs/
+public/hot
+public/build
+database/*.sqlite
+*.log
