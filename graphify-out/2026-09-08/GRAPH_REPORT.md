@@ -1,16 +1,16 @@
 # Graph Report - coderockr-fullstack-test  (2026-09-08)
 
 ## Corpus Check
-- 123 files · ~66,518 words
+- 156 files · ~78,855 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 913 nodes · 1041 edges · 73 communities (52 shown, 7 thin omitted)
-- Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 3 edges (avg confidence: 0.85)
+- 1149 nodes · 1474 edges · 93 communities (65 shown, 14 thin omitted)
+- Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 27 edges (avg confidence: 0.85)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `8216f68c`
+- Built from commit: `569d5488`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -19,7 +19,7 @@
 - sdd-multi-agent.md
 - scripts
 - Tasks: [FEATURE NAME]
-- User
+- TestCase
 - speckit-analyze/SKILL.md
 - package.json
 - Fullstack Test Project <img src="https://raw.githubusercontent.com/Coderockr/fullstack-test/refs/heads/main/coderockr.banner.svg" align="right" height="50px" />
@@ -29,7 +29,7 @@
 - Feature Specification: [FEATURE NAME]
 - speckit-plan/SKILL.md
 - speckit-tasks/SKILL.md
-- 0001_01_01_000000_create_users_table.php
+- Illuminate\Database\Migrations\Migration
 - Coderockr Fullstack Constitution
 - speckit-specify/SKILL.md
 - Architecture-Security Plan: [FEATURE]
@@ -68,41 +68,61 @@
 - 30.2 Graphify — consulta prioritária e rebuild no PR (obrigatório)
 - 8. DATABASE SECURITY — RLS / Authorization
 - Data Model: Autenticação Admin / Owner
-- UserFactory
+- Investment.php
 - Research: Autenticação Admin / Owner
 - sanctum.php
 - Tasks: Ganho composto no dia civil e imposto no resgate
 - Data Model: Ganho composto e imposto
 - Research: Ganho composto e imposto
+- Architecture-Security Plan: Criar, listar, detalhar e resgatar investimentos
+- Tasks: Criar, listar, detalhar e resgatar investimentos
+- User
+- Data Model: Investimentos
+- Investment
+- CarbonImmutable
+- InvestmentValuation
+- Illuminate\Foundation\Testing\RefreshDatabase
+- Research: API de investimentos
+- WithdrawalTaxCalculator
+- InvalidInvestmentDate
+- AppServiceProvider.php
+- PHPUnit\Framework\TestCase
+- LoginTest
+- InvestmentUnauthenticatedTest
+- ListInvestmentsTest
+- DatabaseSeeder
+- ShowInvestmentTest
+- UserTest
+- InvestmentMassAssignmentTest
 
 ## God Nodes (most connected - your core abstractions)
-1. `Money` - 33 edges
-2. `User` - 32 edges
-3. `TestCase` - 21 edges
-4. `Tasks: Autenticação e papéis Admin / Owner` - 14 edges
-5. `Tasks: Ganho composto no dia civil e imposto no resgate` - 14 edges
-6. `Tasks: [FEATURE NAME]` - 13 edges
-7. `WithdrawalTaxCalculator` - 12 edges
-8. `Fullstack Test Project <img src="https://raw.githubusercontent.com/Coderockr/fullstack-test/refs/heads/main/coderockr.banner.svg" align="right" height="50px" />` - 11 edges
-9. `Research: Autenticação Admin / Owner` - 11 edges
-10. `CivilMonthAnniversary` - 10 edges
+1. `User` - 78 edges
+2. `Money` - 38 edges
+3. `TestCase` - 35 edges
+4. `Investment` - 29 edges
+5. `InvestmentValuation` - 23 edges
+6. `Controller` - 18 edges
+7. `Tasks: Autenticação e papéis Admin / Owner` - 14 edges
+8. `Tasks: Ganho composto no dia civil e imposto no resgate` - 14 edges
+9. `Tasks: Criar, listar, detalhar e resgatar investimentos` - 14 edges
+10. `Tasks: [FEATURE NAME]` - 13 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `InvestmentValuation` --references--> `CompoundGainCalculator`  [EXTRACTED]
   app/Domain/Investment/InvestmentValuation.php → app/Domain/Investment/CompoundGainCalculator.php
 - `InvestmentValuation` --references--> `WithdrawalTaxCalculator`  [EXTRACTED]
   app/Domain/Investment/InvestmentValuation.php → app/Domain/Investment/WithdrawalTaxCalculator.php
-- `CurrentUserController` --inherits--> `Controller`  [EXTRACTED]
-  app/Http/Controllers/Api/CurrentUserController.php → app/Http/Controllers/Controller.php
-- `HealthController` --inherits--> `Controller`  [EXTRACTED]
-  app/Http/Controllers/Api/HealthController.php → app/Http/Controllers/Controller.php
-- `LoginController` --inherits--> `Controller`  [EXTRACTED]
-  app/Http/Controllers/Api/LoginController.php → app/Http/Controllers/Controller.php
+- `WithdrawInvestment` --references--> `InvestmentValuation`  [EXTRACTED]
+  app/Services/Investment/WithdrawInvestment.php → app/Domain/Investment/InvestmentValuation.php
+- `CurrentUserTest` --inherits--> `TestCase`  [EXTRACTED]
+  tests/Feature/Api/Auth/CurrentUserTest.php → tests/TestCase.php
+- `DatabaseSeederAuthTest` --inherits--> `TestCase`  [EXTRACTED]
+  tests/Feature/Api/Auth/DatabaseSeederAuthTest.php → tests/TestCase.php
 
 ## Import Cycles
 - None detected.
 
-## Communities (73 total, 7 thin omitted)
+## Communities (93 total, 14 thin omitted)
 
 ### Community 0 - "composer.json"
 Cohesion: 0.05
@@ -120,9 +140,9 @@ Nodes (28): scripts, dev, docs, post-autoload-dump, post-create-project-cmd, pos
 Cohesion: 0.07
 Nodes (26): Dependencies & Execution Order, Format: `[ID] [P?] [Story] Description`, Implementation for User Story 1, Implementation for User Story 2, Implementation for User Story 3, Implementation Strategy, Incremental Delivery, MVP First (User Story 1 Only) (+18 more)
 
-### Community 4 - "User"
-Cohesion: 0.05
-Nodes (26): UserRole, User, DatabaseSeeder, Factory, Illuminate\Database\Console\Seeds\WithoutModelEvents, Illuminate\Database\Eloquent\Attributes\Fillable, Illuminate\Database\Eloquent\Attributes\Hidden, Illuminate\Database\Eloquent\Factories\HasFactory (+18 more)
+### Community 4 - "TestCase"
+Cohesion: 0.13
+Nodes (7): Factory, Illuminate\Foundation\Testing\TestCase, LoginRateLimitTest, LogoutTest, HealthTest, ExampleTest, TestCase
 
 ### Community 5 - "speckit-analyze/SKILL.md"
 Cohesion: 0.08
@@ -160,8 +180,8 @@ Nodes (11): Completion Report, Done When, Key rules, Mandatory Post-Execution Ho
 Cohesion: 0.17
 Nodes (11): Checklist Format (REQUIRED), Completion Report, Done When, Mandatory Post-Execution Hooks, Outline, Phase Structure, Pre-Execution Checks, SDD Task Ordering (mandatory) (+3 more)
 
-### Community 14 - "0001_01_01_000000_create_users_table.php"
-Cohesion: 0.16
+### Community 14 - "Illuminate\Database\Migrations\Migration"
+Cohesion: 0.14
 Nodes (3): Illuminate\Database\Migrations\Migration, Illuminate\Database\Schema\Blueprint, Illuminate\Support\Facades\Schema
 
 ### Community 15 - "Coderockr Fullstack Constitution"
@@ -185,8 +205,8 @@ Cohesion: 0.20
 Nodes (10): 22. Test Agent — Security Tests, Authorization, Concurrency, IDOR, Injection, Mass assignment, Privilege escalation, Secrets (+2 more)
 
 ### Community 20 - "Controller"
-Cohesion: 0.08
-Nodes (20): CurrentUserController, HealthController, LoginController, LogoutController, Controller, LoginRequest, UserResource, AppServiceProvider (+12 more)
+Cohesion: 0.05
+Nodes (28): CurrentUserController, HealthController, IndexInvestmentController, LoginController, LogoutController, ShowInvestmentController, StoreInvestmentController, WithdrawInvestmentController (+20 more)
 
 ### Community 21 - "Code Review Agent"
 Cohesion: 0.22
@@ -273,8 +293,8 @@ Cohesion: 0.50
 Nodes (3): Code Agent, Proibido, Required
 
 ### Community 43 - "Money"
-Cohesion: 0.06
-Nodes (17): CivilMonthAnniversary, CompoundGainCalculator, InvalidInvestmentDate, InvestmentValuation, Money, WithdrawalTaxCalculator, Carbon\CarbonImmutable, DomainException (+9 more)
+Cohesion: 0.15
+Nodes (4): Money, self, InvalidArgumentException, MoneyTest
 
 ### Community 44 - "25. Code Review Gate"
 Cohesion: 0.50
@@ -288,9 +308,9 @@ Nodes (4): 30.1 Commit e Pull Request — Boas práticas (obrigatório), Branchi
 Cohesion: 0.09
 Nodes (21): Data Model: Autenticação Admin / Owner, Factory states, Out of scope, Seed records, Session (token Sanctum), State transitions, User (Pessoa), UserRole (enum) (+13 more)
 
-### Community 67 - "UserFactory"
-Cohesion: 0.16
-Nodes (7): UserFactory, Illuminate\Auth\AuthenticationException, Illuminate\Database\Eloquent\Factories\Factory, Illuminate\Support\Facades\Hash, Illuminate\Support\Str, Pdo\Mysql, static
+### Community 67 - "Investment.php"
+Cohesion: 0.07
+Nodes (18): InvestmentFactory, static, static, UserFactory, Illuminate\Auth\AuthenticationException, Illuminate\Database\Eloquent\Attributes\Fillable, Illuminate\Database\Eloquent\Attributes\Hidden, Illuminate\Database\Eloquent\Builder (+10 more)
 
 ### Community 68 - "Research: Autenticação Admin / Owner"
 Cohesion: 0.17
@@ -312,22 +332,74 @@ Nodes (17): CivilMonthAnniversary, CompoundGainCalculator, Domain contract: comp
 Cohesion: 0.20
 Nodes (9): 1. Onde vive o cálculo, 2. Representação de dinheiro, 3. Compostagem e arredondamento, 4. Aniversário civil (clamp), 5. Imposto (faixas), 6. Data inválida e freeze, 7. HTTP / Scribe / Auth, Research: Ganho composto e imposto (+1 more)
 
+### Community 73 - "Architecture-Security Plan: Criar, listar, detalhar e resgatar investimentos"
+Cohesion: 0.05
+Nodes (36): API Inventory, Architecture, Architecture-Security Plan: Criar, listar, detalhar e resgatar investimentos, Design Patterns, File-by-file Analysis, Line-by-line Analysis, Remaining Risks, Required Tests (+28 more)
+
+### Community 74 - "Tasks: Criar, listar, detalhar e resgatar investimentos"
+Cohesion: 0.06
+Nodes (31): Dependencies & Execution Order, Format: `[ID] [P?] [Story] Description`, Implementation, Implementation for User Story 1, Implementation for User Story 2, Implementation for User Story 3, Implementation for User Story 4, Implementation Strategy (+23 more)
+
+### Community 75 - "User"
+Cohesion: 0.11
+Nodes (6): User, InvestmentPolicy, Illuminate\Foundation\Auth\User, InvestmentAuthorizationTest, StoreInvestmentTest, WithdrawInvestmentTest
+
+### Community 76 - "Data Model: Investimentos"
+Cohesion: 0.10
+Nodes (19): Data Model: Investimentos, Evaluation (não persistida), Factory, Investment, Out of scope, State transitions, User (existente), Validation rules (+11 more)
+
+### Community 77 - "Investment"
+Cohesion: 0.18
+Nodes (5): Investment, self, ValuedInvestment, Carbon\CarbonImmutable, Illuminate\Contracts\Pagination\LengthAwarePaginator
+
+### Community 78 - "CarbonImmutable"
+Cohesion: 0.24
+Nodes (5): CivilMonthAnniversary, CompoundGainCalculator, CarbonImmutable, CivilMonthAnniversaryTest, CompoundGainCalculatorTest
+
+### Community 79 - "InvestmentValuation"
+Cohesion: 0.19
+Nodes (7): InvestmentValuation, CreateInvestment, ListInvestments, ShowInvestment, Illuminate\Database\Eloquent\ModelNotFoundException, Illuminate\Validation\ValidationException, InvestmentValuationTest
+
+### Community 80 - "Illuminate\Foundation\Testing\RefreshDatabase"
+Cohesion: 0.17
+Nodes (5): UserRole, Illuminate\Foundation\Testing\RefreshDatabase, CurrentUserTest, DatabaseSeederAuthTest, PrivilegeEscalationTest
+
+### Community 81 - "Research: API de investimentos"
+Cohesion: 0.15
+Nodes (12): 10. Scribe, 1. Camadas, 2. Autorização e IDOR (FR-004, FR-005, SC-003), 3. Mass assignment e dono (FR-003), 4. Dinheiro e datas, 5. Exemplo 1000 / 1200 / 45 no HTTP, 6. Paginação (FR-009), 7. Concorrência de resgate (FR-013) (+4 more)
+
+### Community 83 - "InvalidInvestmentDate"
+Cohesion: 0.24
+Nodes (4): InvalidInvestmentDate, InvestmentAlreadyWithdrawn, DomainException, Illuminate\Support\Facades\DB
+
+### Community 84 - "AppServiceProvider.php"
+Cohesion: 0.29
+Nodes (4): AppServiceProvider, Illuminate\Cache\RateLimiting\Limit, Illuminate\Support\Facades\RateLimiter, Illuminate\Support\ServiceProvider
+
+### Community 85 - "PHPUnit\Framework\TestCase"
+Cohesion: 0.32
+Nodes (3): PHPUnit\Framework\TestCase, ExampleTest, UserRoleTest
+
+### Community 89 - "DatabaseSeeder"
+Cohesion: 0.60
+Nodes (3): DatabaseSeeder, Illuminate\Database\Console\Seeds\WithoutModelEvents, Illuminate\Database\Seeder
+
 ## Knowledge Gaps
-- **477 isolated node(s):** `$schema`, `name`, `type`, `description`, `laravel` (+472 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 579 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **7 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **554 isolated node(s):** `$schema`, `name`, `type`, `description`, `laravel` (+549 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 677 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **14 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `UserRole` connect `User` to `UserFactory`?**
-  _High betweenness centrality (0.022) - this node is a cross-community bridge._
-- **Why does `User` connect `User` to `UserFactory`?**
-  _High betweenness centrality (0.019) - this node is a cross-community bridge._
-- **Why does `LoginUser` connect `Controller` to `UserFactory`, `User`?**
-  _High betweenness centrality (0.009) - this node is a cross-community bridge._
+- **Why does `User` connect `User` to `Investment.php`, `TestCase`, `Investment`, `InvestmentValuation`, `Illuminate\Foundation\Testing\RefreshDatabase`, `InvalidInvestmentDate`, `Controller`, `LoginTest`, `ListInvestmentsTest`, `DatabaseSeeder`, `ShowInvestmentTest`, `UserTest`, `InvestmentMassAssignmentTest`?**
+  _High betweenness centrality (0.047) - this node is a cross-community bridge._
+- **Why does `Investment` connect `Investment` to `Investment.php`, `Money`, `User`, `InvestmentValuation`, `InvalidInvestmentDate`, `Controller`?**
+  _High betweenness centrality (0.016) - this node is a cross-community bridge._
+- **Why does `Money` connect `Money` to `Investment.php`, `Investment`, `CarbonImmutable`, `InvestmentValuation`, `WithdrawalTaxCalculator`, `InvalidInvestmentDate`, `PHPUnit\Framework\TestCase`?**
+  _High betweenness centrality (0.012) - this node is a cross-community bridge._
 - **What connects `$schema`, `name`, `type` to the rest of the system?**
-  _477 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _554 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `composer.json` be split into smaller, more focused modules?**
   _Cohesion score 0.046511627906976744 - nodes in this community are weakly interconnected._
 - **Should `sdd-multi-agent.md` be split into smaller, more focused modules?**
