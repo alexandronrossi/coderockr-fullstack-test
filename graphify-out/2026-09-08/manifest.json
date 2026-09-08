@@ -84,14 +84,14 @@
     "semantic_hash": "25a307335c0719bc9a91b3f7babd186d"
   },
   "app/Models/User.php": {
-    "mtime": 1788880386.4520614,
-    "seen": 1788880753.6866965,
+    "mtime": 1788881031.9783766,
+    "seen": 1788881892.249278,
     "ast_hash": "05ff76bb1279d0f2c6d45d52a03e5478",
     "semantic_hash": ""
   },
   "app/Providers/AppServiceProvider.php": {
-    "mtime": 1788880416.697777,
-    "seen": 1788880753.6866977,
+    "mtime": 1788881031.9783766,
+    "seen": 1788881892.2492793,
     "ast_hash": "7216fa2ba669d32a5ed4adf9ecdc74b8",
     "semantic_hash": ""
   },
@@ -114,8 +114,8 @@
     "semantic_hash": "888c810b5a4720916f07aa05dd2c2dd3"
   },
   "composer.json": {
-    "mtime": 1788880286.372327,
-    "seen": 1788880753.6867046,
+    "mtime": 1788881031.9911637,
+    "seen": 1788881892.2492867,
     "ast_hash": "6f492b38253377a85d68857220b66cea",
     "semantic_hash": ""
   },
@@ -192,8 +192,8 @@
     "semantic_hash": "5ea7169252ec3cc7fad471f5cd0d7678"
   },
   "database/factories/UserFactory.php": {
-    "mtime": 1788880423.655932,
-    "seen": 1788880753.6867242,
+    "mtime": 1788881031.991565,
+    "seen": 1788881892.2493062,
     "ast_hash": "af0ae6f3973baddcaee3220b3651118b",
     "semantic_hash": ""
   },
@@ -216,8 +216,8 @@
     "semantic_hash": "b0603b9fa0a27473971da76bb0c42ee1"
   },
   "database/seeders/DatabaseSeeder.php": {
-    "mtime": 1788880416.8180707,
-    "seen": 1788880753.6867318,
+    "mtime": 1788881032.0045052,
+    "seen": 1788881892.2493148,
     "ast_hash": "6a830e527ebb980a64eefee55ed29d06",
     "semantic_hash": ""
   },
@@ -246,8 +246,8 @@
     "semantic_hash": "1a03818ea91deb4f3989c6c994e5867c"
   },
   "routes/api.php": {
-    "mtime": 1788880413.8992152,
-    "seen": 1788880753.6867383,
+    "mtime": 1788881032.0449524,
+    "seen": 1788881892.2493217,
     "ast_hash": "2b104ec2a3b6c1c37d52083d8f829197",
     "semantic_hash": ""
   },
@@ -276,8 +276,8 @@
     "semantic_hash": "8328bf150e8d3b4098f68b408cc2e020"
   },
   "tests/TestCase.php": {
-    "mtime": 1788880668.2251427,
-    "seen": 1788880753.6867526,
+    "mtime": 1788881032.0582597,
+    "seen": 1788881892.2493362,
     "ast_hash": "e54172e3c46a1d217494320bf9702d24",
     "semantic_hash": ""
   },
@@ -486,165 +486,285 @@
     "semantic_hash": ""
   },
   "app/Enums/UserRole.php": {
-    "mtime": 1788880382.8386364,
-    "seen": 1788880753.6866834,
+    "mtime": 1788881031.9783766,
+    "seen": 1788881892.2492661,
     "ast_hash": "f55298a606187bed505c86edd2df3fdc",
     "semantic_hash": ""
   },
   "app/Http/Controllers/Api/CurrentUserController.php": {
-    "mtime": 1788880410.12052,
-    "seen": 1788880753.686685,
+    "mtime": 1788881031.9783766,
+    "seen": 1788881892.2492673,
     "ast_hash": "64ad4ee996a91b2e74717719744f3c3b",
     "semantic_hash": ""
   },
   "app/Http/Controllers/Api/LoginController.php": {
-    "mtime": 1788880407.7914882,
-    "seen": 1788880753.6866884,
+    "mtime": 1788881031.9783766,
+    "seen": 1788881892.2492702,
     "ast_hash": "b969caeb9923199dc1f142ea2a1e6999",
     "semantic_hash": ""
   },
   "app/Http/Controllers/Api/LogoutController.php": {
-    "mtime": 1788880455.8650484,
-    "seen": 1788880753.6866896,
+    "mtime": 1788881031.9783766,
+    "seen": 1788881892.2492719,
     "ast_hash": "09f20b69dfd9c7c8b7a0b055c653b0cc",
     "semantic_hash": ""
   },
   "app/Http/Requests/Api/LoginRequest.php": {
-    "mtime": 1788880399.2508068,
-    "seen": 1788880753.686692,
+    "mtime": 1788881031.9783766,
+    "seen": 1788881892.249275,
     "ast_hash": "260af9d555d6fc2c4c0aeb1baa81fdbd",
     "semantic_hash": ""
   },
   "app/Http/Resources/UserResource.php": {
-    "mtime": 1788880401.3065326,
-    "seen": 1788880753.6866949,
+    "mtime": 1788881031.9783766,
+    "seen": 1788881892.2492762,
     "ast_hash": "a226cf77bf8ebab134e86b8c33e42263",
     "semantic_hash": ""
   },
   "app/Services/Auth/LoginUser.php": {
-    "mtime": 1788880405.4897964,
-    "seen": 1788880753.686699,
+    "mtime": 1788881031.9783766,
+    "seen": 1788881892.2492807,
     "ast_hash": "b32ce7f4295ea6696b7b6435556461c1",
     "semantic_hash": ""
   },
   "config/sanctum.php": {
-    "mtime": 1788880677.5610635,
-    "seen": 1788880753.6867187,
+    "mtime": 1788881031.991565,
+    "seen": 1788881892.2493007,
     "ast_hash": "05039ff2f9dd2d119cf854c6a1597626",
     "semantic_hash": ""
   },
   "database/migrations/2026_09_08_151141_create_personal_access_tokens_table.php": {
-    "mtime": 1788880300.0287807,
-    "seen": 1788880753.6867297,
+    "mtime": 1788881031.991565,
+    "seen": 1788881892.249312,
     "ast_hash": "eb77af89d184f92ec893eff344c34999",
     "semantic_hash": ""
   },
   "database/migrations/2026_09_08_151200_add_role_to_users_table.php": {
-    "mtime": 1788880385.9937332,
-    "seen": 1788880753.6867309,
+    "mtime": 1788881031.991565,
+    "seen": 1788881892.2493134,
     "ast_hash": "1a66fbbf234231d104c27d10f88996ae",
     "semantic_hash": ""
   },
   "tests/Feature/Api/Auth/CurrentUserTest.php": {
-    "mtime": 1788880366.1289704,
-    "seen": 1788880753.6867423,
+    "mtime": 1788881032.0449524,
+    "seen": 1788881892.2493258,
     "ast_hash": "287af50e882d443348a2b74d1c54e681",
     "semantic_hash": ""
   },
   "tests/Feature/Api/Auth/DatabaseSeederAuthTest.php": {
-    "mtime": 1788880335.0143363,
-    "seen": 1788880753.6867435,
+    "mtime": 1788881032.0449524,
+    "seen": 1788881892.2493272,
     "ast_hash": "b24b825bfeabdd33d8975586670f5464",
     "semantic_hash": ""
   },
   "tests/Feature/Api/Auth/LoginRateLimitTest.php": {
-    "mtime": 1788880332.1208327,
-    "seen": 1788880753.6867447,
+    "mtime": 1788881032.0578587,
+    "seen": 1788881892.2493284,
     "ast_hash": "4c51b0a3c4b32a2d6f5a344f16b76bb7",
     "semantic_hash": ""
   },
   "tests/Feature/Api/Auth/LoginTest.php": {
-    "mtime": 1788880320.9962556,
-    "seen": 1788880753.686746,
+    "mtime": 1788881032.0582597,
+    "seen": 1788881892.2493296,
     "ast_hash": "5ae80d84701e513f74e399c5e211fa8c",
     "semantic_hash": ""
   },
   "tests/Feature/Api/Auth/LogoutTest.php": {
-    "mtime": 1788880531.3922772,
-    "seen": 1788880753.6867468,
+    "mtime": 1788881032.0582597,
+    "seen": 1788881892.249331,
     "ast_hash": "4aa13168e7c447eba6f5ba5842d4f5e4",
     "semantic_hash": ""
   },
   "tests/Feature/Api/Auth/PrivilegeEscalationTest.php": {
-    "mtime": 1788880332.1208327,
-    "seen": 1788880753.6867483,
+    "mtime": 1788881032.0582597,
+    "seen": 1788881892.2493322,
     "ast_hash": "dbef3f2b1425111aea01f4c463a91c92",
     "semantic_hash": ""
   },
   "tests/Unit/UserRoleTest.php": {
-    "mtime": 1788880260.4030378,
-    "seen": 1788880753.6867552,
+    "mtime": 1788881032.0582597,
+    "seen": 1788881892.249345,
     "ast_hash": "a093f24091b6d0bee6043be276aaa3f7",
     "semantic_hash": ""
   },
   "tests/Unit/UserTest.php": {
-    "mtime": 1788880260.589652,
-    "seen": 1788880753.6867561,
+    "mtime": 1788881032.0582597,
+    "seen": 1788881892.2493463,
     "ast_hash": "1f53270b15ab4f244455565cde16b1b6",
     "semantic_hash": ""
   },
   "specs/001-user-auth/architecture-security-plan.md": {
-    "mtime": 1788879897.3690574,
-    "seen": 1788880753.6867986,
+    "mtime": 1788881032.0449524,
+    "seen": 1788881892.2493916,
     "ast_hash": "ff465b963d8320d0bfeb4d4b945152a2",
     "semantic_hash": ""
   },
   "specs/001-user-auth/checklists/requirements.md": {
-    "mtime": 1788879568.9366481,
-    "seen": 1788880753.6867998,
+    "mtime": 1788881032.0449524,
+    "seen": 1788881892.249393,
     "ast_hash": "b2261170436c1ddc21e8cf609e2f0481",
     "semantic_hash": ""
   },
   "specs/001-user-auth/contracts/auth.yaml": {
-    "mtime": 1788879775.7517254,
-    "seen": 1788880753.6868014,
+    "mtime": 1788881032.0449524,
+    "seen": 1788881892.2493942,
     "ast_hash": "ea9a225275f33411565c91f9a8e2d5e4",
     "semantic_hash": ""
   },
   "specs/001-user-auth/data-model.md": {
-    "mtime": 1788879765.9084775,
-    "seen": 1788880753.6868024,
+    "mtime": 1788881032.0449524,
+    "seen": 1788881892.2493954,
     "ast_hash": "2835e59368b7407880cba94047b27516",
     "semantic_hash": ""
   },
   "specs/001-user-auth/plan.md": {
-    "mtime": 1788879742.6068618,
-    "seen": 1788880753.6868038,
+    "mtime": 1788881032.0449524,
+    "seen": 1788881892.2493968,
     "ast_hash": "bd45f9a74b855680f98ecca8e7d645af",
     "semantic_hash": ""
   },
   "specs/001-user-auth/quickstart.md": {
-    "mtime": 1788879775.9124925,
-    "seen": 1788880753.6868048,
+    "mtime": 1788881032.0449524,
+    "seen": 1788881892.2493982,
     "ast_hash": "dc923017416b967018a071fa70e7d7a1",
     "semantic_hash": ""
   },
   "specs/001-user-auth/research.md": {
-    "mtime": 1788879755.3591154,
-    "seen": 1788880753.6868057,
+    "mtime": 1788881032.0449524,
+    "seen": 1788881892.2494,
     "ast_hash": "e101bebc4f59a2f4664a9b678551df65",
     "semantic_hash": ""
   },
   "specs/001-user-auth/spec.md": {
-    "mtime": 1788879564.0124147,
-    "seen": 1788880753.6868067,
+    "mtime": 1788881032.0449524,
+    "seen": 1788881892.249401,
     "ast_hash": "60d5ca98d5cd001b8f95ab4f445394b1",
     "semantic_hash": ""
   },
   "specs/001-user-auth/tasks.md": {
-    "mtime": 1788880747.080281,
-    "seen": 1788880753.6868079,
+    "mtime": 1788881032.0449524,
+    "seen": 1788881892.2494023,
     "ast_hash": "a12036a942cd321892e59e9afcfe258e",
+    "semantic_hash": ""
+  },
+  "app/Domain/Investment/CivilMonthAnniversary.php": {
+    "mtime": 1788881799.005785,
+    "seen": 1788881892.2492573,
+    "ast_hash": "c55a7212ccfb0d9ef7a940cb18cbb22c",
+    "semantic_hash": ""
+  },
+  "app/Domain/Investment/CompoundGainCalculator.php": {
+    "mtime": 1788881805.2404177,
+    "seen": 1788881892.2492592,
+    "ast_hash": "fef56bab6a5e90a3c2434e8bf935f9ce",
+    "semantic_hash": ""
+  },
+  "app/Domain/Investment/InvalidInvestmentDate.php": {
+    "mtime": 1788881794.2219667,
+    "seen": 1788881892.249261,
+    "ast_hash": "e15c4e4e7ed2432d9aebfdd9a18fba72",
+    "semantic_hash": ""
+  },
+  "app/Domain/Investment/InvestmentValuation.php": {
+    "mtime": 1788881810.7188015,
+    "seen": 1788881892.249262,
+    "ast_hash": "b126ce3d2c76429ad45b0a17b93eebee",
+    "semantic_hash": ""
+  },
+  "app/Domain/Investment/Money.php": {
+    "mtime": 1788881795.9232647,
+    "seen": 1788881892.2492635,
+    "ast_hash": "82738bdff3f0cc8e9eaa8286ba5cd5b2",
+    "semantic_hash": ""
+  },
+  "app/Domain/Investment/WithdrawalTaxCalculator.php": {
+    "mtime": 1788881810.5947635,
+    "seen": 1788881892.2492645,
+    "ast_hash": "6e29639e711d35099e17cf4b208c39eb",
+    "semantic_hash": ""
+  },
+  "tests/Unit/Domain/CivilMonthAnniversaryTest.php": {
+    "mtime": 1788881710.4494455,
+    "seen": 1788881892.2493377,
+    "ast_hash": "067a836a29861b57a9c0624b24fd0d41",
+    "semantic_hash": ""
+  },
+  "tests/Unit/Domain/CompoundGainCalculatorTest.php": {
+    "mtime": 1788881719.2827995,
+    "seen": 1788881892.2493389,
+    "ast_hash": "f97615b577d1b6981a852f3e13b23472",
+    "semantic_hash": ""
+  },
+  "tests/Unit/Domain/InvestmentValuationTest.php": {
+    "mtime": 1788881726.1432626,
+    "seen": 1788881892.24934,
+    "ast_hash": "496bb6bb4ade1c1aabd146ba7646f864",
+    "semantic_hash": ""
+  },
+  "tests/Unit/Domain/MoneyTest.php": {
+    "mtime": 1788881701.0536451,
+    "seen": 1788881892.2493412,
+    "ast_hash": "41c18f162d5c5dc66866a1084c2006dd",
+    "semantic_hash": ""
+  },
+  "tests/Unit/Domain/WithdrawalTaxCalculatorTest.php": {
+    "mtime": 1788881726.0885391,
+    "seen": 1788881892.2493422,
+    "ast_hash": "602e19a6b5bdf6ee1b60b83987cb7c5d",
+    "semantic_hash": ""
+  },
+  "specs/002-gains-tax/architecture-security-plan.md": {
+    "mtime": 1788881289.391211,
+    "seen": 1788881892.2494035,
+    "ast_hash": "8385a37756356cdc821bdcb3d0818378",
+    "semantic_hash": ""
+  },
+  "specs/002-gains-tax/checklists/requirements.md": {
+    "mtime": 1788881099.1086373,
+    "seen": 1788881892.2494047,
+    "ast_hash": "255e632214a86ebab08b89fdb06a5283",
+    "semantic_hash": ""
+  },
+  "specs/002-gains-tax/contracts/domain.md": {
+    "mtime": 1788881230.1498954,
+    "seen": 1788881892.2494056,
+    "ast_hash": "a2163c5dbcca47fbf8e27e355d4faba2",
+    "semantic_hash": ""
+  },
+  "specs/002-gains-tax/data-model.md": {
+    "mtime": 1788881223.4721699,
+    "seen": 1788881892.249407,
+    "ast_hash": "ce16c886ad0e057b1d67f074ea131ed5",
+    "semantic_hash": ""
+  },
+  "specs/002-gains-tax/plan.md": {
+    "mtime": 1788881206.6528986,
+    "seen": 1788881892.2494085,
+    "ast_hash": "8b929b43f77f0f0f545d5edeb61e0b3b",
+    "semantic_hash": ""
+  },
+  "specs/002-gains-tax/quickstart.md": {
+    "mtime": 1788881230.3529768,
+    "seen": 1788881892.2494097,
+    "ast_hash": "0a3f813c633fc83c65dfc1e683916795",
+    "semantic_hash": ""
+  },
+  "specs/002-gains-tax/research.md": {
+    "mtime": 1788881216.2962036,
+    "seen": 1788881892.2494109,
+    "ast_hash": "afc45ddf513878f3bfb3ee7fa5d63591",
+    "semantic_hash": ""
+  },
+  "specs/002-gains-tax/spec.md": {
+    "mtime": 1788881094.6137028,
+    "seen": 1788881892.2494118,
+    "ast_hash": "87878dd6576765e0a935d783ebebed91",
+    "semantic_hash": ""
+  },
+  "specs/002-gains-tax/tasks.md": {
+    "mtime": 1788881884.1752899,
+    "seen": 1788881892.249413,
+    "ast_hash": "d6c27b6e69296d848c5fec9d4165afeb",
     "semantic_hash": ""
   }
 }
